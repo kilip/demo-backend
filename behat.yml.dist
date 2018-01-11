@@ -1,0 +1,24 @@
+default:
+    calls:
+        error_reporting: 16383 # E_ALL & ~E_USER_DREPRECATED
+    suites:
+        default:
+            contexts:
+                - FeatureContext:
+                    doctrine: '@doctrine'
+                - Behat\MinkExtension\Context\MinkContext
+                - Behatch\Context\RestContext
+                - Behatch\Context\JsonContext
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                bootstrap: features/bootstrap/bootstrap.php
+                env: "test"
+                debug: true
+                class: Northwind\Kernel
+        Behat\MinkExtension:
+            base_url: "http://example.com/"
+            sessions:
+                default:
+                    symfony2: ~
+        Behatch\Extension: ~

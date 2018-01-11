@@ -1,0 +1,1 @@
+ALTER TABLE `order_details_status` AUTO_INCREMENT=0;
