@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the northwind-backend project.
+ * This file is part of the Demo project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Northwind\Test;
+namespace Demo\Test;
 
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\Assert;
@@ -60,7 +60,7 @@ trait MutableTest
         }
 
         $num = func_get_args();
-        if (count($num) > 2) {
+        if (count($num) > 3) {
             Assert::assertEquals(
                 $default,
                 call_user_func($getter),
@@ -96,17 +96,31 @@ trait MutableTest
         $ignores = $this->propertyToIgnores;
         foreach ($properties as $key => $property) {
             $name = $property->getName();
+            if ($this->getClassToTest() != $property->getDeclaringClass()->getName()) {
+                continue;
+            }
             if (in_array($name, $ignores)) {
                 continue;
             }
+            $testValue = 'some value';
+            $readOnly = false;
+            $default = null;
+
+            if ('created' == $name || 'updated' == $name) {
+                $testValue = new \DateTime();
+                $readOnly = true;
+            }
+
             $tpl = array(
                 'name' => $name,
-                'readonly' => false,
-                'value' => 'some value',
-                'default' => null,
+                'readonly' => $readOnly,
+                'value' => $testValue,
             );
+
             if ('id' == $name) {
                 $tpl['readonly'] = true;
+                unset($tpl['value']);
+                unset($tpl['default']);
             }
 
             if (isset($config[$name])) {
@@ -126,7 +140,7 @@ trait MutableTest
     protected function getClassToTest()
     {
         $classToTest = strtr(__CLASS__, array(
-            '\Tests' => '',
+            '\Test' => '',
             'Test' => '',
         ));
         //$classToTest = rtrim($classToTest,'Test');

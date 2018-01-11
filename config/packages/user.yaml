@@ -1,0 +1,8 @@
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: Demo\Entity\User
+    from_email:
+        address: "%env(MAILER_USER)%"
+        sender_name: "%env(MAILER_USER)%"
+    use_listener: true

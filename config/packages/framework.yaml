@@ -16,6 +16,9 @@ framework:
 
     serializer:
         enable_annotations: true
+    csrf_protection: ~
+    templating:
+        engines: twig
     cache:
         # The app cache caches to the filesystem by default. Other options include:
 

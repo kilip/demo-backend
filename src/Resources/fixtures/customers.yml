@@ -1,0 +1,28 @@
+Demo\Entity\Address:
+    cust_addr1_{1..10}:
+        address: <address()>
+        city: <city()>
+        state: <state()>
+        country: <country()>
+        zip: <postcode()>
+        phone: <phoneNumber()>
+        fax: <phoneNumber()>
+        mobile: <phoneNumber()>
+
+    cust_addr2_{1..10}:
+        address: <address()>
+        city: <city()>
+        state: <state()>
+        country: <country()>
+        zip: <postcode()>
+        phone: <phoneNumber()>
+        fax: <phoneNumber()>
+        mobile: <phoneNumber()>
+
+Demo\Entity\Customer:
+    cust_{1..10}:
+        name: <firstName()> <lastName()>
+        email: <email()>
+        __calls:
+            - addAddress: ['@cust_addr1_<current()>']
+            - addAddress: ['@cust_addr2_<current()>']

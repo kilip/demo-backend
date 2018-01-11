@@ -15,10 +15,17 @@
         <env name="APP_SECRET" value="s$cretf0rt3st" />
         <env name="SHELL_VERBOSITY" value="-1" />
         <!-- define your env variables for the test env here -->
+
+        <!-- ###+ symfony/swiftmailer-bundle ### -->
+        <!-- For Gmail as a transport, use: "gmail://username:password@localhost" -->
+        <!-- For a generic SMTP server, use: "smtp://localhost:25?encryption=&auth_mode=" -->
+        <!-- Delivery is disabled by default via "null://localhost" -->
+        <env name="MAILER_URL" value="null://localhost"/>
+        <!-- ###- symfony/swiftmailer-bundle ### -->
     </php>
 
     <testsuites>
-        <testsuite name="Northwind Test Suite">
+        <testsuite name="Demo Test Suite">
             <directory>tests/</directory>
         </testsuite>
     </testsuites>
@@ -27,6 +34,7 @@
         <whitelist>
             <directory>./src/</directory>
             <exclude>
+                <directory>src/DataFixtures</directory>
                 <directory>src/Resources</directory>
                 <directory>src/Test</directory>
             </exclude>
