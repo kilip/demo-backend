@@ -107,6 +107,9 @@
     "fabpot/goutte": {
         "version": "v3.2.2"
     },
+    "fzaninotto/faker": {
+        "version": "v1.7.1"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.3.0"
     },
@@ -116,11 +119,26 @@
     "guzzlehttp/psr7": {
         "version": "1.4.2"
     },
+    "hautelook/alice-bundle": {
+        "version": "1.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.4",
+            "ref": "3447d538661064626c782b1122a14defa48dc0b1"
+        }
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
     "justinrainbow/json-schema": {
         "version": "5.2.6"
+    },
+    "myclabs/deep-copy": {
+        "version": "1.7.0"
+    },
+    "nelmio/alice": {
+        "version": "v3.1.3"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -298,6 +316,9 @@
     },
     "symfony/yaml": {
         "version": "v4.0.3"
+    },
+    "theofidry/alice-data-fixtures": {
+        "version": "v1.0.1"
     },
     "twig/twig": {
         "version": "v2.4.4"

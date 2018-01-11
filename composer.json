@@ -17,6 +17,7 @@
         "behat/symfony2-extension": "^2.1",
         "behatch/contexts": "^3.0",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "hautelook/alice-bundle": "^2.0",
         "symfony/dotenv": "^4.0",
         "symfony/phpunit-bridge": "^4.0"
     },
