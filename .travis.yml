@@ -15,15 +15,7 @@ env:
 matrix:
   include:
     - php: '7.1'
-      services:
-          - postgresql
-      before_script:
-      env: APP_ENV=postgres
     - php: '7.2'
-      services:
-          - postgresql
-      before_script:
-      env: APP_ENV=postgres
 
 before_install:
   - phpenv config-rm xdebug.ini || echo "xdebug not available"
