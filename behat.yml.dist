@@ -4,17 +4,20 @@ default:
     suites:
         default:
             contexts:
-                - Demo\Behat\Contexts\FeatureContext:
-                    doctrine: '@doctrine'
                 - Behat\MinkExtension\Context\MinkContext
                 - Behatch\Context\RestContext
                 - Behatch\Context\JsonContext
+                - Demo\Behat\Contexts\RestContext
+                - Demo\Behat\Contexts\FeatureContext:
+                    doctrine: '@doctrine'
+                - Demo\Behat\Contexts\EmployeeContext:
+                    doctrine: '@doctrine'
     extensions:
         Behat\Symfony2Extension:
             kernel:
                 bootstrap: vendor/autoload.php
                 env: "test"
-                debug: true
+                debug: false
                 class: Demo\Kernel
         Behat\MinkExtension:
             base_url: "http://example.com/"

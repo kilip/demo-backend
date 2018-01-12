@@ -25,4 +25,4 @@ doctrine:
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'Demo\Entity'
-                alias: demo
+                alias: Demo

@@ -1,8 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the Demo project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Demo\Behat\Contexts;
 
 use Behat\Behat\Context\Context;
+use Behat\Symfony2Extension\Context\KernelDictionary;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\SchemaTool;
 
@@ -14,6 +26,8 @@ use Doctrine\ORM\Tools\SchemaTool;
  */
 class FeatureContext implements Context
 {
+    use KernelDictionary;
+
     /**
      * @var ManagerRegistry
      */
@@ -27,41 +41,37 @@ class FeatureContext implements Context
     /**
      * @var SchemaTool
      */
-    private $schemaTool;
+    private static $schemaTool;
 
     /**
      * @var array
      */
-    private $classes;
+    private static $classes;
 
     public function __construct(ManagerRegistry $doctrine)
     {
         $this->doctrine = $doctrine;
         $this->manager = $doctrine->getManager();
-        $this->schemaTool = new SchemaTool($this->manager);
-        $this->classes = $this->manager->getMetadataFactory()->getAllMetadata();
+        static::$schemaTool = new SchemaTool($this->manager);
+        static::$classes = $this->manager->getMetadataFactory()->getAllMetadata();
     }
 
     /**
-     * @BeforeSuite
-     */
-    public static function beforeSuite()
-    {
-    }
-
-    /**
-     * @BeforeScenario
+     * @BeforeScenario @createSchema
      */
     public function createDatabase()
     {
-        $this->schemaTool->createSchema($this->classes);
+        //static::$schemaTool->createSchema(static::$classes);
     }
 
     /**
-     * @AfterScenario
+     * @AfterScenario @dropSchema
      */
     public function dropDatabase()
     {
-        $this->schemaTool->dropSchema($this->classes);
+        //$this->schemaTool->dropSchema($this->classes);
+        if (static::$schemaTool instanceof SchemaTool) {
+            //static::$schemaTool->dropSchema(static::$classes);
+        }
     }
 }

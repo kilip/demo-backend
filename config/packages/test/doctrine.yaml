@@ -1,6 +1,6 @@
 doctrine:
     dbal:
-        driver:  "pdo_sqlite"
-        path:    "%kernel.cache_dir%/db.sqlite"
+        #driver:  "pdo_sqlite"
+        #path:    "%kernel.cache_dir%/db.sqlite"
         charset: "UTF8"
-        url: ~
+        url:     "sqlite:///%kernel.project_dir%/var/data.db"

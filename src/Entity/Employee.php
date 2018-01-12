@@ -36,6 +36,7 @@ class Employee
 {
     const GENDER_MALE = 'M';
     const GENDER_FEMALE = 'F';
+
     /**
      * @var null|int
      *
@@ -49,6 +50,7 @@ class Employee
      * @var null|string
      *
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -56,6 +58,8 @@ class Employee
      * @var null|\DateTime
      *
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
+     * @Assert\Date()
      */
     private $birthDate;
 
@@ -63,6 +67,7 @@ class Employee
      * @var null|string
      *
      * @ORM\Column(type="string",length=1)
+     * @Assert\Choice(choices={"M","F"}, message="Choose a valid gender type 'M' or 'F'")
      */
     private $gender;
 
@@ -94,11 +99,11 @@ class Employee
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Address",cascade={"all"},fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity="Address",cascade={"all"},fetch="EAGER",orphanRemoval=true)
      * @ORM\JoinTable(
      *     name="employee_address",
-     *     joinColumns={@ORM\JoinColumn(name="customer_id",referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="address_id",referencedColumnName="id")}
+     *     joinColumns={@ORM\JoinColumn(name="customer_id",referencedColumnName="id",onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="address_id",referencedColumnName="id",onDelete="CASCADE")}
      * )
      * @ApiSubresource()
      */
@@ -107,7 +112,7 @@ class Employee
     /**
      * @var null|User
      *
-     * @ORM\OneToOne(targetEntity="Demo\Entity\User")
+     * @ORM\OneToOne(targetEntity="Demo\Entity\User",cascade={"all"},orphanRemoval=true)
      */
     private $login;
 
