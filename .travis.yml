@@ -26,7 +26,7 @@ install:
   - composer update --prefer-dist --no-progress --no-suggest --ansi
 
 script:
-  -- mkdir -p build/logs
+  - mkdir -p build/logs
   - bin/phpunit
   - ./vendor/bin/behat -fprogress
   - travis_retry php-coveralls.phar -v
