@@ -27,4 +27,9 @@ install:
   - composer update --prefer-dist --no-progress --no-suggest --ansi
 
 script:
-  - vendor/bin/phpunit --coverage-xml=build/coverage
+  - vendor/bin/phpunit
+  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.0.0/php-coveralls.phar
+  - chmod +x php-coveralls.phar
+
+after_success:
+  - travis_retry php-coveralls.phar -v
