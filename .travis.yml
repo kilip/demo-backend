@@ -29,4 +29,9 @@ script:
   - mkdir -p build/logs
   - bin/phpunit
   - ./vendor/bin/behat -fprogress
+
+after_script:
+  - export CI_BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"
+  - export CI_PULL_REQUEST="$TRAVIS_PULL_REQUEST"
+  - export CI_BRANCH="$TRAVIS_BRANCH"
   - travis_retry php coveralls.phar -v

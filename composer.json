@@ -1,4 +1,6 @@
 {
+    "name": "kilip/demo-backend",
+    "description": "Anthonius Munthi Demo application",
     "type": "project",
     "license": "proprietary",
     "require": {
