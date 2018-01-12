@@ -27,7 +27,8 @@ install:
   - composer update --prefer-dist --no-progress --no-suggest --ansi
 
 script:
-  - vendor/bin/phpunit
+  - bin/phpunit
+  - ./vendor/bin/behat -p
   - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.0.0/php-coveralls.phar
   - chmod +x php-coveralls.phar
 
