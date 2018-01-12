@@ -20,16 +20,13 @@ matrix:
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
-  - mkdir -p build/coverage
-
+  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.0.0/php-coveralls.phar
+  - chmod +x php-coveralls.phar
 install:
   - composer update --prefer-dist --no-progress --no-suggest --ansi
 
 script:
+  -- mkdir -p build/logs
   - bin/phpunit
   - ./vendor/bin/behat -fprogress
-  - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.0.0/php-coveralls.phar
-  - chmod +x php-coveralls.phar
-
-after_success:
   - travis_retry php-coveralls.phar -v
