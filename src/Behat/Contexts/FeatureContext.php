@@ -41,15 +41,14 @@ class FeatureContext implements Context
         $this->schemaTool = new SchemaTool($this->manager);
         $this->classes = $this->manager->getMetadataFactory()->getAllMetadata();
     }
-	
-	/**
-	 * @BeforeSuite
-	 */
-    static public function beforeSuite()
+
+    /**
+     * @BeforeSuite
+     */
+    public static function beforeSuite()
     {
-    
     }
-    
+
     /**
      * @BeforeScenario
      */
