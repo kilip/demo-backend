@@ -2,12 +2,14 @@ default:
     calls:
         error_reporting: 16383 # E_ALL & ~E_USER_DREPRECATED
     suites:
-        default:
+        core:
+            paths:
+                - "features"
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - Behatch\Context\RestContext
                 - Behatch\Context\JsonContext
-                - Demo\Behat\Contexts\RestContext
+                - Demo\Behat\Contexts\RestContext:
+                    router: "@router"
                 - Demo\Behat\Contexts\FeatureContext:
                     doctrine: '@doctrine'
                 - Demo\Behat\Contexts\EmployeeContext:

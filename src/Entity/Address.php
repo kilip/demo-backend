@@ -46,6 +46,7 @@ class Address
     /**
      * @var null|string
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $address;
 
@@ -65,6 +66,7 @@ class Address
     /**
      * @var null|string
      * @ORM\Column(type="string",nullable=true)
+     * @Assert\Country()
      */
     private $country;
 

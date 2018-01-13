@@ -13,26 +13,21 @@ declare(strict_types=1);
 
 namespace Demo\Behat\Contexts;
 
-use Behat\Behat\Context\Context;
-use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behatch\Context\RestContext as BehatchRestContext;
+use Behatch\HttpCall\Request;
+use Symfony\Component\Routing\RouterInterface;
 
-class RestContext implements Context
+class RestContext extends BehatchRestContext
 {
     /**
-     * @var BehatchRestContext
+     * @var RouterInterface
      */
-    private $restContext;
+    private $router;
 
-    /**
-     * @param BeforeScenarioScope $scope
-     * @BeforeScenario
-     */
-    public function gatherContexts(BeforeScenarioScope $scope)
+    public function __construct(Request $request, RouterInterface $router)
     {
-        $environment = $scope->getEnvironment();
-
-        $this->restContext = $environment->getContext(BehatchRestContext::class);
+        parent::__construct($request);
+        $this->router = $router;
     }
 
     /**
@@ -40,7 +35,21 @@ class RestContext implements Context
      */
     public function iSetHeaderTypeToHydra()
     {
-        $this->restContext->iAddHeaderEqualTo('Accept', 'application/ld+json');
-        $this->restContext->iAddHeaderEqualTo('Content-Type', 'application/ld+json');
+        $this->iAddHeaderEqualTo('Accept', 'application/ld+json');
+        $this->iAddHeaderEqualTo('Content-Type', 'application/ld+json');
+    }
+
+    /**
+     * Generate url from route name.
+     *
+     * @param $routeName
+     * @param $parameters
+     * @param int $referenceType
+     *
+     * @return string
+     */
+    public function generateUrl($routeName, $parameters, $referenceType = RouterInterface::ABSOLUTE_PATH)
+    {
+        return $this->router->generate($routeName, $parameters, $referenceType);
     }
 }
