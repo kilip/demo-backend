@@ -12,20 +12,6 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    #Demo\:
-    #    resource: '../src/*'
-    #    exclude: '../src/{Entity,Migrations,Tests}'
-
-
-    #Demo\Employee\:
-    #    resource: "../src/*"
-    #    exclude: '../src/{Behat,Entity,Migrations,Tests}'
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-
     #Demo\Employee\Controller\:
     #    resource: "../src/Employee/Controller/*"
     #    tags: ['controller.service_arguments']

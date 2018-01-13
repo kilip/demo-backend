@@ -21,7 +21,6 @@ services:
             - "80:80"
         volumes:
             - ./public:/srv/northwind/public:ro
-
     db:
         # In production, you may want to use a managed database service
         container_name: northwind.db

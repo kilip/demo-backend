@@ -1,4 +1,4 @@
-Feature: Manage Employees
+Feature: Manage Employee Address
     In order to manage Employee Address
     As a client
     I need to be able to retrieve, create, update and delete them through the API.
