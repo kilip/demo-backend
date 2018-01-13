@@ -200,6 +200,15 @@
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
     },
+    "phpspec/php-diff": {
+        "version": "v1.1.0"
+    },
+    "phpspec/phpspec": {
+        "version": "4.3.0"
+    },
+    "phpspec/prophecy": {
+        "version": "1.7.3"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -214,6 +223,18 @@
     },
     "psr/simple-cache": {
         "version": "1.0.0"
+    },
+    "sebastian/comparator": {
+        "version": "2.1.2"
+    },
+    "sebastian/diff": {
+        "version": "2.0.1"
+    },
+    "sebastian/exporter": {
+        "version": "3.1.0"
+    },
+    "sebastian/recursion-context": {
+        "version": "3.0.0"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
