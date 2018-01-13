@@ -24,25 +24,25 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AddressController
 {
-	/**
-	 * @param AddressService $service
-	 * @param Request $request
-	 *
-	 * @return JsonResponse
-	 */
-    public function addForEmployeeAction($id,AddressService $service,Request $request)
+    /**
+     * @param AddressService $service
+     * @param Request        $request
+     *
+     * @return JsonResponse
+     */
+    public function addForEmployeeAction($id, AddressService $service, Request $request)
     {
-    	return $service->createNew(Employee::class,$id,$request);
+        return $service->createNew(Employee::class, $id, $request);
     }
-    
-	/**
-	 * @param AddressService $service
-	 * @param Request $request
-	 *
-	 * @return JsonResponse
-	 */
-	public function addForCustomerAction($id,AddressService $service,Request $request)
-	{
-		return $service->createNew(Customer::class,$id,$request);
-	}
+
+    /**
+     * @param AddressService $service
+     * @param Request        $request
+     *
+     * @return JsonResponse
+     */
+    public function addForCustomerAction($id, AddressService $service, Request $request)
+    {
+        return $service->createNew(Customer::class, $id, $request);
+    }
 }
