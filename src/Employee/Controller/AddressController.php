@@ -22,6 +22,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -77,7 +78,7 @@ class AddressController
         
         $status = 201;
 
-        if (count($errors) > 0) {
+        if (!is_null($errors)) {
             $content = $errorNormalizer->normalize($errors);
             $status = 401;
         } else {

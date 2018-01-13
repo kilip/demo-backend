@@ -71,7 +71,7 @@ EOC;
             ->getMock()
         ;
         $request
-            ->expects($this->exactly(2))
+            ->expects($this->any())
             ->method('get')
             ->willReturnMap(array(
                 array('id', null, 1),
@@ -99,12 +99,12 @@ EOC;
         ;
         $employee = new Employee();
         $responseValue = array('some' => 'value');
-        $repository->expects($this->once())
+        $repository->expects($this->exactly(1))
             ->method('findOneBy')
             ->with(array('id' => 1))
             ->willReturn($employee)
         ;
-        $itemNormalizer->expects($this->exactly(1))
+        $itemNormalizer->expects($this->once())
             ->method('normalize')
             ->with($address)
             ->willReturn($responseValue)
