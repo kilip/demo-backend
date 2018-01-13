@@ -11,4 +11,3 @@ add_customer_address:
     defaults:
         _controller: Demo\Core\Controller\AddressController:addForCustomerAction
         _api_resource_class: 'Demo\Entity\Address'
-
