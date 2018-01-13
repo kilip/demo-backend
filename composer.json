@@ -24,6 +24,7 @@
         "behatch/contexts": "^3.0",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "hautelook/alice-bundle": "^2.0",
+        "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "^4.0",
         "symfony/phpunit-bridge": "^4.0"
     },

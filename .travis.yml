@@ -35,3 +35,6 @@ after_script:
   - export CI_PULL_REQUEST="$TRAVIS_PULL_REQUEST"
   - export CI_BRANCH="$TRAVIS_BRANCH"
   - travis_retry php coveralls.phar -v
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -s build/logs
