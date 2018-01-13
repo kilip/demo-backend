@@ -36,7 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author Anthonius Munthi <me@itstoni.com>
  * @TODO: make sync email between user and employee
  */
-class Employee implements AdressableInterface
+class Employee implements AddressableInterface
 {
     const GENDER_MALE = 'M';
     const GENDER_FEMALE = 'F';

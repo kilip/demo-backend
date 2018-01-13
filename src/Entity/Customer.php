@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @author Anthonius Munthi <me@itstoni.com>
  */
-class Customer
+class Customer implements AddressableInterface
 {
     const TYPE_PERSONAL = 1;
 

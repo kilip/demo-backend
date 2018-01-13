@@ -1,0 +1,3 @@
+core:
+    resource: '../src/Core/Resources/routes.yaml'
+    prefix: "/api"

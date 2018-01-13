@@ -15,7 +15,7 @@ namespace Demo\Entity;
 
 use Doctrine\Common\Collections\Collection;
 
-interface AdressableInterface
+interface AddressableInterface
 {
     /**
      * @param Address $address

@@ -2,7 +2,7 @@
 
 namespace Demo\Employee\Demo\Employee\Controller;
 
-use Demo\Employee\Controller\AddressController;
+use Demo\Core\Controller\AddressController;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -10,6 +10,6 @@ class AddressControllerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(AddressController::class);
+        $this->shouldHaveType( \Demo\Core\Controller\AddressController::class);
     }
 }

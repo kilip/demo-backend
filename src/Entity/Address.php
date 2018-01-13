@@ -26,7 +26,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *     collectionOperations={
  *          "get"={"method"="GET"},
- *          "post"={"method"="POST","route_name"="add_employee_address"}
+ *          "newEmployeeAddress"={"method"="POST","route_name"="add_employee_address"},
+ *          "newCustomerAddress"={"method"="POST","route_name"="add_customer_address"},
  *     }
  * )
  * @ORM\Table(name="address")

@@ -12,7 +12,7 @@ Feature: Manage Employees
 
     Scenario: Add new address to employee
         Given I set header type to hydra
-        And I send a "POST" request to "/api/addresses?type=employee&id=1" with body:
+        And I send a "POST" request to "/api/addresses/employee/1" with body:
         """
         {
             "address":"Some Street",
