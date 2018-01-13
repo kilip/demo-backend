@@ -40,7 +40,7 @@ class RestContext implements Context
      */
     public function iSetHeaderTypeToHydra()
     {
-        $this->restContext->iAddHeaderEqualTo('ContentType', 'application/ld+json');
         $this->restContext->iAddHeaderEqualTo('Accept', 'application/ld+json');
+        $this->restContext->iAddHeaderEqualTo('Content-Type', 'application/ld+json');
     }
 }

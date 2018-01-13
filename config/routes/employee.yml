@@ -1,0 +1,6 @@
+add_employee_address:
+    path: '/api/addresses'
+    methods: ['POST']
+    defaults:
+        _controller: Demo\Employee\Controller\AddressController:addAction
+        _api_resource_class: 'Demo\Entity\Address'

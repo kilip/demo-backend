@@ -17,12 +17,18 @@ namespace Demo\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Address.
  *
  * @ORM\Entity()
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get"={"method"="GET"},
+ *          "post"={"method"="POST","route_name"="add_employee_address"}
+ *     }
+ * )
  * @ORM\Table(name="address")
  */
 class Address
@@ -37,53 +43,54 @@ class Address
     private $id;
 
     /**
-     * @var string
+     * @var null|string
      * @ORM\Column(type="text")
      */
     private $address;
 
     /**
-     * @var string
+     * @var null|string
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $city;
 
     /**
-     * @var string
-     * @ORM\Column(type="string")
+     * @var null|string
+     * @ORM\Column(type="string",nullable=true)
      */
     private $state;
 
     /**
-     * @var string
-     * @ORM\Column(type="string")
+     * @var null|string
+     * @ORM\Column(type="string",nullable=true)
      */
     private $country;
 
     /**
-     * @var string
-     * @ORM\Column(type="string")
+     * @var null|string
+     * @ORM\Column(type="string",nullable=true)
      */
     private $zip;
 
     /**
-     * @var string
+     * @var null|string
      *
-     * @ORM\Column(type="string",length=50)
+     * @ORM\Column(type="string",length=50,nullable=true)
      */
     private $phone;
 
     /**
-     * @var string
+     * @var null|string
      *
-     * @ORM\Column(type="string",length=50)
+     * @ORM\Column(type="string",length=50,nullable=true)
      */
     private $fax;
 
     /**
-     * @var string
+     * @var null|string
      *
-     * @ORM\Column(type="string",length=50)
+     * @ORM\Column(type="string",length=50,nullable=true)
      */
     private $mobile;
 
@@ -104,19 +111,59 @@ class Address
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getState(): string
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param null|string $address
+     *
+     * @return Address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param null|string $city
+     *
+     * @return Address
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getState()
     {
         return $this->state;
     }
 
     /**
-     * @param string $state
+     * @param null|string $state
      *
      * @return Address
      */
-    public function setState(string $state): self
+    public function setState($state)
     {
         $this->state = $state;
 
@@ -124,7 +171,7 @@ class Address
     }
 
     /**
-     * @return mixed
+     * @return null|string
      */
     public function getCountry()
     {
@@ -132,7 +179,7 @@ class Address
     }
 
     /**
-     * @param mixed $country
+     * @param null|string $country
      *
      * @return Address
      */
@@ -146,57 +193,17 @@ class Address
     /**
      * @return null|string
      */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * @param string $address
-     *
-     * @return Address
-     */
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCity(): string
-    {
-        return $this->city;
-    }
-
-    /**
-     * @param string $city
-     *
-     * @return Address
-     */
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getZip(): string
+    public function getZip()
     {
         return $this->zip;
     }
 
     /**
-     * @param string $zip
+     * @param null|string $zip
      *
      * @return Address
      */
-    public function setZip(string $zip): self
+    public function setZip($zip)
     {
         $this->zip = $zip;
 
@@ -204,19 +211,19 @@ class Address
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getPhone(): string
+    public function getPhone()
     {
         return $this->phone;
     }
 
     /**
-     * @param string $phone
+     * @param null|string $phone
      *
      * @return Address
      */
-    public function setPhone(string $phone): self
+    public function setPhone($phone)
     {
         $this->phone = $phone;
 
@@ -224,39 +231,19 @@ class Address
     }
 
     /**
-     * @return string
-     */
-    public function getMobile(): string
-    {
-        return $this->mobile;
-    }
-
-    /**
-     * @param string $mobile
-     *
-     * @return Address
-     */
-    public function setMobile(string $mobile): self
-    {
-        $this->mobile = $mobile;
-
-        return $this;
-    }
-
-    /**
      * @return null|string
      */
-    public function getFax(): string
+    public function getFax()
     {
         return $this->fax;
     }
 
     /**
-     * @param string $fax
+     * @param null|string $fax
      *
      * @return Address
      */
-    public function setFax(string $fax): self
+    public function setFax($fax)
     {
         $this->fax = $fax;
 
@@ -264,7 +251,27 @@ class Address
     }
 
     /**
-     * @return null|\DateTime
+     * @return null|string
+     */
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * @param null|string $mobile
+     *
+     * @return Address
+     */
+    public function setMobile($mobile)
+    {
+        $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
      */
     public function getUpdated()
     {

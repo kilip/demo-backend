@@ -20,9 +20,20 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    Demo\Controller\:
-        resource: '../src/Controller'
+    Demo\Employee\Controller\:
+        resource: '../src/Employee/Controller/*'
         tags: ['controller.service_arguments']
+
+    #Demo\Employee\:
+    #    resource: "../src/*"
+    #    exclude: '../src/{Behat,Entity,Migrations,Tests}'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    Demo\Employee\Controller\AddressController:
+        tags: ['controller.service_arguments']
+        arguments:
+            $errorNormalizer: "@api_platform.hydra.normalizer.constraint_violation_list"
+            $itemNormalizer: "@api_platform.jsonld.normalizer.item"
+            #$itemNormalizer: "@api_platform.hydra.normalizer.collection"

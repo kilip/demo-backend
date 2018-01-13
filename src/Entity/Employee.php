@@ -27,12 +27,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity()
  * @ORM\Table(name="employees")
- * @ApiResource()
+ * @ApiResource(
+ *     subresourceOperations={
+ *          "new-address"={"route_name"="employee_new_address"}
+ *     }
+ * )
  *
  * @author Anthonius Munthi <me@itstoni.com>
  * @TODO: make sync email between user and employee
  */
-class Employee
+class Employee implements AdressableInterface
 {
     const GENDER_MALE = 'M';
     const GENDER_FEMALE = 'F';
@@ -99,7 +103,7 @@ class Employee
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Address",cascade={"all"},fetch="EAGER",orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="Address",cascade={"all"},fetch="LAZY",orphanRemoval=true)
      * @ORM\JoinTable(
      *     name="employee_address",
      *     joinColumns={@ORM\JoinColumn(name="customer_id",referencedColumnName="id",onDelete="CASCADE")},
@@ -129,7 +133,7 @@ class Employee
      *
      * @return Employee
      */
-    public function setLogin($login)
+    public function setLogin($login): self
     {
         $this->login = $login;
         $login->setEmail($this->getEmail());
