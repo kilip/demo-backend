@@ -113,9 +113,14 @@ class AddressServiceSpec extends ObjectBehavior
 	
 	function it_should_throw_not_found_http_exception_when_owner_not_exists(
 		$repository,
-		Request $request
+		Request $request,
+		$validator
 	)
 	{
+		$validator->validate(Argument::any())
+			->shouldBeCalled()
+			->willReturn([])
+		;
 		$request->getContent()->willReturn('{"some":"value"}');
 		$repository->findOneBy(['id'=>2])
 		           ->shouldBeCalled()
