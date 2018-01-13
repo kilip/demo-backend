@@ -27,7 +27,7 @@ install:
 script:
   - mkdir -p build/logs
   - bin/phpunit
-  - ./vendor/bin/phpspec
+  - ./vendor/bin/phpspec run
   - ./vendor/bin/behat -fprogress
 
 after_success:
