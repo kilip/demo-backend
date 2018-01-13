@@ -41,22 +41,22 @@ class EmployeeContext implements Context
             ->delete('Demo:Employee', 'e')
         ;
         $qb->getQuery()->execute();
-	    $this->getEntityManager()->flush();*/
-	    
-	    $this->purge();
+        $this->getEntityManager()->flush();*/
+
+        $this->purge();
     }
-	
-	/**
-	 * @Given I don't have any address data
-	 */
-	public function iDonTHaveAnyAddressData()
+
+    /**
+     * @Given I don't have any address data
+     */
+    public function iDonTHaveAnyAddressData()
     {
-	    $qb = $this->getEntityManager()
-	               ->createQueryBuilder()
-	               ->delete('Demo:Address', 'a')
-	    ;
-	    $qb->getQuery()->execute();
-	    $this->getEntityManager()->flush();
+        $qb = $this->getEntityManager()
+                   ->createQueryBuilder()
+                   ->delete('Demo:Address', 'a')
+        ;
+        $qb->getQuery()->execute();
+        $this->getEntityManager()->flush();
     }
 
     /**

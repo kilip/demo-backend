@@ -21,14 +21,10 @@ use Demo\Entity\Employee;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class EmployeeService.
- *
- * @Route(service="employee.controller.address")
  */
 class AddressController
 {
@@ -75,10 +71,10 @@ class AddressController
         $validator = $this->validator;
         $address = $itemNormalizer->denormalize(json_decode($request->getContent(), true), Address::class, 'json');
         $errors = $validator->validate($address);
-        
+
         $status = 201;
 
-        if (count($errors)>0) {
+        if (count($errors) > 0) {
             $content = $errorNormalizer->normalize($errors);
             $status = 401;
         } else {
@@ -91,10 +87,11 @@ class AddressController
             $this->em->flush();
             $content = $itemNormalizer->normalize($address);
         }
-	    $headers = [
-	    	'Content-Type' => 'application/ld+json'
-	    ];
-        return new JsonResponse($content, $status,$headers);
+        $headers = array(
+            'Content-Type' => 'application/ld+json',
+        );
+
+        return new JsonResponse($content, $status, $headers);
     }
 
     /**
