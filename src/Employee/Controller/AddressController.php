@@ -78,7 +78,7 @@ class AddressController
         
         $status = 201;
 
-        if (!is_null($errors)) {
+        if (count($errors)>0) {
             $content = $errorNormalizer->normalize($errors);
             $status = 401;
         } else {

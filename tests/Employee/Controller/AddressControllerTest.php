@@ -98,7 +98,8 @@ EOC;
             ->willReturn($address)
         ;
         $employee = new Employee();
-        $responseValue = array('some' => 'value');
+	
+	    $responseValue = array('some' => 'value');
         $repository->expects($this->exactly(1))
             ->method('findOneBy')
             ->with(array('id' => 1))
@@ -109,6 +110,13 @@ EOC;
             ->with($address)
             ->willReturn($responseValue)
         ;
+        $validator->expects($this->exactly(2))
+	        ->method('validate')
+	        ->with($address)
+	        ->willReturnOnConsecutiveCalls(
+	        	[],['some'=>'error']
+	        )
+        ;
 
         // test creating new address
         $response = $controller->addAction($request);
@@ -118,11 +126,6 @@ EOC;
 
         // test validation error
         $responseValue = array('some' => 'error');
-        $validator->expects($this->once())
-            ->method('validate')
-            ->with($address)
-            ->willReturn($responseValue)
-        ;
         $errorNormalizer->expects($this->once())
             ->method('normalize')
             ->with($responseValue)
