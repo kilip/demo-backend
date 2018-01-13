@@ -24,6 +24,7 @@
         "behatch/contexts": "^3.0",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "hautelook/alice-bundle": "^2.0",
+        "leanphp/phpspec-code-coverage": "^4.0",
         "phpspec/phpspec": "^4.3",
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "^4.0",
@@ -37,7 +38,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Demo\\": "src/"
+            "Demo\\": "src/",
+            "Spec\\": "spec/"
         }
     },
     "autoload-dev": {

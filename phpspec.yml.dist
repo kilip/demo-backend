@@ -1,0 +1,18 @@
+suites:
+    employee_suite:
+        namespace: Demo
+        psr4_prefix: Demo
+
+extensions:
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+        format:
+            - clover
+        output:
+            clover: build/logs/phpspec.xml
+        whitelist:
+            - src
+        blacklist:
+            - src/Behat
+            - src/Test
+            - src/Resources
+            - src/DataFixtures

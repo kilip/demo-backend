@@ -20,21 +20,15 @@ matrix:
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
-  - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
-  - chmod +x coveralls.phar
+
 install:
   - composer update --prefer-dist --no-progress --no-suggest --ansi
 
 script:
   - mkdir -p build/logs
   - bin/phpunit
+  - ./vendor/bin/phpspec
   - ./vendor/bin/behat -fprogress
 
-after_script:
-  - export CI_BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"
-  - export CI_PULL_REQUEST="$TRAVIS_PULL_REQUEST"
-  - export CI_BRANCH="$TRAVIS_BRANCH"
-  - travis_retry php coveralls.phar -v
-
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -s build/logs
+  - bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml"
