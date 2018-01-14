@@ -1,54 +1,49 @@
 language: php
-
 sudo: false
-
 cache:
   directories:
-    - $HOME/.composer/cache
-    - $HOME/.npm
-
+  - "$HOME/.composer/cache"
+  - "$HOME/.npm"
 matrix:
   include:
-    - php: '7.1'
-      services:
-          - postgresql
-      env: DATABASE_URL=pgsql://postgres@localhost:5432/demo
-    - php: '7.1'
-      services:
-          - mysql
-      env: DATABASE_URL=mysql://root@localhost:3306/demo
-    - php: '7.2'
-      services:
-          - postgresql
-      env: DATABASE_URL=pgsql://postgres@localhost:5432/demo
-    - php: '7.2'
-      services:
-          - mysql
-      env: DATABASE_URL=mysql://root@localhost:3306/demo
-
+  - php: '7.1'
+    services:
+    - postgresql
+    env: DATABASE_URL=pgsql://postgres@localhost:5432/demo
+  - php: '7.1'
+    services:
+    - mysql
+    env: DATABASE_URL=mysql://root@localhost:3306/demo
+  - php: '7.2'
+    services:
+    - postgresql
+    env: DATABASE_URL=pgsql://postgres@localhost:5432/demo
+  - php: '7.2'
+    services:
+    - mysql
+    env: DATABASE_URL=mysql://root@localhost:3306/demo
 before_install:
-  - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-  - export PATH="$PATH:$HOME/.composer/vendor/bin"
-  - cp .env.dist .env
-
+- echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+- export PATH="$PATH:$HOME/.composer/vendor/bin"
+- cp .env.dist .env
 install:
-  - composer update --prefer-dist --no-progress --no-suggest --ansi
-  - bin/console doctrine:database:create --env=test
-  - bin/console doctrine:schema:update --force --env=test
-
+- composer update --prefer-dist --no-progress --no-suggest --ansi
+- bin/console doctrine:database:create --env=test
+- bin/console doctrine:schema:update --force --env=test
 script:
-  - mkdir -p build/logs
-  - bin/phpunit
-  - ./vendor/bin/phpspec run -fdot
-  - ./vendor/bin/behat -fprogress
-
+- mkdir -p build/logs
+- bin/phpunit
+- "./vendor/bin/phpspec run -fdot"
+- "./vendor/bin/behat -fprogress"
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml"
-
+- bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml"
 deploy:
   provider: heroku
-  api_key: HEROKU_API_KEY
-  app: tonidemo
+  api_key:
+    secure: Qc9rQBoTpmY+3OEyK0qUydtlMNbFz9PDzOmNW7OBVDOENpCilzC/D49NRRh9tgY2rmD0AmkwTRfeej/oW0mq1fokluzhU7PfdazA4CYq7sQKDenJIQll+xu/E6ZcH5BPZGH5FW6ulRJ/p217W+fRESYNDea2raP7r4P+KWA7k2JT0+X0pvVwxLbjnewn/ON73ttKejuXlWC95SH0Iv62xDgbg7gCiVUeqer96iPM+R9ottA5IvEqRjbNAWg/HHEj67lHlHBvDSiN4TzQUcDSOZetnu2QFBJwIsVPFQN+ADq3uN2gL7owaPp8R+0vCni33h3Axat5j+mut33FcNc5t+hHKT4bYoeSPLq/j70YFGQv57B9tlqzvFd2dyQHp0sVUwCqURN99RJt5VnbsUh8WMEAOpabJx0jpdsNYRqKb4PvUu7cSlzFG+2w7pOOHugRTpRmYaUK9M6WwpX3Hz78mcMFAMZisUfK1iLnH66v8FfGm/sGx6oH9AosXnoL3WeHb2yq/s5/sZhafTVSsXqgPI0mYWeSblFaRkCi8cMrb/WJYg+qflbk2SVuodLeo2gcZDJCcHUMVCD3fUXDBZ1hvuD5jTuQME5bdthJ8Vv1EOs+pSqqfrC6P6pxV30leG9dxb7dU4PWcxy+zqWFr5WIM/wgfL/XonNCUq/oQDwLQ3g=
+  app: kilip
+  on:
+    repo: kilip/demo-backend
   run:
     - "bin/console doctrine:schema:update --force --env=prod"
     - "bin/console cache:clear --env=prod"
