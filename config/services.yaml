@@ -25,5 +25,7 @@ services:
         arguments:
             $errorNormalizer: "@api_platform.hydra.normalizer.constraint_violation_list"
             $itemNormalizer: "@api_platform.jsonld.normalizer.item"
-    Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager:
+
+    lexik_jwt_authentication.jwt_manager:
+        class:  Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager
         public: true
