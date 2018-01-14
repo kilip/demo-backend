@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "72cb27b3f251c0044d7760f4cdde3256",
+    "content-hash": "a32d1f266ac0730fde0edd0c1dd832dd",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -8338,7 +8338,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.1.3",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-apcu": "*"
     },
     "platform-dev": []
 }

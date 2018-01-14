@@ -3,17 +3,10 @@ doctrine:
         driver: 'pdo_pgsql'
         url: "%env(resolve:SYMFONY_DATABASE_URL)%?charset=utf8"
     orm:
-        auto_generate_proxy_classes: true
-        proxy_dir:            '%kernel.cache_dir%/doctrine/orm/proxies'
-        metadata_cache_driver:
-            type: service
-            id: doctrine.system_cache_provider
-        query_cache_driver:
-            type: service
-            id: doctrine.system_cache_provider
-        result_cache_driver:
-            type: service
-            id: doctrine.result_cache_provider
+        auto_generate_proxy_classes: false
+        metadata_cache_driver: apcu
+        query_cache_driver: apcu
+        result_cache_driver: apcu
 
 services:
     doctrine.result_cache_provider:
