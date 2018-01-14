@@ -33,6 +33,7 @@ matrix:
               repo: kilip/demo-backend
           run:
               - "bin/console cache:clear --env=prod"
+              - "bin/console cache:warmup"
 
     - php: '7.2'
       services:
