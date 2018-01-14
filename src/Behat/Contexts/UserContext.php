@@ -76,7 +76,7 @@ class UserContext implements Context
     public function iAmLoggedInAsAdmin()
     {
         $user = $this->findUserByName('admin');
-        if (null === $user) {
+        if (!$user instanceof User) {
             $user = $this->createUser('admin', 'admin', null, 'ROLE_SUPER_ADMIN');
         }
         $this->login($user);
