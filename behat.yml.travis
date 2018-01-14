@@ -19,7 +19,6 @@ default:
         Behat\Symfony2Extension:
             kernel:
                 bootstrap: vendor/autoload.php
-                env: "test"
                 debug: true
                 class: Demo\Kernel
         Behat\MinkExtension:
