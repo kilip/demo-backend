@@ -9,6 +9,7 @@ Feature: Manage Employee Address
             | name      | Lorem Ipsum |
             | gender    | M           |
             | address   | Some Street |
+        And I am logged in as admin
 
     Scenario: Add address to employee
         Given I send POST request to add employee address for "Lorem Ipsum" with body:

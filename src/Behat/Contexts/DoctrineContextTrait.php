@@ -39,16 +39,18 @@ trait DoctrineContextTrait
         $params = $this->doctrine->getConnection($connectionName)->getParams();
         $hasPath = isset($params['path']);
         $name = $hasPath ? $params['path'] : (isset($params['dbname']) ? $params['dbname'] : false);
-        $path = $params['path'];
+        $path = isset($params['path']) ? $params['path'] : null;
         unset($params['dbname'], $params['path'], $params['url']);
-        if (!is_file($path)) {
+        if (!$hasPath) {
             $tmpConnection = DriverManager::getConnection($params);
             $tmpConnection->connect();
-            $tmpConnection->getSchemaManager()->createDatabase($name);
-            $schemaTool = new SchemaTool($this->getEntityManager());
-            $classes = $this->getEntityManager()->getMetadataFactory()->getAllMetadata();
-            $schemaTool->updateSchema($classes, true);
+            if (!in_array($name, $tmpConnection->getSchemaManager()->listDatabases())) {
+                $tmpConnection->getSchemaManager()->createDatabase($name);
+            }
         }
+        $schemaTool = new SchemaTool($this->getEntityManager());
+        $classes = $this->getEntityManager()->getMetadataFactory()->getAllMetadata();
+        $schemaTool->updateSchema($classes, true);
     }
 
     /**
@@ -93,5 +95,6 @@ trait DoctrineContextTrait
     {
         $purger = new ORMPurger($this->getEntityManager());
         $purger->purge();
+        $this->getEntityManager()->flush();
     }
 }

@@ -1,3 +1,8 @@
 core:
     resource: '../src/Core/Resources/routes.yaml'
     prefix: "/api"
+
+#login_check_json:
+#    path: /login_check_json
+#    method: "POST"
+#    controller: Demo\Core\Controller\SecurityController::login

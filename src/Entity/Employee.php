@@ -28,8 +28,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity()
  * @ORM\Table(name="employees")
  * @ApiResource(
- *     subresourceOperations={
- *          "new-address"={"route_name"="employee_new_address"}
+ *     attributes= {
+ *         {"access_control"="is_granted('ROLE_EMPLOYEE')"}
+ *     },
+ *     collectionOperations={
+ *         "get"={"method"="GET","access_control"="is_granted('ROLE_EMPLOYEE')"},
+ *         "post"={"method"="POST","access_control"="is_granted('ROLE_EMPLOYEE')"}
+ *     },
+ *     itemOperations={
+ *         "get"={"method"="GET","access_control"="is_granted('ROLE_EMPLOYEE')"},
+ *         "put"={"method"="PUT","access_control"="is_granted('ROLE_EMPLOYEE')"},
+ *         "delete"={"method"="DELETE","access_control"="is_granted('ROLE_EMPLOYEE')"},
  *     }
  * )
  *
@@ -103,7 +112,7 @@ class Employee implements AddressableInterface
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Address",cascade={"all"},fetch="LAZY",orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="Address",cascade={"persist","remove"},fetch="LAZY")
      * @ORM\JoinTable(
      *     name="employee_address",
      *     joinColumns={@ORM\JoinColumn(name="customer_id",referencedColumnName="id",onDelete="CASCADE")},

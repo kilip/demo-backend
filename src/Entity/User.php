@@ -23,7 +23,15 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity()
  * @ORM\Table(name="security_users")
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={
+ *         {"access_control"="is_granted('ROLE_USER')"}
+ *     },
+ *     collectionOperations={
+ *         "get"={"method"="GET","access_control"="is_granted('ROLE_ADMIN')"},
+ *         "post"={"method"="POST","access_control"="is_granted('ROLE_ADMIN')"}
+ *     }
+ * )
  */
 class User extends BaseUser
 {

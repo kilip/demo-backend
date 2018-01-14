@@ -8,12 +8,7 @@ parameters:
 doctrine:
     dbal:
         # configure these for your database server
-        #driver: 'pdo_pgsql'
-        # With Symfony 3.3, remove the `resolve:` prefix
-        #dbname: "%env(resolve:DATABASE_NAME)%"
-        #user: "%env(resolve:DATABASE_USER)%"
-        #password: "%env(resolve:DATABASE_PASSWORD)%"
-        #host: "%env(resolve:DATABASE_HOST)%"
+        driver: 'pdo_pgsql'
         url: "%env(resolve:DATABASE_URL)%?charset=utf8"
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'

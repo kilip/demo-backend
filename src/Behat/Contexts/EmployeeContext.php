@@ -55,18 +55,53 @@ class EmployeeContext implements Context
     }
 
     /**
+     * @Given I send :method request to employees with body:
+     * @Given I send :method request to employees
+     */
+    public function iSendRequestToEmployeesWith($method, PyStringNode $data = null)
+    {
+        $routeName = 'api_employees_'.strtolower($method).'_collection';
+        $url = $this->restContext->generateUrl(
+            $routeName,
+            array()
+        );
+        $this->restContext->iSetHeaderTypeToHydra();
+        $this->restContext->iSendARequestTo(
+            $method,
+            $url,
+            $data
+        );
+    }
+
+    /**
+     * @Given I send :method request to employee :name with body:
+     * @Given I send :method request to employee :name
+     */
+    public function iSendRequestToEmployee($method, $name, PyStringNode $body = null)
+    {
+        $employee = $this->getEmployeeWithName($name, true);
+        $routeName = 'api_employees_'.strtolower($method).'_item';
+        $url = $this->restContext->generateUrl(
+            $routeName,
+            array('id' => $employee->getId())
+        );
+        $this->restContext->iSetHeaderTypeToHydra();
+        $this->restContext->iSendARequestTo(
+            $method, $url, $body
+        );
+    }
+
+    /**
      * @Given I don't have any employee data
      */
     public function iDonTHaveAnyEmployeeData()
     {
-        /*$qb = $this->getEntityManager()
+        $qb = $this->getEntityManager()
             ->createQueryBuilder()
             ->delete('Demo:Employee', 'e')
         ;
         $qb->getQuery()->execute();
-        $this->getEntityManager()->flush();*/
-
-        $this->purge();
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -88,10 +123,8 @@ class EmployeeContext implements Context
     public function iHaveEmployeeWithData(TableNode $table)
     {
         $rows = $table->getRowsHash();
-        $employee = $this->getEmployeeWithName($rows['name']);
-        if (!$employee instanceof Employee) {
-            $this->createNewEmployee($rows);
-        }
+
+        $this->getEmployeeWithName($rows['name'], true, $rows);
     }
 
     /**
@@ -165,14 +198,29 @@ class EmployeeContext implements Context
 
     /**
      * @param string $name
+     * @param bool   $create
+     * @param array  $data
      *
      * @return Employee
+     *
+     * @throws \Exception
      */
-    public function getEmployeeWithName($name)
+    public function getEmployeeWithName($name, $create = false, array $data = array())
     {
+        /* @var \Demo\Entity\Employee $employee */
         $repo = $this->getEntityManager()->getRepository(Employee::class);
 
-        return $repo->findOneBy(array('name' => $name));
+        $employee = $repo->findOneBy(array('name' => $name));
+        if (null === $employee && $create) {
+            $data['name'] = $name;
+            $employee = $this->createNewEmployee($data);
+        }
+
+        if (null === $employee) {
+            throw new \Exception('Can not find employee named: '.$name);
+        }
+
+        return $employee;
     }
 
     private function createNewEmployee(array $data)
@@ -206,5 +254,7 @@ class EmployeeContext implements Context
 
         $this->getEntityManager()->persist($employee);
         $this->getEntityManager()->flush();
+
+        return $employee;
     }
 }

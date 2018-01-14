@@ -9,11 +9,10 @@ Feature: Manage Employees
         And I have employee with data:
             | name      | Lorem Ipsum |
             | gender    | M           |
+        And I am logged in as admin
 
     Scenario: Create employee
-        When I add "Content-Type" header equal to "application/ld+json"
-        And I add "Accept" header equal to "application/ld+json"
-        And I send a "POST" request to "/employees" with body:
+        When I send POST request to employees with body:
         """
         {
           "name": "Some Name",
@@ -30,9 +29,9 @@ Feature: Manage Employees
         And the JSON node email should be equal to "some@example.com"
 
     Scenario: Browse the employee list
-        When I set header type to hydra
-        And I send a "GET" request to "/employees"
-        Then the response should be in JSON
+        When I send GET request to employees
+        Then the response status code should be 200
+        And the response should be in JSON
         And the header "Content-Type" should be equal to "application/ld+json; charset=utf-8"
         And the JSON should be valid according to this schema:
         """
@@ -54,9 +53,7 @@ Feature: Manage Employees
         """
 
     Scenario: Update employee data
-        When I add "Content-Type" header equal to "application/ld+json"
-        And I add "Accept" header equal to "application/ld+json"
-        And I send a "PUT" request to "/employees/1" with body:
+        When I send PUT request to employee "Lorem Ipsum" with body:
         """
         {
           "name": "Some Edited Name",
@@ -74,9 +71,7 @@ Feature: Manage Employees
         | email     | some-edited@example.com |
 
     Scenario: Update with invalid data
-        When I add "Content-Type" header equal to "application/ld+json"
-        And I add "Accept" header equal to "application/ld+json"
-        And I send a "PUT" request to "/employees/1" with body:
+        When I send PUT request to employee "Lorem Ipsum" with body:
         """
         {
           "name": "Some Name",
@@ -107,8 +102,5 @@ Feature: Manage Employees
         """
 
     Scenario: Delete employee
-        When I set header type to hydra
-        And I send a "DELETE" request to "/employees/1"
+        When I send DELETE request to employee "Lorem Ipsum"
         Then the response status code should be 204
-
-
