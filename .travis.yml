@@ -1,9 +1,12 @@
 language: php
+
 sudo: false
+
 cache:
     directories:
       - "$HOME/.composer/cache"
       - "$HOME/.npm"
+
 matrix:
     include:
     - php: '7.1'
@@ -22,21 +25,26 @@ matrix:
       services:
       - mysql
       env: DATABASE_URL=mysql://root@localhost:3306/demo
+
 before_install:
     - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
     - export PATH="$PATH:$HOME/.composer/vendor/bin"
     - cp .env.dist .env
+
 install:
     - composer update --prefer-dist --no-progress --no-suggest --ansi
     - bin/console doctrine:database:create --env=test
     - bin/console doctrine:schema:update --force --env=test
+
 script:
     - mkdir -p build/logs
     - bin/phpunit
     - "./vendor/bin/phpspec run -fdot"
     - "./vendor/bin/behat -fprogress"
+
 after_success:
     - bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml"
+
 deploy:
     provider: heroku
     api_key:
