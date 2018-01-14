@@ -32,7 +32,6 @@ matrix:
           on:
               repo: kilip/demo-backend
           run:
-              - "bin/console doctrine:schema:update --force --env=prod"
               - "bin/console cache:clear --env=prod"
 
     - php: '7.2'
