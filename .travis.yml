@@ -44,3 +44,11 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml"
+
+deploy:
+  provider: heroku
+  api_key: HEROKU_API_KEY
+  app: tonidemo
+  run:
+    - "bin/console doctrine:schema:update --force --env=prod"
+    - "bin/console cache:clear --env=prod"
