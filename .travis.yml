@@ -14,11 +14,13 @@ matrix:
           - postgresql
       before_script:
           - psql -c 'create database demo;' -U postgres
+      env: DATABASE_URL=pgsql://postgres@localhost:5432/demo
     - php: '7.2'
       services:
           - postgresql
       before_script:
           - psql -c 'create database demo;' -U postgres
+      env: DATABASE_URL=pgsql://postgres@localhost:5432/demo
 
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
