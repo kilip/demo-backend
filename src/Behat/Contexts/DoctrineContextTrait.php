@@ -32,27 +32,6 @@ trait DoctrineContextTrait
      */
     protected $purger;
 
-    private function checkDatabase()
-    {
-        /* @var ConnectionRegistry $conn */
-        $connectionName = $this->doctrine->getDefaultConnectionName();
-        $params = $this->doctrine->getConnection($connectionName)->getParams();
-        $hasPath = isset($params['path']);
-        $name = $hasPath ? $params['path'] : (isset($params['dbname']) ? $params['dbname'] : false);
-        $path = isset($params['path']) ? $params['path'] : null;
-        unset($params['dbname'], $params['path'], $params['url']);
-        if (!$hasPath) {
-            $tmpConnection = DriverManager::getConnection($params);
-            $tmpConnection->connect();
-            if (!in_array($name, $tmpConnection->getSchemaManager()->listDatabases())) {
-                $tmpConnection->getSchemaManager()->createDatabase($name);
-            }
-        }
-        $schemaTool = new SchemaTool($this->getEntityManager());
-        $classes = $this->getEntityManager()->getMetadataFactory()->getAllMetadata();
-        $schemaTool->updateSchema($classes, true);
-    }
-
     /**
      * @return DoctrineRegistry
      */
@@ -67,7 +46,6 @@ trait DoctrineContextTrait
     public function setDoctrine(DoctrineRegistry $doctrine)
     {
         $this->doctrine = $doctrine;
-        $this->checkDatabase();
     }
 
     protected function getRepository($name)

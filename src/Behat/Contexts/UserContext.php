@@ -15,11 +15,13 @@ namespace Demo\Behat\Contexts;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
 use Demo\Entity\User;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
+use Symfony\Component\Dotenv\Dotenv;
 
 class UserContext implements Context
 {
@@ -48,6 +50,14 @@ class UserContext implements Context
         $this->entityManager = $doctrine->getManagerForClass(User::class);
         $this->userRepository = $this->entityManager->getRepository(User::class);
         $this->jwtManager = $jwtManager;
+    }
+
+    /**
+     * @BeforeSuite
+     */
+    static public function beforeSuite(BeforeSuiteScope $scope)
+    {
+        (new Dotenv())->load(getcwd().'/.env');
     }
 
     /**

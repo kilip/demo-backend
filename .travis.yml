@@ -26,10 +26,10 @@ before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
   - cp .env.dist .env
-  - cp behat.yml.travis behat.yml
 
 install:
   - composer update --prefer-dist --no-progress --no-suggest --ansi
+  - bin/console doctrine:database:create --env=test
 
 script:
   - mkdir -p build/logs

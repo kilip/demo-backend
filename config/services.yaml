@@ -25,10 +25,5 @@ services:
         arguments:
             $errorNormalizer: "@api_platform.hydra.normalizer.constraint_violation_list"
             $itemNormalizer: "@api_platform.jsonld.normalizer.item"
-    #Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager:
-    #Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager:
-    #    public: true
-    #    autowire: true
-
-    #Lexik\Bundle\JWTAuthenticationBundle\Security\Http\Authentication\AuthenticationSuccessHandler:
-    #    autowire: true
+    Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager:
+        public: true
