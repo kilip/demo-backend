@@ -77,7 +77,7 @@ class UserContext implements Context
     {
         $user = $this->findUserByName('admin');
         if (null === $user) {
-            $this->createUser('admin', 'admin', null, 'ROLE_SUPER_ADMIN');
+            $user = $this->createUser('admin', 'admin', null, 'ROLE_SUPER_ADMIN');
         }
         $this->login($user);
     }
@@ -111,6 +111,7 @@ class UserContext implements Context
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+        return $user;
     }
 
     /**
