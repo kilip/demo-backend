@@ -28,3 +28,17 @@ default:
                 default:
                     symfony2: ~
         Behatch\Extension: ~
+
+coverage:
+    suites:
+        core:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Behatch\Context\JsonContext
+                - Demo\Behat\Contexts\UserContext:
+                    doctrine: "@doctrine"
+                    jwtManager: "@lexik_jwt_authentication.jwt_manager"
+                - Demo\Behat\Contexts\RestContext:
+                    router: "@router"
+                - Demo\Behat\Contexts\EmployeeContext:
+                    doctrine: '@doctrine'
