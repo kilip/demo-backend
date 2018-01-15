@@ -26,7 +26,32 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity()
  * @ORM\Table(name="customers")
- * @ApiResource()
+ * @ApiResource(
+ *     attributes= {
+ *         {"access_control"="is_granted('ROLE_CUSTOMER')"}
+ *     },
+ *     collectionOperations={
+ *         "get"={"method"="GET","access_control"="is_granted('ROLE_CUSTOMER')"},
+ *         "post"={"method"="POST","access_control"="is_granted('ROLE_CUSTOMER')"}
+ *     },
+ *     itemOperations={
+ *         "get"={"method"="GET","access_control"="is_granted('ROLE_CUSTOMER')"},
+ *         "put"={"method"="PUT","access_control"="is_granted('ROLE_CUSTOMER')"},
+ *         "delete"={"method"="DELETE","access_control"="is_granted('ROLE_CUSTOMER')"},
+ *         "customerProfile"={
+ *              "method"="GET",
+ *              "route_name"="api_customers_get_profile",
+ *              "path"="/customers/{id}/profile",
+ *              "access_control"="is_granted('ROLE_CUSTOMER') and object.login == user"
+ *          },
+ *         "customerProfileUpdate"={
+ *              "method"="PUT",
+ *              "route_name"="api_customers_put_profile",
+ *              "path"="/customers/{id}/profile",
+ *              "access_control"="is_granted('ROLE_CUSTOMER') and object.login == user"
+ *          }
+ *     }
+ * )
  *
  * @author Anthonius Munthi <me@itstoni.com>
  */
@@ -105,11 +130,37 @@ class Customer implements AddressableInterface
      */
     private $addresses;
 
+    /**
+     * @var null|User
+     *
+     * @ORM\OneToOne(targetEntity="Demo\Entity\User",cascade={"all"},orphanRemoval=true)
+     */
+    public $login;
+
     public function __construct()
     {
         $this->status = static::STATUS_REGISTERED;
         $this->type = static::TYPE_PERSONAL;
         $this->addresses = new ArrayCollection();
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * @param User $login
+     */
+    public function setLogin($login)
+    {
+        if(is_null($login->getEmail())){
+            $login->setEmail($this->email);
+        }
+        $this->login = $login;
     }
 
     public function addAddress(Address $address)

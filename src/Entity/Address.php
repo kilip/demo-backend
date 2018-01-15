@@ -24,10 +24,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity()
  * @ApiResource(
+ *     attributes= {
+ *         {"access_control"="is_granted('ROLE_EMPLOYEE')"}
+ *     },
  *     collectionOperations={
- *          "get"={"method"="GET"},
- *          "newEmployeeAddress"={"method"="POST","route_name"="add_employee_address"},
- *          "newCustomerAddress"={"method"="POST","route_name"="add_customer_address"},
+ *          "get"={"method"="GET","access_control"="is_granted('ROLE_EMPLOYEE')"},
+ *          "newEmployeeAddress"={"method"="POST","route_name"="add_employee_address","access_control"="is_granted('ROLE_EMPLOYEE')"},
+ *          "newCustomerAddress"={"method"="POST","route_name"="add_customer_address","access_control"="is_granted('ROLE_EMPLOYEE')"},
+ *     },
+ *     itemOperations={
+ *         "get"={"method"="GET","access_control"="is_granted('ROLE_EMPLOYEE')"},
+ *         "put"={"method"="PUT","access_control"="is_granted('ROLE_EMPLOYEE')"},
+ *         "delete"={"method"="DELETE","access_control"="is_granted('ROLE_EMPLOYEE')"},
  *     }
  * )
  * @ORM\Table(name="address")

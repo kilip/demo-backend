@@ -38,7 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     itemOperations={
  *         "get"={"method"="GET","access_control"="is_granted('ROLE_EMPLOYEE')"},
  *         "put"={"method"="PUT","access_control"="is_granted('ROLE_EMPLOYEE')"},
- *         "delete"={"method"="DELETE","access_control"="is_granted('ROLE_EMPLOYEE')"},
+ *         "delete"={"method"="DELETE","access_control"="is_granted('ROLE_EMPLOYEE')"}
  *     }
  * )
  *

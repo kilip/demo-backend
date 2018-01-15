@@ -23,12 +23,13 @@ Demo\Entity\User:
         username: <userName()>
         plainPassword: test
         enabled: true
+        roles: [ ROLE_EMPLOYEE ]
 
 Demo\Entity\Employee:
     emp_female_{1..10}:
         name: <firstName('female')> <lastName('female')>
         birthDate: <dateTimeBetween('-40 years','-20 years')>
-        email: <email()>
+        email: "@emp_user_<current(email())>"
         gender: 'F'
         __calls:
             - addAddress: ['@emp_addr1_<current()>']
@@ -37,7 +38,7 @@ Demo\Entity\Employee:
 
     emp_male_{11..15}:
         name: <firstName('male')> <lastName('male')>
-        email: <email()>
+        email: "@emp_user_<current(email)>"
         gender: 'M'
         birthDate: <dateTimeBetween('-40 years','-20 years')>
         login: '@emp_user_<current()>'

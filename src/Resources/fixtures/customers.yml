@@ -19,10 +19,19 @@ Demo\Entity\Address:
         fax: <phoneNumber()>
         mobile: <phoneNumber()>
 
+Demo\Entity\User:
+    cust_user_{1..15}:
+        username: <userName()>
+        plainPassword: test
+        enabled: true
+        email: <email()>
+        roles: [ROLE_CUSTOMER]
+
 Demo\Entity\Customer:
     cust_{1..10}:
         name: <firstName()> <lastName()>
-        email: <email()>
+        email: "@cust_user_<current(email())>"
+        login: '@cust_user_<current(email())>'
         __calls:
             - addAddress: ['@cust_addr1_<current()>']
             - addAddress: ['@cust_addr2_<current()>']

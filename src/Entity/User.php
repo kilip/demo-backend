@@ -30,6 +30,10 @@ use Doctrine\ORM\Mapping as ORM;
  *     collectionOperations={
  *         "get"={"method"="GET","access_control"="is_granted('ROLE_ADMIN')"},
  *         "post"={"method"="POST","access_control"="is_granted('ROLE_ADMIN')"}
+ *     },
+ *     itemOperations={
+ *         "get"={"method"="GET","access_control"="is_granted('ROLE_ADMIN')"},
+ *         "put"={"method"="PUT","access_control"="is_granted('ROLE_ADMIN')"}
  *     }
  * )
  */

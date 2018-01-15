@@ -23,7 +23,19 @@ use FOS\UserBundle\Model\Group as BaseGroup;
  *
  * @ORM\Entity()
  * @ORM\Table(name="security_groups")
- * @ApiResource()
+ * @ApiResource(
+ *     attributes={
+ *         {"access_control"="is_granted('ROLE_USER')"}
+ *     },
+ *     collectionOperations={
+ *         "get"={"method"="GET","access_control"="is_granted('ROLE_ADMIN')"},
+ *         "post"={"method"="POST","access_control"="is_granted('ROLE_ADMIN')"}
+ *     },
+ *     itemOperations={
+ *         "get"={"method"="GET","access_control"="is_granted('ROLE_ADMIN')"},
+ *         "put"={"method"="PUT","access_control"="is_granted('ROLE_ADMIN')"}
+ *     }
+ * )
  */
 class Group extends BaseGroup
 {
