@@ -16,8 +16,8 @@ matrix:
       after_success:
           - bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml"
           - wget https://scrutinizer-ci.com/ocular.phar
-          - php ocular.phar --format=php-clover build/logs/phpunit.xml
-          - php ocular.phar --format=php-clover build/logs/phpspec.xml
+          - php ocular.phar code-coverage:upload --format=php-clover build/logs/phpunit.xml
+          - php ocular.phar code-coverage:upload --format=php-clover build/logs/phpspec.xml
 
     - php: '7.1'
       services:
