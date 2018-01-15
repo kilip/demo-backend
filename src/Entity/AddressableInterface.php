@@ -18,11 +18,11 @@ use Doctrine\Common\Collections\Collection;
 interface AddressableInterface
 {
     /**
-     * @param Address $address
+     * @param Collection $addresses
      *
      * @return $this
      */
-    public function setAddresses(Collection $address);
+    public function setAddresses(Collection $addresses);
 
     /**
      * @return Collection
