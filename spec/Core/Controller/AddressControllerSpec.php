@@ -18,22 +18,22 @@ class AddressControllerSpec extends ObjectBehavior
     }
     
     public function it_should_create_address_for_employee(
-    	AddressService $service, Request $request
+        AddressService $service, Request $request
     )
     {
         $service->createNew(Employee::class,1,$request)
-	        ->shouldBeCalled()
+            ->shouldBeCalled()
         ;
         $this->addForEmployeeAction(1,$service,$request);
     }
 	
-	public function it_should_create_address_for_customer(
-		AddressService $service, Request $request
-	)
-	{
-		$service->createNew(Customer::class,1,$request)
-		        ->shouldBeCalled()
-		;
-		$this->addForCustomerAction(1,$service,$request);
-	}
+    public function it_should_create_address_for_customer(
+        AddressService $service, Request $request
+    )
+    {
+        $service->createNew(Customer::class,1,$request)
+                ->shouldBeCalled()
+        ;
+        $this->addForCustomerAction(1,$service,$request);
+    }
 }

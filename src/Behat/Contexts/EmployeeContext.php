@@ -110,8 +110,8 @@ class EmployeeContext implements Context
     public function iDonTHaveAnyAddressData()
     {
         $qb = $this->getEntityManager()
-                   ->createQueryBuilder()
-                   ->delete('Demo:Address', 'a')
+                    ->createQueryBuilder()
+                    ->delete('Demo:Address', 'a')
         ;
         $qb->getQuery()->execute();
         $this->getEntityManager()->flush();
