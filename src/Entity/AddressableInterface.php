@@ -25,7 +25,7 @@ interface AddressableInterface
     public function setAddresses(Collection $address);
 
     /**
-     * @return Address
+     * @return Collection
      */
     public function getAddresses();
 
