@@ -138,11 +138,11 @@ class Employee implements AddressableInterface
     }
 
     /**
-     * @param User|null $login
+     * @param User $login
      *
      * @return Employee
      */
-    public function setLogin($login): self
+    public function setLogin(User $login): self
     {
         $this->login = $login;
         $login->setEmail($this->getEmail());
@@ -159,7 +159,7 @@ class Employee implements AddressableInterface
     }
 
     /**
-     * @param \DateTime|null $birthDate
+     * @param \DateTime $birthDate
      *
      * @return Employee
      */
@@ -179,7 +179,7 @@ class Employee implements AddressableInterface
     }
 
     /**
-     * @param null|string $gender
+     * @param string $gender
      *
      * @return Employee
      */
