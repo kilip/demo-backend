@@ -31,6 +31,7 @@
         "behat/symfony2-extension": "^2.1",
         "behatch/contexts": "^3.0",
         "coduo/php-matcher": "~3.0@dev",
+        "phpunit/php-code-coverage": "^5.3",
         "leanphp/phpspec-code-coverage": "^4.0",
         "phpspec/phpspec": "^4.3",
         "symfony/phpunit-bridge": "^4.0"
