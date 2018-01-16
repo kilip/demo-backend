@@ -12,6 +12,7 @@ declare(strict_types = 1);
  */
 
 namespace Omed\Customer\Controller;
+
 use Omed\Entity\Customer;
 use Symfony\Component\Routing\Annotation\Route;
 
