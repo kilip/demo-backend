@@ -6,4 +6,12 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/5a582cb60fb24f512d75fd44/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a582cb60fb24f512d75fd44)
 
 OMED project is my project that contains a latest technology available
-in web devlopment.
+in web development.
+
+### Used Technology
+- Symfony 4 Framework
+- api-platform
+- React
+- phpspec
+- Behat
+- Docker
