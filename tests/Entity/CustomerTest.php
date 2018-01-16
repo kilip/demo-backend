@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Demo\Test\Entity;
 
+use Demo\Entity\User;
 use Doctrine\Common\Collections\Collection;
 use Demo\Entity\Address;
 use Demo\Entity\Customer;
@@ -26,6 +27,7 @@ class CustomerTest extends TestCase
 
     protected function configureMutablePropertiesTest()
     {
+        $user = new User();
         $this->mutableTestConfig = array(
             'type' => array(
                 'value' => Customer::TYPE_COMPANY,
@@ -34,6 +36,9 @@ class CustomerTest extends TestCase
             'status' => array(
                 'value' => Customer::STATUS_EMAIL_CONFIRMED,
                 'default' => Customer::STATUS_REGISTERED,
+            ),
+            'login' => array(
+                'value' => $user,
             ),
         );
 
