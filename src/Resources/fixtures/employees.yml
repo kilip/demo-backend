@@ -1,4 +1,4 @@
-Demo\Entity\Address:
+Omed\Entity\Address:
     emp_addr1_{1..15}:
         address: <address()>
         city: <city()>
@@ -18,14 +18,14 @@ Demo\Entity\Address:
         fax: <phoneNumber()>
         mobile: <phoneNumber()>
 
-Demo\Entity\User:
+Omed\Entity\User:
     emp_user_{1..15}:
         username: <userName()>
         plainPassword: test
         enabled: true
         roles: [ ROLE_EMPLOYEE ]
 
-Demo\Entity\Employee:
+Omed\Entity\Employee:
     emp_female_{1..10}:
         name: <firstName('female')> <lastName('female')>
         birthDate: <dateTimeBetween('-40 years','-20 years')>

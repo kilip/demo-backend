@@ -5,4 +5,4 @@ core:
 #login_check_json:
 #    path: /login_check_json
 #    method: "POST"
-#    controller: Demo\Core\Controller\SecurityController::login
+#    controller: Omed\Core\Controller\SecurityController::login

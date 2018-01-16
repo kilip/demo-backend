@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Demo project.
+ * This file is part of the Omed project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Demo\Test;
+namespace Omed\Test;
 
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\Assert;

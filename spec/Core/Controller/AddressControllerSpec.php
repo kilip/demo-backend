@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Demo\Core\Controller;
+namespace spec\Omed\Core\Controller;
 
-use Demo\Core\Controller\AddressController;
-use Demo\Core\Service\AddressService;
-use Demo\Entity\Customer;
-use Demo\Entity\Employee;
+use Omed\Core\Controller\AddressController;
+use Omed\Core\Service\AddressService;
+use Omed\Entity\Customer;
+use Omed\Entity\Employee;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Request;

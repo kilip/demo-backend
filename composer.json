@@ -1,5 +1,5 @@
 {
-    "name": "kilip/demo-backend",
+    "name": "kilip/omed-backend",
     "description": "Anthonius Munthi Demo application",
     "type": "project",
     "license": "proprietary",
@@ -43,13 +43,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Demo\\": "src/",
+            "Omed\\": "src/",
             "Spec\\": "spec/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Demo\\Test\\": "tests/"
+            "Omed\\Test\\": "tests/"
         }
     },
     "replace": {

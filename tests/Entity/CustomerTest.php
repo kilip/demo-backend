@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Demo project.
+ * This file is part of the Omed project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -12,13 +12,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Demo\Test\Entity;
+namespace Omed\Test\Entity;
 
-use Demo\Entity\User;
+use Omed\Entity\User;
 use Doctrine\Common\Collections\Collection;
-use Demo\Entity\Address;
-use Demo\Entity\Customer;
-use Demo\Test\MutableTest;
+use Omed\Entity\Address;
+use Omed\Entity\Customer;
+use Omed\Test\MutableTest;
 use PHPUnit\Framework\TestCase;
 
 class CustomerTest extends TestCase

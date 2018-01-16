@@ -1,4 +1,4 @@
-Demo\Entity\Address:
+Omed\Entity\Address:
     cust_addr1_{1..10}:
         address: <address()>
         city: <city()>
@@ -19,7 +19,7 @@ Demo\Entity\Address:
         fax: <phoneNumber()>
         mobile: <phoneNumber()>
 
-Demo\Entity\User:
+Omed\Entity\User:
     cust_user_{1..15}:
         username: <userName()>
         plainPassword: test
@@ -27,7 +27,7 @@ Demo\Entity\User:
         email: <email()>
         roles: [ROLE_CUSTOMER]
 
-Demo\Entity\Customer:
+Omed\Entity\Customer:
     cust_{1..10}:
         name: <firstName()> <lastName()>
         email: "@cust_user_<current(email())>"

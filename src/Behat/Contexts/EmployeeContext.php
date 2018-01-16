@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Demo project.
+ * This file is part of the Omed project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Demo\Behat\Contexts;
+namespace Omed\Behat\Contexts;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelDictionary;
-use Demo\Entity\Address;
-use Demo\Entity\Employee;
+use Omed\Entity\Address;
+use Omed\Entity\Employee;
 use Faker\Factory;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
@@ -98,7 +98,7 @@ class EmployeeContext implements Context
     {
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
-            ->delete('Demo:Employee', 'e')
+            ->delete('Omed:Employee', 'e')
         ;
         $qb->getQuery()->execute();
         $this->getEntityManager()->flush();
@@ -111,7 +111,7 @@ class EmployeeContext implements Context
     {
         $qb = $this->getEntityManager()
                     ->createQueryBuilder()
-                    ->delete('Demo:Address', 'a')
+                    ->delete('Omed:Address', 'a')
         ;
         $qb->getQuery()->execute();
         $this->getEntityManager()->flush();
@@ -207,7 +207,7 @@ class EmployeeContext implements Context
      */
     public function getEmployeeWithName($name, $create = false, array $data = array())
     {
-        /* @var \Demo\Entity\Employee $employee */
+        /* @var \Omed\Entity\Employee $employee */
         $repo = $this->getEntityManager()->getRepository(Employee::class);
 
         $employee = $repo->findOneBy(array('name' => $name));

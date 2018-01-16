@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Demo project.
+ * This file is part of the Omed project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -12,9 +12,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Demo\Test\Entity;
+namespace Omed\Test\Entity;
 
-use Demo\Test\MutableTest;
+use Omed\Test\MutableTest;
 use PHPUnit\Framework\TestCase;
 
 class AddressTest extends TestCase

@@ -12,15 +12,11 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
 
-    #Demo\Employee\Controller\:
-    #    resource: "../src/Employee/Controller/*"
-    #    tags: ['controller.service_arguments']
-
-    Demo\Core\Controller\:
-        resource: "../src/Core/Controller/*"
+    Omed\Core\Controller\:
+        resource: "../src/Core/Controller"
         tags: ['controller.service_arguments']
 
-    Demo\Core\Service\AddressService:
+    Omed\Core\Service\AddressService:
         tags: ['controller.service_arguments']
         arguments:
             $errorNormalizer: "@api_platform.hydra.normalizer.constraint_violation_list"

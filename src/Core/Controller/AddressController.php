@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Demo project.
+ * This file is part of the Omed project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Demo\Core\Controller;
+namespace Omed\Core\Controller;
 
-use Demo\Core\Service\AddressService;
-use Demo\Entity\Customer;
-use Demo\Entity\Employee;
+use Omed\Core\Service\AddressService;
+use Omed\Entity\Customer;
+use Omed\Entity\Employee;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

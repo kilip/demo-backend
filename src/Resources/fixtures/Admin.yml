@@ -1,4 +1,4 @@
-Demo\Entity\User:
+Omed\Entity\User:
     admin:
         username: admin
         plainPassword: admin

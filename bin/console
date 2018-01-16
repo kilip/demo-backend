@@ -1,11 +1,11 @@
 #!/usr/bin/env php
 <?php
 
-use Demo\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\Dotenv\Dotenv;
+use Omed\Core\Kernel;
 
 set_time_limit(0);
 

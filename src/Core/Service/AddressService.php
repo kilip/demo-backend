@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Demo project.
+ * This file is part of the Omed project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Demo\Core\Service;
+namespace Omed\Core\Service;
 
-use Demo\Entity\Address;
-use Demo\Entity\AddressableInterface;
+use Omed\Entity\Address;
+use Omed\Entity\AddressableInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -102,7 +102,7 @@ class AddressService
      */
     private function getAddressOwner($ownerClass, $id)
     {
-        /* @var \Demo\Entity\AddressableInterface $owner */
+        /* @var \Omed\Entity\AddressableInterface $owner */
         $repository = $this->em->getRepository($ownerClass);
         $owner = $repository->findOneBy(array('id' => $id));
         if (null === $owner) {

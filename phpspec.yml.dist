@@ -1,7 +1,7 @@
 suites:
     employee_suite:
-        namespace: Demo
-        psr4_prefix: Demo
+        namespace: Omed
+        psr4_prefix: Omed
 
 extensions:
     LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:

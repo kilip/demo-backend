@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Demo project.
+ * This file is part of the Omed project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Demo\Test\Entity;
+namespace Omed\Test\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Demo\Entity\Address;
-use Demo\Entity\Employee;
-use Demo\Entity\User;
-use Demo\Test\MutableTest;
+use Omed\Entity\Address;
+use Omed\Entity\Employee;
+use Omed\Entity\User;
+use Omed\Test\MutableTest;
 use PHPUnit\Framework\TestCase;
 
 class EmployeeTest extends TestCase

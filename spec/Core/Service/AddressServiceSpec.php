@@ -1,14 +1,14 @@
 <?php
 
-namespace spec\Demo\Core\Service;
+namespace spec\Omed\Core\Service;
 
-use Demo\Core\Service\AddressService;
+use Omed\Core\Service\AddressService;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use ApiPlatform\Core\Serializer\AbstractItemNormalizer;
-use Demo\Core\Controller\AddressController;
-use Demo\Entity\Address;
-use Demo\Entity\Employee;
+use Omed\Core\Controller\AddressController;
+use Omed\Entity\Address;
+use Omed\Entity\Employee;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;

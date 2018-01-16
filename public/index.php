@@ -1,6 +1,6 @@
 <?php
 
-use Demo\Kernel;
+use Omed\Core\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;

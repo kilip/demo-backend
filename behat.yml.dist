@@ -8,12 +8,12 @@ default:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Behatch\Context\JsonContext
-                - Demo\Behat\Contexts\UserContext:
+                - Omed\Behat\Contexts\UserContext:
                     doctrine: "@doctrine"
                     jwtManager: "@lexik_jwt_authentication.jwt_manager"
-                - Demo\Behat\Contexts\RestContext:
+                - Omed\Behat\Contexts\RestContext:
                     router: "@router"
-                - Demo\Behat\Contexts\EmployeeContext:
+                - Omed\Behat\Contexts\EmployeeContext:
                     doctrine: '@doctrine'
     extensions:
         Behat\Symfony2Extension:
@@ -21,7 +21,7 @@ default:
                 bootstrap: vendor/autoload.php
                 env: "test"
                 debug: true
-                class: Demo\Kernel
+                class: Omed\Core\Kernel
         Behat\MinkExtension:
             base_url: "http://example.com/"
             sessions:
@@ -35,10 +35,10 @@ coverage:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - Behatch\Context\JsonContext
-                - Demo\Behat\Contexts\UserContext:
+                - Omed\Behat\Contexts\UserContext:
                     doctrine: "@doctrine"
                     jwtManager: "@lexik_jwt_authentication.jwt_manager"
-                - Demo\Behat\Contexts\RestContext:
+                - Omed\Behat\Contexts\RestContext:
                     router: "@router"
-                - Demo\Behat\Contexts\EmployeeContext:
+                - Omed\Behat\Contexts\EmployeeContext:
                     doctrine: '@doctrine'

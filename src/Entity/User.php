@@ -4,7 +4,7 @@
 declare(strict_types = 1);
 
 /*
- * This file is part of the Demo project.
+ * This file is part of the Omed project.
  *
  * (c) Anthonius Munthi <me@itstoni.com>
  *
@@ -12,7 +12,7 @@ declare(strict_types = 1);
  * file that was distributed with this source code.
  */
 
-namespace Demo\Entity;
+namespace Omed\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use ApiPlatform\Core\Annotation\ApiResource;

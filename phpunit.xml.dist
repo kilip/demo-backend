@@ -40,7 +40,7 @@
     </logging>
 
     <testsuites>
-        <testsuite name="Demo Test Suite">
+        <testsuite name="Omed Test Suite">
             <directory>tests/</directory>
         </testsuite>
     </testsuites>
