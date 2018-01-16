@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 /*
  * This file is part of the Omed project.
@@ -38,7 +38,7 @@ class CustomerController
      *
      *
      */
-    public function getProfile($id,$data)
+    public function getProfile($id, $data)
     {
         return $data;
     }

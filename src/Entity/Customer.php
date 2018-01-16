@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 /*
  * This file is part of the Omed project.
@@ -157,7 +157,7 @@ class Customer implements AddressableInterface
      */
     public function setLogin($login)
     {
-        if(is_null($login->getEmail())){
+        if (is_null($login->getEmail())) {
             $login->setEmail($this->email);
         }
         $this->login = $login;
