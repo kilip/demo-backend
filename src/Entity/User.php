@@ -39,6 +39,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    const ROLE_EMPLOYEE = 'ROLE_EMPLOYEE';
+    const ROLE_CUSTOMER = 'ROLE_CUSTOMER';
+
     /**
      * @var null|int
      *

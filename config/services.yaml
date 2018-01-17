@@ -16,6 +16,14 @@ services:
         resource: "../src/Core/Controller"
         tags: ['controller.service_arguments']
 
+    Omed\Customer\Controller\:
+        resource: "../src/Customer/Controller"
+        tags: ['controller.service_arguments']
+
+    Omed\Employee\Controller\:
+        resource: "../src/Employee/Controller"
+        tags: ['controller.service_arguments']
+
     Omed\Core\Service\AddressService:
         tags: ['controller.service_arguments']
         arguments:

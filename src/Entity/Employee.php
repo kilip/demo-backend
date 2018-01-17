@@ -29,16 +29,28 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="employees")
  * @ApiResource(
  *     attributes= {
- *         {"access_control"="is_granted('ROLE_EMPLOYEE')"}
+ *         {"access_control"="is_granted('ROLE_ADMIN')"}
  *     },
  *     collectionOperations={
  *         "get"={"method"="GET","access_control"="is_granted('ROLE_EMPLOYEE')"},
- *         "post"={"method"="POST","access_control"="is_granted('ROLE_EMPLOYEE')"}
+ *         "post"={"method"="POST","access_control"="is_granted('ROLE_ADMIN')"}
  *     },
  *     itemOperations={
  *         "get"={"method"="GET","access_control"="is_granted('ROLE_EMPLOYEE')"},
- *         "put"={"method"="PUT","access_control"="is_granted('ROLE_EMPLOYEE')"},
- *         "delete"={"method"="DELETE","access_control"="is_granted('ROLE_EMPLOYEE')"}
+ *         "put"={"method"="PUT","access_control"="is_granted('ROLE_ADMIN')"},
+ *         "delete"={"method"="DELETE","access_control"="is_granted('ROLE_ADMIN')"},
+ *         "employeeProfile"={
+ *              "method"="GET",
+ *              "route_name"="api_employees_get_profile",
+ *              "path"="/employees/{id}/profile",
+ *              "access_control"="is_granted('ROLE_EMPLOYEE') and object.getLogin() == user"
+ *         },
+ *         "employeeProfileUpdate"={
+ *              "method"="PUT",
+ *              "route_name"="api_employees_put_profile",
+ *              "path"="/employees/{id}/profile",
+ *              "access_control"="is_granted('ROLE_EMPLOYEE') and object.getLogin() == user"
+ *          }
  *     }
  * )
  *

@@ -42,13 +42,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "method"="GET",
  *              "route_name"="api_customers_get_profile",
  *              "path"="/customers/{id}/profile",
- *              "access_control"="is_granted('ROLE_CUSTOMER') and object.login == user"
+ *              "access_control"="is_granted('ROLE_CUSTOMER') and object.getLogin() == user"
  *          },
  *         "customerProfileUpdate"={
  *              "method"="PUT",
  *              "route_name"="api_customers_put_profile",
  *              "path"="/customers/{id}/profile",
- *              "access_control"="is_granted('ROLE_CUSTOMER') and object.login == user"
+ *              "access_control"="is_granted('ROLE_CUSTOMER') and object.getLogin() == user"
  *          }
  *     }
  * )

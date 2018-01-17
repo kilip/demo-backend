@@ -1,5 +1,5 @@
 parameters:
-    '%env(resolve:DATABASE_URL)%': .
+    '%env(DATABASE_URL)%': ""
 doctrine:
     dbal:
         # configure these for your database server

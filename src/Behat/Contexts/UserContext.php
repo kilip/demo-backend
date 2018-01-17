@@ -75,7 +75,7 @@ class UserContext implements Context
      */
     public function iAmLoggedInAsAdmin()
     {
-        $user = $this->findUserByName('admin');
+        $user = $this->findByUsername('admin');
         if (!$user instanceof User) {
             $user = $this->createUser('admin', 'admin', null, 'ROLE_SUPER_ADMIN');
         }
@@ -123,12 +123,16 @@ class UserContext implements Context
     }
 
     /**
-     * @param string $name
+     * @param string $username
      *
      * @return null|User
      */
-    public function findUserByName($name, $create = false)
+    public function findByUsername($username, $create = false)
     {
-        return $this->userRepository->findOneBy(array('username' => $name));
+        $user = $this->userRepository->findOneBy(array('username' => $username));
+        if(!$user instanceof User && $create){
+            $this->createUser($username,'test');
+        }
+        return $user;
     }
 }

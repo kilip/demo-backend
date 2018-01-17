@@ -21,6 +21,7 @@ use Behat\Symfony2Extension\Context\KernelDictionary;
 use Omed\Entity\Address;
 use Omed\Entity\Employee;
 use Faker\Factory;
+use Omed\Entity\User;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
 class EmployeeContext implements Context
@@ -38,6 +39,11 @@ class EmployeeContext implements Context
      */
     private $restContext;
 
+    /**
+     * @var UserContext
+     */
+    private $userContext;
+
     public function __construct(ManagerRegistry $doctrine)
     {
         $this->setDoctrine($doctrine);
@@ -52,6 +58,7 @@ class EmployeeContext implements Context
         $environment = $scope->getEnvironment();
 
         $this->restContext = $environment->getContext(RestContext::class);
+        $this->userContext = $environment->getContext(UserContext::class);
     }
 
     /**
@@ -81,6 +88,24 @@ class EmployeeContext implements Context
     {
         $employee = $this->getEmployeeWithName($name, true);
         $routeName = 'api_employees_'.strtolower($method).'_item';
+        $url = $this->restContext->generateUrl(
+            $routeName,
+            array('id' => $employee->getId())
+        );
+        $this->restContext->iSetHeaderTypeToHydra();
+        $this->restContext->iSendARequestTo(
+            $method, $url, $body
+        );
+    }
+
+    /**
+     * @Given I send :method request to employee profile :name with body:
+     * @Given I send :method request to employee profile :name
+     */
+    public function iSendRequestToEmployeeProfile($method, $name, PyStringNode $body = null)
+    {
+        $employee = $this->getEmployeeWithName($name, true);
+        $routeName = 'api_employees_'.strtolower($method).'_profile';
         $url = $this->restContext->generateUrl(
             $routeName,
             array('id' => $employee->getId())
@@ -256,5 +281,26 @@ class EmployeeContext implements Context
         $this->getEntityManager()->flush();
 
         return $employee;
+    }
+
+    /**
+     * @Given I am logged in employee
+     */
+    public function iAmLoggedInEmployee()
+    {
+        $userContext = $this->userContext;
+        $employee = $this->getEmployeeWithName('Omed Employee',true);
+        $user = $userContext->findByUsername('employee',true);
+        if(!$employee->getLogin() instanceof User){
+            $user
+                ->setUsername('employee')
+                ->setPlainPassword('test')
+                ->setRoles([User::ROLE_EMPLOYEE])
+            ;
+            $employee->setLogin($user);
+            $this->getEntityManager()->persist($employee);
+            $this->getEntityManager()->flush();
+        }
+        $userContext->login($employee->getLogin());
     }
 }

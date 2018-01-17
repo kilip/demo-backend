@@ -54,7 +54,7 @@ class CustomerController
      *         "_api_resource_class"=Customer::class,
      *         "_api_item_operation_name"="customerProfileUpdate"
      *     },
-     *     methods="GET"
+     *     methods="PUT"
      * )
      * @param   string  $id
      * @return  Customer

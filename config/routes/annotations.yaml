@@ -1,3 +1,7 @@
-controllers:
+customer_controllers:
     resource: ../../src/Customer/Controller/
+    type: annotation
+
+employee_controllers:
+    resource: ../../src/Employee/Controller/
     type: annotation
