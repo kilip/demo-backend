@@ -64,8 +64,8 @@ Feature: Securing Employee Resource
         Then the response status code should be 403
         And the JSON node "hydra:description" should be equal to "Access Denied."
 
-
-        #And the JSON should be equal to:
-        #"""
-        #{}
-        #"""
+    Scenario: Fail to delete employee data with employee role
+        Given I am logged in employee
+        And I send DELETE request to employee "Lorem Ipsum"
+        Then the response status code should be 403
+        And the JSON node "hydra:description" should be equal to "Access Denied."
