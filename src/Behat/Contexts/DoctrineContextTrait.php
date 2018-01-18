@@ -16,6 +16,7 @@ namespace Omed\Behat\Contexts;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ConnectionRegistry;
 use Doctrine\Common\Persistence\ManagerRegistry as DoctrineRegistry;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -48,9 +49,13 @@ trait DoctrineContextTrait
         $this->doctrine = $doctrine;
     }
 
+    /**
+     * @param string $name
+     * @return ObjectRepository
+     */
     protected function getRepository($name)
     {
-        $this->doctrine->getRepository($name);
+        return $this->doctrine->getRepository($name);
     }
 
     /**

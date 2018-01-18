@@ -131,7 +131,7 @@ class UserContext implements Context
     {
         $user = $this->userRepository->findOneBy(array('username' => $username));
         if(!$user instanceof User && $create){
-            $this->createUser($username,'test');
+            $user = $this->createUser($username,'test');
         }
         return $user;
     }

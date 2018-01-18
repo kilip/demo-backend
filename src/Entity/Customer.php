@@ -102,6 +102,14 @@ class Customer implements AddressableInterface
     private $status;
 
     /**
+     * @var null|string
+     *
+     * @ORM\Column(type="string",nullable=true)
+     */
+    private $company;
+
+
+    /**
      * @var null|\DateTime
      *
      * @ORM\Column(type="datetime")
@@ -120,11 +128,11 @@ class Customer implements AddressableInterface
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Address",cascade={"all"},fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity="Address",cascade={"persist","remove"},orphanRemoval=true)
      * @ORM\JoinTable(
      *     name="customer_address",
-     *     joinColumns={@ORM\JoinColumn(name="customer_id",referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="address_id",referencedColumnName="id")}
+     *     joinColumns={@ORM\JoinColumn(name="customer_id",referencedColumnName="id",onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="address_id",referencedColumnName="id",onDelete="CASCADE")}
      * )
      * @ApiSubresource()
      */
@@ -142,6 +150,25 @@ class Customer implements AddressableInterface
         $this->status = static::STATUS_REGISTERED;
         $this->type = static::TYPE_PERSONAL;
         $this->addresses = new ArrayCollection();
+    }
+
+    /**
+     *
+     * @param $addressToSearch
+     * @return bool
+     */
+    public function hasAddress($addressToSearch)
+    {
+        if($this->getAddresses()->contains($addressToSearch)){
+            return true;
+        }
+        foreach($this->getAddresses() as $address){
+            if($address->getAddress() == $addressToSearch){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -184,6 +211,24 @@ class Customer implements AddressableInterface
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param null|string $company
+     * @return Customer
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+        return $this;
     }
 
     /**
