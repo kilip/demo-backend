@@ -50,10 +50,12 @@ matrix:
           strategy: git
           on:
               repo: kilip/omed-backend
+      before_install: echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - php: '7.2'
       services:
           - mysql
       env: DATABASE_URL=mysql://root@localhost:3306/omed
+      before_install: echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 before_install:
     - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
