@@ -55,7 +55,7 @@ before_install:
     - cp .env.dist .env
 
 install:
-    - echo yes | pecl install apcu
+    - if [[${TRAVIS_PHP_VERSION:0:3} == '7.1']]; then echo yes | pecl install apcu; fi
     - composer update --prefer-dist --no-progress --no-suggest --ansi
     - bin/console doctrine:database:create --env=test
     - bin/console doctrine:schema:update --force --env=test
