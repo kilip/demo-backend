@@ -30,8 +30,8 @@ Omed\Entity\User:
 Omed\Entity\Customer:
     cust_{1..10}:
         name: <firstName()> <lastName()>
-        email: "@cust_user_<current(email())>"
-        login: '@cust_user_<current(email())>'
+        email: "@cust_user_<current()>"
+        login: '@cust_user_<current()>'
         __calls:
             - addAddress: ['@cust_addr1_<current()>']
             - addAddress: ['@cust_addr2_<current()>']

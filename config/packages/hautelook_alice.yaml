@@ -3,4 +3,4 @@ hautelook_alice:
     fixtures_path: 'Resources/fixtures'
     root_dirs:
         - '%kernel.root_dir%'
-        - '%kernel.project_dir%'
+        - '%kernel.project_dir%/src'

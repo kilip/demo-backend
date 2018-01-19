@@ -181,13 +181,15 @@ class Customer implements AddressableInterface
 
     /**
      * @param User $login
+     *
+     * @return $this
      */
     public function setLogin($login)
     {
-        if (is_null($login->getEmail())) {
-            $login->setEmail($this->email);
-        }
+        $login->setEmail($this->getEmail());
         $this->login = $login;
+
+        return $this;
     }
 
     public function addAddress(Address $address)

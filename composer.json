@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.0",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "friendsofsymfony/jsrouting-bundle": "^2.1",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "hautelook/alice-bundle": "^2.0",
         "lexik/jwt-authentication-bundle": "dev-master",
@@ -31,9 +32,10 @@
         "behat/symfony2-extension": "^2.1",
         "behatch/contexts": "^3.0",
         "coduo/php-matcher": "~3.0@dev",
-        "phpunit/php-code-coverage": "^5.3",
         "leanphp/phpspec-code-coverage": "^4.0",
         "phpspec/phpspec": "^4.3",
+        "phpunit/php-code-coverage": "^5.3",
+        "phpunit/phpcov": "^4.0",
         "symfony/phpunit-bridge": "^4.0"
     },
     "config": {
@@ -63,7 +65,8 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd",
-            "cache:warmup": "symfony-cmd"
+            "cache:warmup": "symfony-cmd",
+            "fos:js-routing:dump --target=%PUBLIC_DIR%/js/routes.js": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

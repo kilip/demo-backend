@@ -40,7 +40,7 @@ matrix:
           provider: heroku
           api_key:
               secure: "Qc9rQBoTpmY+3OEyK0qUydtlMNbFz9PDzOmNW7OBVDOENpCilzC/D49NRRh9tgY2rmD0AmkwTRfeej/oW0mq1fokluzhU7PfdazA4CYq7sQKDenJIQll+xu/E6ZcH5BPZGH5FW6ulRJ/p217W+fRESYNDea2raP7r4P+KWA7k2JT0+X0pvVwxLbjnewn/ON73ttKejuXlWC95SH0Iv62xDgbg7gCiVUeqer96iPM+R9ottA5IvEqRjbNAWg/HHEj67lHlHBvDSiN4TzQUcDSOZetnu2QFBJwIsVPFQN+ADq3uN2gL7owaPp8R+0vCni33h3Axat5j+mut33FcNc5t+hHKT4bYoeSPLq/j70YFGQv57B9tlqzvFd2dyQHp0sVUwCqURN99RJt5VnbsUh8WMEAOpabJx0jpdsNYRqKb4PvUu7cSlzFG+2w7pOOHugRTpRmYaUK9M6WwpX3Hz78mcMFAMZisUfK1iLnH66v8FfGm/sGx6oH9AosXnoL3WeHb2yq/s5/sZhafTVSsXqgPI0mYWeSblFaRkCi8cMrb/WJYg+qflbk2SVuodLeo2gcZDJCcHUMVCD3fUXDBZ1hvuD5jTuQME5bdthJ8Vv1EOs+pSqqfrC6P6pxV30leG9dxb7dU4PWcxy+zqWFr5WIM/wgfL/XonNCUq/oQDwLQ3g="
-          app: kilip
+          app: omed
           strategy: git
           on:
               repo: kilip/omed-backend
