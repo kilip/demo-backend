@@ -67,4 +67,20 @@ class CustomerTest extends TestCase
         $entity->setAddresses($collection);
         $this->assertEquals($collection, $entity->getAddresses());
     }
+
+    public function testHasAddress()
+    {
+        $add1 = new Address();
+        $add1->setAddress('add1');
+
+        $add2 = new Address();
+        $add2->setAddress('add2');
+
+        $entity = new Customer();
+        $this->assertFalse($entity->hasAddress('add1'));
+
+        $entity->getAddresses()->add($add1);
+        $this->assertTrue($entity->hasAddress($add1));
+        $this->assertTrue($entity->hasAddress('add1'));
+    }
 }

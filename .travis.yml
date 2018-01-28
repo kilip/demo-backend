@@ -7,6 +7,8 @@ cache:
       - "$HOME/.composer/cache"
       - "$HOME/.npm"
 
+env:
+    COVERAGE: false
 matrix:
     include:
 
@@ -14,14 +16,13 @@ matrix:
     - php: '7.1.8'
       services:
           - postgresql
-      env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
+      env: COVERAGE=true DATABASE_URL=pgsql://postgres@localhost:5432/omed
       before_install:
           - echo yes | pecl install apcu
       after_success:
           - bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml"
           - wget https://scrutinizer-ci.com/ocular.phar
-          - php ocular.phar code-coverage:upload --format=php-clover build/logs/phpunit.xml
-          - php ocular.phar code-coverage:upload --format=php-clover build/logs/phpspec.xml
+          - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
 
     # PHP 7.1.x
     - php: '7.1'
@@ -69,6 +70,7 @@ install:
 
 script:
     - mkdir -p build/logs
-    - bin/phpunit
-    - "./vendor/bin/phpspec run -fdot"
-    - "./vendor/bin/behat -fprogress"
+    - if [[ $COVERAGE = true  ]]; then bin/coverage; fi
+    - if [[ $COVERAGE = false ]]; then bin/phpunit; fi
+    - if [[ $COVERAGE = false ]]; then ./vendor/bin/phpspec run -fdot; fi
+    - if [[ $COVERAGE = false ]]; then ./vendor/bin/behat -fprogress; fi

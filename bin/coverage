@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the Demo project.
+ *
+ * (c) Anthonius Munthi <me@itstoni.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+if(!is_dir($dir=__DIR__.'/../build/coverage')){
+    mkdir($dir,0777,true);
+}
+
+$target = __DIR__.'/../build/coverage/phpunit.cov';
+$cmd = __DIR__.'/../vendor/bin/phpunit --coverage-php='.$target;
+passthru($cmd);
+
+$cmd = __DIR__.'/../vendor/bin/phpspec run -fdot --config='.realpath(__DIR__.'/../phpspec-coverage.yml');
+passthru($cmd);
+
+$cmd = __DIR__.'/../vendor/bin/behat -fprogress -p coverage';
+passthru($cmd);
+
+$dir = realpath(__DIR__.'/../build');
+$cmd = __DIR__."/../vendor/bin/phpcov merge $dir/coverage --html=$dir/html/coverage --clover $dir/logs/clover.xml";
+passthru($cmd);

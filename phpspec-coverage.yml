@@ -1,0 +1,18 @@
+suites:
+    employee_suite:
+        namespace: Omed
+        psr4_prefix: Omed
+
+extensions:
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+        format:
+            - php
+        output:
+            php: build/coverage/phpspec.cov
+        whitelist:
+            - src
+        blacklist:
+            - src/Behat
+            - src/Test
+            - src/Resources
+            - src/DataFixtures

@@ -44,3 +44,6 @@ coverage:
                     router: "@router"
                 - Omed\Behat\Contexts\EmployeeContext:
                     doctrine: '@doctrine'
+                - Omed\Behat\Contexts\CustomerContext:
+                    doctrine: '@doctrine'
+                - Omed\Behat\Contexts\CoverageContext

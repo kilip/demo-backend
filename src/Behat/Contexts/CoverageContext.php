@@ -33,8 +33,10 @@ class CoverageContext implements Context
     public static function setup()
     {
         $filter = new Filter();
-        $filter->addDirectoryToWhitelist(getcwd().'/Omed');
-
+        $filter->addDirectoryToWhitelist(getcwd().'/src');
+        $filter->removeDirectoryFromWhitelist(getcwd().'/src/Behat');
+        $filter->removeDirectoryFromWhitelist(getcwd().'/src/Test');
+        $filter->removeDirectoryFromWhitelist(getcwd().'/src/*/Resources');
         self::$coverage = new CodeCoverage(null, $filter);
     }
 
@@ -44,7 +46,7 @@ class CoverageContext implements Context
     public static function tearDown()
     {
         $feature = getenv('FEATURE') ?: 'behat';
-        (new PHP())->process(self::$coverage, getcwd()."/build/logs/coverage-$feature.cov");
+        (new PHP())->process(self::$coverage, getcwd()."/build/coverage/coverage-$feature.cov");
     }
 
     /**
