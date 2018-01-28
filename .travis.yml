@@ -69,11 +69,10 @@ before_install:
 install:
     - composer install --prefer-dist --no-progress --no-suggest --ansi
     - bin/console doctrine:database:create -n --if-not-exists
-    #- bin/console doctrine:schema:create -n
+    - bin/console doctrine:schema:create -n
     - composer run-script compile
 
 script:
-    - echo $COVERAGE
     - mkdir -p build/logs
     - if [[ $COVERAGE = 'true'  ]]; then bin/coverage; fi
     - if [[ $COVERAGE = 'false' ]]; then bin/phpunit; fi
