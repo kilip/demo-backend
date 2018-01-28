@@ -66,7 +66,8 @@ before_install:
     - cp .env.dist .env
 
 install:
-    - composer update --prefer-dist --no-progress --no-suggest --ansi
+    - composer install --prefer-dist --no-progress --no-suggest --ansi
+    - bin/console doctrine:database:create -n --if-not-exists
     - composer run-script compile
 
 script:
