@@ -8,8 +8,9 @@ cache:
       - "$HOME/.npm"
 
 env:
-    COVERAGE: false
-    APP_ENV: test
+    global:
+        - COVERAGE: false
+        - APP_ENV: test
 
 matrix:
     include:
