@@ -9,6 +9,8 @@ cache:
 
 env:
     COVERAGE: false
+    APP_ENV: test
+
 matrix:
     include:
 
@@ -65,8 +67,7 @@ before_install:
 
 install:
     - composer update --prefer-dist --no-progress --no-suggest --ansi
-    - bin/console doctrine:database:create --env=test
-    - bin/console doctrine:schema:update --force --env=test
+    - composer run-script compile
 
 script:
     - mkdir -p build/logs
