@@ -18,14 +18,20 @@ if(!is_dir($dir=__DIR__.'/../build/coverage')){
 
 $target = __DIR__.'/../build/coverage/phpunit.cov';
 $cmd = __DIR__.'/../vendor/bin/phpunit --coverage-php='.$target;
-passthru($cmd);
+passthru($cmd,$phpunit);
 
 $cmd = __DIR__.'/../vendor/bin/phpspec run -fdot --config='.realpath(__DIR__.'/../phpspec-coverage.yml');
-passthru($cmd);
+passthru($cmd,$phpspec);
 
 $cmd = __DIR__.'/../vendor/bin/behat -fprogress -p coverage';
-passthru($cmd);
+passthru($cmd,$behat);
 
 $dir = realpath(__DIR__.'/../build');
 $cmd = __DIR__."/../vendor/bin/phpcov merge $dir/coverage --html=$dir/html/coverage --clover $dir/logs/clover.xml";
 passthru($cmd);
+
+if($behat || $phpunit || $phpspec){
+    exit(1);
+}else{
+    exit(0);
+}
