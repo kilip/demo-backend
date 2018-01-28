@@ -71,8 +71,9 @@ install:
     - composer run-script compile
 
 script:
+    - echo $COVERAGE
     - mkdir -p build/logs
-    - if [[ $COVERAGE = true  ]]; then bin/coverage; fi
-    - if [[ $COVERAGE = false ]]; then bin/phpunit; fi
-    - if [[ $COVERAGE = false ]]; then ./vendor/bin/phpspec run -fdot; fi
-    - if [[ $COVERAGE = false ]]; then ./vendor/bin/behat -fprogress; fi
+    - if [[ $COVERAGE = 'true'  ]]; then bin/coverage; fi
+    - if [[ $COVERAGE = 'false' ]]; then bin/phpunit; fi
+    - if [[ $COVERAGE = 'false' ]]; then ./vendor/bin/phpspec run -fdot; fi
+    - if [[ $COVERAGE = 'false' ]]; then ./vendor/bin/behat -fprogress; fi
