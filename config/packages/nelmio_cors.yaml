@@ -8,7 +8,7 @@ nelmio_cors:
     paths:
         '^/':
             origin_regex: true
-            allow_origin: ['^https?://localhost:?[0-9]*$','%env(CORS_ALLOW_ORIGIN)%',"^https://omed.surge.sh"]
+            allow_origin: ['^https?://localhost:?[0-9]*$','%env(CORS_ALLOW_ORIGIN)%',"^https?://omed.surge.sh*$"]
             allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
             allow_headers: ['Content-Type', 'Authorization']
             max_age: 3600
