@@ -30,7 +30,7 @@ RUN set -xe \
 CMD sh -c 'if [ "${APP_DEBUG}" = 1 ]; then docker-php-ext-enable xdebug; else echo "XDebug is not activated"; fi'
 
 COPY --from=0 /usr/bin/composer /usr/bin/composer
-COPY php.ini /usr/local/etc/php/php.ini
+COPY 99-custom.ini /usr/local/etc/php/conf.d/99-custom.ini
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
