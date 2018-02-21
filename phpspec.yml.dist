@@ -2,17 +2,3 @@ suites:
     employee_suite:
         namespace: Omed
         psr4_prefix: Omed
-
-extensions:
-    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
-        format:
-            - clover
-        output:
-            clover: build/logs/phpspec.xml
-        whitelist:
-            - src
-        blacklist:
-            - src/Behat
-            - src/Test
-            - src/Resources
-            - src/DataFixtures

@@ -1,0 +1,34 @@
+### Omed Project ###
+/build/
+data/demo/
+.php_cs
+.php_cs.cache
+/public/js
+!public/js/.gitkeep
+composer.lock
+### < Omed Project ###
+
+###> symfony/framework-bundle ###
+.env
+
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+.gitignore
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###
+
+###> phpspec ###
+phpspec.yml
+###< phpspec ###
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
