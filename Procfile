@@ -1,1 +1,1 @@
-web: bin/console cache:warmup && $(composer config bin-dir)/heroku-php-apache2 public/
+web: bin/console cache:warmup && $(composer config bin-dir)/heroku-php-nginx -C .deploy/nginx.conf
