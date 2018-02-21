@@ -6,7 +6,7 @@ cache:
   - "$HOME/.npm"
 env:
   global:
-    - COVERAGE: false
+    - COVERAGE: no
     - APP_ENV: test
 
 notifications:
@@ -18,7 +18,7 @@ matrix:
   - php: '7.1'
     services:
       - postgresql
-    env: COVERAGE=true DATABASE_URL=pgsql://postgres@localhost:5432/omed
+    env: COVERAGE=yes DATABASE_URL=pgsql://postgres@localhost:5432/omed
 
   - php: '7.1'
     services:
@@ -28,8 +28,6 @@ matrix:
   - php: '7.1'
     services:
       - mysql
-    before_install:
-      - echo yes | pecl install apcu
     env: DATABASE_URL=mysql://root@localhost:3306/omed
 
   - php: '7.2'
@@ -49,14 +47,13 @@ matrix:
     services:
       - mysql
     env: DATABASE_URL=mysql://root@localhost:3306/omed
-    before_install:
 
 
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
   - >
-    if [[ $COVERAGE = 'false' ]]; then
+    if [[ $COVERAGE = no ]]; then
       phpenv config-rm xdebug.ini || echo "xdebug not available";
     fi
   - cp .env.dist .env
@@ -75,14 +72,14 @@ install:
 
 script:
   - mkdir -p build/logs
-  - if [[ $COVERAGE = 'true'  ]]; then bin/coverage; fi
-  - if [[ $COVERAGE = 'false' ]]; then bin/phpunit; fi
-  - if [[ $COVERAGE = 'false' ]]; then ./vendor/bin/phpspec run -fdot; fi
-  - if [[ $COVERAGE = 'false' ]]; then ./vendor/bin/behat -fprogress; fi
+  - if [[ $COVERAGE = yes  ]]; then bin/coverage; fi
+  - if [[ $COVERAGE != yes ]]; then bin/phpunit; fi
+  - if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
+  - if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
 
 after_success:
   - >
-    if [[ $COVERAGE = 'true' ]]; then
+    if [[ $COVERAGE = yes ]]; then
         bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml";
         wget https://scrutinizer-ci.com/ocular.phar;
         php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
