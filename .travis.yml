@@ -6,8 +6,8 @@ cache:
   - "$HOME/.npm"
 env:
   global:
-  - COVERAGE: false
-  - APP_ENV: test
+    - COVERAGE: false
+    - APP_ENV: test
 
 notifications:
   slack:
@@ -56,16 +56,16 @@ before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
   - >
-    if [[ $COVERAGE = 'false']]; then
+    if [[ $COVERAGE = 'false' ]]; then
       phpenv config-rm xdebug.ini || echo "xdebug not available";
-    fi;
+    fi
   - cp .env.dist .env
   - >
     if [[ $TRAVIS_PHP_VERSION = "7.1" ]]; then
       echo yes | pecl install apcu;
     else
       echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
-    fi;
+    fi
 
 install:
   - composer install --prefer-dist --no-progress --no-suggest --ansi
@@ -86,5 +86,5 @@ after_success:
         bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml";
         wget https://scrutinizer-ci.com/ocular.phar;
         php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
-    fi;
+    fi
 
