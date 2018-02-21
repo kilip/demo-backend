@@ -42,6 +42,7 @@ matrix:
       strategy: git
       on:
         repo: kilip/omed-backend
+        all_branches: true
 
   - php: '7.2'
     services:
@@ -85,3 +86,5 @@ after_success:
         php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
     fi
 
+before_deploy:
+  - cp .deploy/.htaccess public/.htaccess
