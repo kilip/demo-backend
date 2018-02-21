@@ -61,7 +61,7 @@ before_install:
     fi
   - cp .env.dist .env
   - >
-    if [[ $TRAVIS_PHP_VERSION = "7.1" ]]; then
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
       echo yes | pecl install apcu;
     else
       echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
