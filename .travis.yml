@@ -15,28 +15,23 @@ notifications:
 
 matrix:
   include:
-  - php: 7.1.8
+  - php: '7.1'
     services:
       - postgresql
     env: COVERAGE=true DATABASE_URL=pgsql://postgres@localhost:5432/omed
-    before_install:
-      - echo yes | pecl install apcu
-    after_success:
-      - bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml"
-      - wget https://scrutinizer-ci.com/ocular.phar
-      - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+
   - php: '7.1'
     services:
       - postgresql
     env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
-    before_install:
-      - echo yes | pecl install apcu
+
   - php: '7.1'
     services:
       - mysql
     before_install:
       - echo yes | pecl install apcu
     env: DATABASE_URL=mysql://root@localhost:3306/omed
+
   - php: '7.2'
     services:
       - postgresql
@@ -49,20 +44,28 @@ matrix:
       strategy: git
       on:
         repo: kilip/omed-backend
-    before_install:
-      - echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
   - php: '7.2'
     services:
       - mysql
     env: DATABASE_URL=mysql://root@localhost:3306/omed
-    before_install: echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    before_install:
 
 
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - export PATH="$PATH:$HOME/.composer/vendor/bin"
+  - >
+    if [[ $COVERAGE = 'false']]; then
+      phpenv config-rm xdebug.ini || echo "xdebug not available";
+    fi;
   - cp .env.dist .env
+  - >
+    if [[ $TRAVIS_PHP_VERSION = "7.1" ]]; then
+      echo yes | pecl install apcu;
+    else
+      echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
+    fi;
 
 install:
   - composer install --prefer-dist --no-progress --no-suggest --ansi
@@ -77,5 +80,11 @@ script:
   - if [[ $COVERAGE = 'false' ]]; then ./vendor/bin/phpspec run -fdot; fi
   - if [[ $COVERAGE = 'false' ]]; then ./vendor/bin/behat -fprogress; fi
 
-before_deploy:
-  -
+after_success:
+  - >
+    if [[ $COVERAGE = 'true' ]]; then
+        bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml";
+        wget https://scrutinizer-ci.com/ocular.phar;
+        php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
+    fi;
+
