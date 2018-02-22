@@ -8,7 +8,6 @@
         "ext-apcu": "*",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.0",
-        "doctrine/doctrine-fixtures-bundle": "^3.0",
         "friendsofsymfony/jsrouting-bundle": "^2.1",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "lexik/jwt-authentication-bundle": "^2.4",
@@ -36,7 +35,8 @@
         "phpunit/php-code-coverage": "^5.3",
         "phpunit/phpcov": "^4.0",
         "symfony/phpunit-bridge": "^4.0",
-        "hautelook/alice-bundle": "^2.0"
+        "hautelook/alice-bundle": "^2.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.0"
     },
     "config": {
         "preferred-install": {
