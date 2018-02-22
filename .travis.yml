@@ -30,8 +30,12 @@ matrix:
   include:
     - php: '7.2'
       env: COVERAGE=yes DATABASE_URL=mysql://root@localhost:3306/omed
-    - php: '7.2'
-      env: DEPLOY=true DATABASE_URL=pgsql://postgres@localhost:5432/omed
+
+jobs:
+  include:
+    - stage: deploy
+      php: '7.2'
+      env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
       deploy:
         provider: heroku
         api_key:
