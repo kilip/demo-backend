@@ -8,7 +8,7 @@ return [
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
     ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['prod'=>true, 'dev' => true, 'test' => true],
-    Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['prod'=>true, 'dev' => true, 'test' => true],
+    Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['prod'=>false, 'dev' => true, 'test' => true],
     Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['prod'=>true, 'dev' => true, 'test' => true],
     Hautelook\AliceBundle\HautelookAliceBundle::class => ['prod'=>false, 'dev' => true, 'test' => true],
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
