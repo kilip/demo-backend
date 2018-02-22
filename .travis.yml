@@ -4,7 +4,6 @@ sudo: false
 
 services:
   - postgresql
-  - mysql
 
 cache:
   directories:
@@ -12,7 +11,6 @@ cache:
   - "$HOME/.npm"
 
 php:
-  - 7.0
   - 7.1
   - 7.2
 
@@ -31,13 +29,8 @@ notifications:
 matrix:
   include:
     - php: '7.2'
-      env: DATABASE_URL=pgsql://postgres@localhost:5432/omed COVERAGE=yes
-
-
-jobs:
-  include:
-    - stage: deploy
-      php: 7.2
+      env: COVERAGE=yes DATABASE_URL=mysql://root@localhost:3306/omed
+    - php: '7.2'
       env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
       deploy:
         provider: heroku
@@ -64,8 +57,7 @@ before_install:
     fi
 
 install:
-  - rm composer.lock
-  - composer install --prefer-dist --no-progress --no-suggest --ansi
+  - composer update --prefer-dist --no-progress --no-suggest --ansi
   - bin/console doctrine:database:create -n --if-not-exists
   - bin/console doctrine:schema:create -n
   - composer run-script compile
@@ -77,7 +69,7 @@ script:
   - if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
   - if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
 
-after_success:
+after_script:
   - >
     if [[ $COVERAGE = yes ]]; then
         bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml";
