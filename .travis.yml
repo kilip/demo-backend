@@ -12,7 +12,6 @@ cache:
   - "$HOME/.npm"
 
 php:
-  - 7.0
   - 7.1
   - 7.2
 
@@ -32,7 +31,6 @@ matrix:
   include:
     - php: '7.2'
       env: DATABASE_URL=pgsql://postgres@localhost:5432/omed COVERAGE=yes
-
 
 jobs:
   include:
