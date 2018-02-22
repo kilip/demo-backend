@@ -29,7 +29,7 @@ env:
 matrix:
   fast_finish: true
   allow_failures:
-    env: COVERAGE=yes
+    env: COVERAGE=yes DATABASE_URL=pgsql://postgres@localhost:5432/omed
 
 jobs:
   include:
