@@ -29,11 +29,11 @@ notifications:
 jobs:
   include:
     - stage: test
-      php: '7.2'
+      php: '7.2.2'
       env: COVERAGE=yes DATABASE_URL=pgsql://postgres@localhost:5432/omed
 
     - stage: deploy
-      php: '7.2'
+      php: '7.2.2'
       env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
       deploy:
         provider: heroku
