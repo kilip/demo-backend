@@ -30,13 +30,12 @@
         "behat/symfony2-extension": "^2.1",
         "behatch/contexts": "^3.0",
         "coduo/php-matcher": "~3.0@dev",
+        "hautelook/alice-bundle": "^2.0",
         "leanphp/phpspec-code-coverage": "^4.0",
         "phpspec/phpspec": "^4.3",
         "phpunit/php-code-coverage": "^5.3",
         "phpunit/phpcov": "^4.0",
-        "symfony/phpunit-bridge": "^4.0",
-        "hautelook/alice-bundle": "^2.0",
-        "doctrine/doctrine-fixtures-bundle": "^3.0"
+        "symfony/phpunit-bridge": "^4.0"
     },
     "config": {
         "preferred-install": {
