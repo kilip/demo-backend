@@ -29,8 +29,8 @@ notifications:
 matrix:
   exclude:
     - php: '7.2'
-      env:
-        - DATABASE_URL=pgsql://postgres@localhost:5432/omed
+      env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
+
   include:
     - php: '7.2'
       env: COVERAGE=yes DATABASE_URL=mysql://root@localhost:3306/omed
