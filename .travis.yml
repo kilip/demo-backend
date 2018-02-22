@@ -40,9 +40,6 @@ matrix:
         strategy: git
         on:
           repo: kilip/omed-backend
-  exclude:
-    - php: '7.2'
-      env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
 
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
