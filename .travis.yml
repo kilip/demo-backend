@@ -63,8 +63,8 @@ before_install:
 
 install:
   - >
-    if [[ ${TRAVIS_PHP_VERSION:0:2} == "7.0" ]]; then
-      composer remove hautelook/alice-bundle --ignore-platform-reqs
+    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then
+      composer remove hautelook/alice-bundle --ignore-platform-reqs;
     fi;
 
   - composer update --prefer-dist --no-progress --no-suggest --ansi
@@ -79,7 +79,7 @@ script:
   - if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
   - if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
 
-after_success:
+after_script:
   - >
     if [[ $COVERAGE = yes ]]; then
         bash <(curl -s https://codecov.io/bash) -s build/logs -f "*.xml";
