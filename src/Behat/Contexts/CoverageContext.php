@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -12,7 +12,6 @@ declare(strict_types = 1);
  */
 
 namespace Omed\Behat\Contexts;
-
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;

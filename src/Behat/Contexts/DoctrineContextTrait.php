@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -14,12 +14,9 @@ declare(strict_types = 1);
 namespace Omed\Behat\Contexts;
 
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\Persistence\ConnectionRegistry;
 use Doctrine\Common\Persistence\ManagerRegistry as DoctrineRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
-use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\SchemaTool;
 
 trait DoctrineContextTrait
 {
@@ -51,6 +48,7 @@ trait DoctrineContextTrait
 
     /**
      * @param string $name
+     *
      * @return ObjectRepository
      */
     protected function getRepository($name)

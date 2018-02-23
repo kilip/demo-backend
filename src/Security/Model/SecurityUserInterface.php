@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Demo project.
@@ -12,7 +12,6 @@ declare(strict_types = 1);
  */
 
 namespace Omed\Security\Model;
-
 
 use FOS\UserBundle\Model\UserInterface;
 
@@ -31,8 +30,7 @@ interface SecurityUserInterface
     public function getLogin();
 
     /**
-     * @param string    $email
-     * @return void
+     * @param string $email
      */
     public function setEmail($email);
 
@@ -42,7 +40,8 @@ interface SecurityUserInterface
     public function getEmail();
 
     /**
-     * Get default role for this user
+     * Get default role for this user.
+     *
      * @return string
      */
     public function getDefaultRole();

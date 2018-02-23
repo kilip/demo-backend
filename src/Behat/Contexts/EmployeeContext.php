@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -124,7 +124,7 @@ class EmployeeContext implements Context
         $repo = $this->getRepository('Omed:Employee');
         $results = $repo->findAll();
         $em = $this->getEntityManager();
-        foreach($results as $employee){
+        foreach ($results as $employee) {
             $em->remove($employee);
             $em->flush();
         }
@@ -287,7 +287,7 @@ class EmployeeContext implements Context
     public function iAmLoggedInEmployee()
     {
         $userContext = $this->userContext;
-        $employee = $this->getEmployeeWithName('Omed Employee',true);
+        $employee = $this->getEmployeeWithName('Omed Employee', true);
         $user = $employee->getLogin();
         $user
             ->setUsername('employee')

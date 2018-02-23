@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Demo project.
@@ -12,7 +12,6 @@ declare(strict_types = 1);
  */
 
 namespace Omed\Security\Services;
-
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
@@ -31,21 +30,19 @@ class UserCreator
     }
 
     /**
-     *
      * @param LifecycleEventArgs $args
      */
     public function prePersist(LifecycleEventArgs $args)
     {
         $securityUser = $args->getEntity();
 
-        if($securityUser instanceof SecurityUserInterface){
-
+        if ($securityUser instanceof SecurityUserInterface) {
             $login = $securityUser->getLogin();
-            if($securityUser->getEmail() != $login->getEmail()){
+            if ($securityUser->getEmail() != $login->getEmail()) {
                 $login->setEmail($securityUser->getEmail());
                 $this->canonicalFieldsUpdater->updateCanonicalFields($login);
             }
-            if(!is_array($login->getRoles())){
+            if (!is_array($login->getRoles())) {
                 $login->setRoles([$securityUser->getDefaultRole()]);
             }
 

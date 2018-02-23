@@ -1,7 +1,7 @@
 <?php
 
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -61,6 +61,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Employee implements AddressableInterface, SecurityUserInterface
 {
     const GENDER_MALE = 'M';
+
     const GENDER_FEMALE = 'F';
 
     /**
@@ -207,6 +208,7 @@ class Employee implements AddressableInterface, SecurityUserInterface
     public function setLogin(UserInterface $login): self
     {
         $this->login = $login;
+
         return $this;
     }
 
@@ -353,9 +355,10 @@ class Employee implements AddressableInterface, SecurityUserInterface
      */
     public function getLogin()
     {
-        if(is_null($this->login)){
+        if (is_null($this->login)) {
             $this->login = new User();
         }
+
         return $this->login;
     }
 }

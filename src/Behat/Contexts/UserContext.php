@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -55,7 +55,7 @@ class UserContext implements Context
     /**
      * @BeforeSuite
      */
-    static public function beforeSuite(BeforeSuiteScope $scope)
+    public static function beforeSuite(BeforeSuiteScope $scope)
     {
         (new Dotenv())->load(getcwd().'/.env');
     }
@@ -111,6 +111,7 @@ class UserContext implements Context
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+
         return $user;
     }
 
@@ -130,9 +131,10 @@ class UserContext implements Context
     public function findByUsername($username, $create = false)
     {
         $user = $this->userRepository->findOneBy(array('username' => $username));
-        if(!$user instanceof User && $create){
-            $user = $this->createUser($username,'test');
+        if (!$user instanceof User && $create) {
+            $user = $this->createUser($username, 'test');
         }
+
         return $user;
     }
 }

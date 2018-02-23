@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Omed\Employee\EventListener;
 
-
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
@@ -30,21 +29,22 @@ class EmployeeListener
 
     /**
      * @param LifecycleEventArgs $args
+     *
      * @internal param Employee $employee
      */
     public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if($entity instanceof SecurityUserInterface){
-            $this->syncEmailToUser($entity,$args);
+        if ($entity instanceof SecurityUserInterface) {
+            $this->syncEmailToUser($entity, $args);
         }
     }
 
     private function syncEmailToUser(SecurityUserInterface $entity, LifecycleEventArgs $args)
     {
         $user = $entity->getLogin();
-        if($user instanceof UserInterface){
-            if($user->getEmail() != $entity->getEmail()){
+        if ($user instanceof UserInterface) {
+            if ($user->getEmail() != $entity->getEmail()) {
                 $user
                     ->setEmail($entity->getEmail())
                 ;
@@ -55,5 +55,4 @@ class EmployeeListener
             }
         }
     }
-
 }

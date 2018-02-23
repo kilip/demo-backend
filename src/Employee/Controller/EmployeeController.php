@@ -17,15 +17,12 @@ use Omed\Entity\Employee;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class EmployeeController
- *
- * @package Omed\Employee\Controller
+ * Class EmployeeController.
  */
 class EmployeeController
 {
-
     /**
-     * Get employee profile
+     * Get employee profile.
      *
      * @Route(
      *     name="api_employees_get_profile",
@@ -36,6 +33,7 @@ class EmployeeController
      *     },
      *     methods="GET"
      * )
+     *
      * @return Employee
      */
     public function getProfile($data)
@@ -44,7 +42,7 @@ class EmployeeController
     }
 
     /**
-     * Update employee profile
+     * Update employee profile.
      *
      * @Route(
      *     name="api_employees_put_profile",
@@ -55,7 +53,8 @@ class EmployeeController
      *     },
      *     methods="PUT"
      * )
-     * @return  Employee
+     *
+     * @return Employee
      */
     public function updateProfile($data)
     {
