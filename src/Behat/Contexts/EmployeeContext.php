@@ -121,12 +121,13 @@ class EmployeeContext implements Context
      */
     public function iDonTHaveAnyEmployeeData()
     {
-        $qb = $this->getEntityManager()
-            ->createQueryBuilder()
-            ->delete('Omed:Employee', 'e')
-        ;
-        $qb->getQuery()->execute();
-        $this->getEntityManager()->flush();
+        $repo = $this->getRepository('Omed:Employee');
+        $results = $repo->findAll();
+        $em = $this->getEntityManager();
+        foreach($results as $employee){
+            $em->remove($employee);
+            $em->flush();
+        }
     }
 
     /**
@@ -134,12 +135,9 @@ class EmployeeContext implements Context
      */
     public function iDonTHaveAnyAddressData()
     {
-        $qb = $this->getEntityManager()
-                    ->createQueryBuilder()
-                    ->delete('Omed:Address', 'a')
-        ;
-        $qb->getQuery()->execute();
-        $this->getEntityManager()->flush();
+        $connection = $this->getEntityManager()->getConnection();
+        $connection->exec('DELETE from public.employees');
+        $connection->commit();
     }
 
     /**
@@ -290,17 +288,15 @@ class EmployeeContext implements Context
     {
         $userContext = $this->userContext;
         $employee = $this->getEmployeeWithName('Omed Employee',true);
-        $user = $userContext->findByUsername('employee',true);
-        if(!$employee->getLogin() instanceof User){
-            $user
-                ->setUsername('employee')
-                ->setPlainPassword('test')
-                ->setRoles([User::ROLE_EMPLOYEE])
-            ;
-            $employee->setLogin($user);
-            $this->getEntityManager()->persist($employee);
-            $this->getEntityManager()->flush();
-        }
+        $user = $employee->getLogin();
+        $user
+            ->setUsername('employee')
+            ->setPlainPassword('test')
+            ->setRoles([User::ROLE_EMPLOYEE])
+        ;
+        $this->getEntityManager()->persist($employee);
+        $this->getEntityManager()->flush();
+
         $userContext->login($employee->getLogin());
     }
 }

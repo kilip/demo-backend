@@ -16,7 +16,6 @@ namespace Omed\Security\Services;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
-use Omed\Entity\User;
 use Omed\Security\Model\SecurityUserInterface;
 
 class UserCreator
@@ -41,13 +40,16 @@ class UserCreator
 
         if($securityUser instanceof SecurityUserInterface){
 
-            $login = new User();
-            $login->setEmail($securityUser->getEmail());
-            $login->setRoles([$securityUser->getDefaultRole()]);
-            $login->setEnabled(true);
-            $this->canonicalFieldsUpdater->updateCanonicalFields($login);
+            $login = $securityUser->getLogin();
+            if($securityUser->getEmail() != $login->getEmail()){
+                $login->setEmail($securityUser->getEmail());
+                $this->canonicalFieldsUpdater->updateCanonicalFields($login);
+            }
+            if(!is_array($login->getRoles())){
+                $login->setRoles([$securityUser->getDefaultRole()]);
+            }
 
-            $securityUser->setLogin($login);
+            $login->setEnabled(true);
         }
     }
 }

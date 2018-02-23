@@ -40,8 +40,8 @@ Feature: Securing Employee Resource
         And I send PUT request to employee profile "Omed Employee" with body:
         """
         {
-            "email": "some@email.com"
+            "email": "some-edited@email.com"
         }
         """
         Then the response status code should be 200
-        And the JSON node "email" should be equal to "some@email.com"
+        And the JSON node "email" should be equal to "some-edited@email.com"

@@ -144,6 +144,7 @@ class Customer implements AddressableInterface, SecurityUserInterface
      * @var null|User
      *
      * @ORM\OneToOne(targetEntity="Omed\Entity\User",cascade={"all"},orphanRemoval=true)
+     * @ORM\JoinColumn(name="security_user_id",referencedColumnName="id",onDelete="CASCADE")
      */
     public $login;
 
@@ -184,6 +185,9 @@ class Customer implements AddressableInterface, SecurityUserInterface
      */
     public function getLogin()
     {
+        if(is_null($this->login)){
+            $this->login = new User();
+        }
         return $this->login;
     }
 
@@ -194,9 +198,7 @@ class Customer implements AddressableInterface, SecurityUserInterface
      */
     public function setLogin(UserInterface $login)
     {
-        $login->setEmail($this->getEmail());
         $this->login = $login;
-
         return $this;
     }
 
