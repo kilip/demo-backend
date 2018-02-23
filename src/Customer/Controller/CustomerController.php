@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -17,15 +17,12 @@ use Omed\Entity\Customer;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class CustomerController
- *
- * @package Omed\Customer\Controller
+ * Class CustomerController.
  */
 class CustomerController
 {
-
     /**
-     * Get customer profile
+     * Get customer profile.
      *
      * @Route(
      *     name="api_customers_get_profile",
@@ -36,8 +33,6 @@ class CustomerController
      *     },
      *     methods="GET"
      * )
-     *
-     *
      */
     public function getProfile($id, $data)
     {
@@ -45,7 +40,7 @@ class CustomerController
     }
 
     /**
-     * Update customer profile
+     * Update customer profile.
      *
      * @Route(
      *     name="api_customers_put_profile",
@@ -56,8 +51,10 @@ class CustomerController
      *     },
      *     methods="PUT"
      * )
-     * @param   string  $id
-     * @return  Customer
+     *
+     * @param string $id
+     *
+     * @return Customer
      */
     public function updateProfile($id, $data)
     {

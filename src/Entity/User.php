@@ -1,7 +1,7 @@
 <?php
 
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -59,11 +59,11 @@ use Doctrine\ORM\Mapping as ORM;
  * )
  *
  * @author Anthonius Munthi <me@itstoni.com>
- *
  */
 class User extends BaseUser
 {
     const ROLE_EMPLOYEE = 'ROLE_EMPLOYEE';
+
     const ROLE_CUSTOMER = 'ROLE_CUSTOMER';
 
     /**

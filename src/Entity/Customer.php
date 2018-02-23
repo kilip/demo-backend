@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -110,7 +110,6 @@ class Customer implements AddressableInterface, SecurityUserInterface
      */
     private $company;
 
-
     /**
      * @var null|\DateTime
      *
@@ -160,19 +159,18 @@ class Customer implements AddressableInterface, SecurityUserInterface
         return User::ROLE_CUSTOMER;
     }
 
-
     /**
-     *
      * @param $addressToSearch
+     *
      * @return bool
      */
     public function hasAddress($addressToSearch)
     {
-        if($this->getAddresses()->contains($addressToSearch)){
+        if ($this->getAddresses()->contains($addressToSearch)) {
             return true;
         }
-        foreach($this->getAddresses() as $address){
-            if($address->getAddress() == $addressToSearch){
+        foreach ($this->getAddresses() as $address) {
+            if ($address->getAddress() == $addressToSearch) {
                 return true;
             }
         }
@@ -185,9 +183,10 @@ class Customer implements AddressableInterface, SecurityUserInterface
      */
     public function getLogin()
     {
-        if(is_null($this->login)){
+        if (is_null($this->login)) {
             $this->login = new User();
         }
+
         return $this->login;
     }
 
@@ -199,6 +198,7 @@ class Customer implements AddressableInterface, SecurityUserInterface
     public function setLogin(UserInterface $login)
     {
         $this->login = $login;
+
         return $this;
     }
 
@@ -235,11 +235,13 @@ class Customer implements AddressableInterface, SecurityUserInterface
 
     /**
      * @param null|string $company
+     *
      * @return Customer
      */
     public function setCompany($company)
     {
         $this->company = $company;
+
         return $this;
     }
 
