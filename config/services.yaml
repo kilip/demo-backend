@@ -30,18 +30,6 @@ services:
             $errorNormalizer: "@api_platform.hydra.normalizer.constraint_violation_list"
             $itemNormalizer: "@api_platform.jsonld.normalizer.item"
 
-    Omed\Employee\EventListener\EmployeeListener:
-        tags:
-          - { name: doctrine.event_listener, event: 'postUpdate' }
-        arguments:
-            $canonicalFieldsUpdater: "@fos_user.util.canonical_fields_updater"
-
-    Omed\Security\Services\UserCreator:
-        tags:
-          - { name: doctrine.event_listener, event: 'prePersist' }
-        arguments:
-            $canonicalFieldsUpdater: "@fos_user.util.canonical_fields_updater"
-
 
     lexik_jwt_authentication.jwt_manager:
         class:  Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager

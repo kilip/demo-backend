@@ -4,9 +4,15 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
         http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults autowire="true" autoconfigure="true" public="true"/>
-        <service id="Omed\Employee\EventListener\EmployeeListener" autowire="true" autoconfigure="true">
-            <tag name="doctrine.event_listener" event="all" connection="default" priority="100" />
+        <defaults autowire="true" autoconfigure="true" public="false"/>
+
+        <service id="Omed\Employee\EventListener\EmployeeListener">
+            <tag name="doctrine.event_listener" event="postUpdate"/>
+            <argument type="service" id="fos_user.util.canonical_fields_updater"/>
+        </service>
+        <service id="Omed\Security\Services\UserCreator">
+            <tag name="doctrine.event_listener" event="prePersist"/>
+            <argument type="service" id="fos_user.util.canonical_fields_updater"/>
         </service>
     </services>
 </container>

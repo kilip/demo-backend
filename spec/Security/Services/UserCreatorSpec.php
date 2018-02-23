@@ -35,19 +35,31 @@ class UserCreatorSpec extends ObjectBehavior
     function it_should_create_new_login_for_security_user(
         SecurityUserInterface $entity,
         LifecycleEventArgs $args,
-        ObjectManager $manager
+        UserInterface $user
     )
     {
+        $entity
+            ->getLogin()
+            ->willReturn($user)
+        ;
+
         $entity->getDefaultRole()
             ->willReturn(User::ROLE_EMPLOYEE)
         ;
+
         $entity->getEmail()
             ->willReturn('some@example.com')
         ;
-        $entity
-            ->setLogin(Argument::type(User::class))
-            ->shouldBeCalled()
+
+        $user
+            ->getEmail()
+            ->willReturn(null)
         ;
+        $user->getRoles()->willReturn(null);
+        $user->setRoles([User::ROLE_EMPLOYEE])->shouldBeCalled();
+        $user->setEmail('some@example.com')->shouldBeCalled();
+        $user->setEnabled(true)->shouldBeCalled();
+
         $this->prePersist($args);
     }
 }
