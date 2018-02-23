@@ -11,7 +11,7 @@ security:
     providers:
         in_memory: { memory: ~ }
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
     firewalls:
         login:
             pattern:  ^/login

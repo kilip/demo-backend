@@ -18,7 +18,9 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Omed\Security\Model\SecurityUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -55,7 +57,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @author Anthonius Munthi <me@itstoni.com>
  */
-class Customer implements AddressableInterface
+class Customer implements AddressableInterface, SecurityUserInterface
 {
     const TYPE_PERSONAL = 1;
 
@@ -152,6 +154,12 @@ class Customer implements AddressableInterface
         $this->addresses = new ArrayCollection();
     }
 
+    public function getDefaultRole()
+    {
+        return User::ROLE_CUSTOMER;
+    }
+
+
     /**
      *
      * @param $addressToSearch
@@ -180,11 +188,11 @@ class Customer implements AddressableInterface
     }
 
     /**
-     * @param User $login
+     * @param UserInterface $login
      *
      * @return $this
      */
-    public function setLogin($login)
+    public function setLogin(UserInterface $login)
     {
         $login->setEmail($this->getEmail());
         $this->login = $login;

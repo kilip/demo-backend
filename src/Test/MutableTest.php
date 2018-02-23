@@ -39,8 +39,8 @@ trait MutableTest
         $getter = array($entity, 'get'.$property);
         $isMethod = array($entity, 'is'.$property);
         if (!is_callable($getter)) {
-            if (is_callable($is = array('is'.$property))) {
-                $getter = $is;
+            if (is_callable($isMethod)) {
+                $getter = $isMethod;
             } else {
                 throw new ExpectationFailedException('Getter is not callable');
             }

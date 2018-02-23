@@ -33,6 +33,9 @@ class EmployeeTest extends TestCase
             'login' => array(
                 'value' => $user,
             ),
+            'active' => [
+                'value' => false,
+            ]
         );
     }
 
@@ -57,19 +60,5 @@ class EmployeeTest extends TestCase
         $collection = $this->getMockForAbstractClass(Collection::class);
         $entity->setAddresses($collection);
         $this->assertEquals($collection, $entity->getAddresses());
-    }
-
-    public function testShouldSyncEmailAutomatically()
-    {
-        $user = $this->getMockBuilder(User::class)
-            ->getMock()
-        ;
-        $user->expects($this->once())
-            ->method('setEmail')
-            ->willReturn($user);
-
-        $ob = new Employee();
-        $ob->setEmail('some@example.com');
-        $ob->setLogin($user);
     }
 }

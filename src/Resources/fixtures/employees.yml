@@ -18,30 +18,21 @@ Omed\Entity\Address:
         fax: <phoneNumber()>
         mobile: <phoneNumber()>
 
-Omed\Entity\User:
-    emp_user_{1..15}:
-        username: <userName()>
-        plainPassword: test
-        enabled: true
-        roles: [ ROLE_EMPLOYEE ]
-
 Omed\Entity\Employee:
     emp_female_{1..10}:
         name: <firstName('female')> <lastName('female')>
         birthDate: <dateTimeBetween('-40 years','-20 years')>
-        email: "@emp_user_<current(email())>"
+        email: <companyEmail()>
         gender: 'F'
         __calls:
             - addAddress: ['@emp_addr1_<current()>']
             - addAddress: ['@emp_addr2_<current()>']
-        login: '@emp_user_<current()>'
 
     emp_male_{11..15}:
         name: <firstName('male')> <lastName('male')>
-        email: "@emp_user_<current(email)>"
+        email: <companyEmail()>
         gender: 'M'
         birthDate: <dateTimeBetween('-40 years','-20 years')>
-        login: '@emp_user_<current()>'
         __calls:
             - addAddress: ['@emp_addr1_<current()>']
             - addAddress: ['@emp_addr2_<current()>']

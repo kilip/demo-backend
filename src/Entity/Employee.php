@@ -19,7 +19,9 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Omed\Security\Model\SecurityUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -55,9 +57,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  *
  * @author Anthonius Munthi <me@itstoni.com>
- * @TODO: make sync email between user and employee
  */
-class Employee implements AddressableInterface
+class Employee implements AddressableInterface, SecurityUserInterface
 {
     const GENDER_MALE = 'M';
     const GENDER_FEMALE = 'F';
@@ -142,6 +143,17 @@ class Employee implements AddressableInterface
     private $login;
 
     /**
+     * @var null|\DateTime
+     * @ORM\Column(name="hire_date",type="datetime",nullable=true)
+     */
+    private $hireDate;
+
+    /**
+     * @var bool
+     */
+    private $active = true;
+
+    /**
      * Employee constructor.
      */
     public function __construct()
@@ -149,16 +161,51 @@ class Employee implements AddressableInterface
         $this->addresses = new ArrayCollection();
     }
 
+    public function getDefaultRole()
+    {
+        return User::ROLE_EMPLOYEE;
+    }
+
     /**
-     * @param User $login
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     */
+    public function setActive(bool $active)
+    {
+        $this->active = $active;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getHireDate()
+    {
+        return $this->hireDate;
+    }
+
+    /**
+     * @param \DateTime|null $hireDate
+     */
+    public function setHireDate($hireDate)
+    {
+        $this->hireDate = $hireDate;
+    }
+
+    /**
+     * @param UserInterface $login
      *
      * @return Employee
      */
-    public function setLogin(User $login): self
+    public function setLogin(UserInterface $login): self
     {
         $this->login = $login;
-        $login->setEmail($this->getEmail());
-
         return $this;
     }
 
@@ -301,7 +348,7 @@ class Employee implements AddressableInterface
     }
 
     /**
-     * @return User|null
+     * @return UserInterface|null
      */
     public function getLogin()
     {

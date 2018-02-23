@@ -20,7 +20,7 @@ services:
         ports:
             - "80:80"
         volumes:
-            - ./public:/srv/omed/public:ro
+            - ./public:/srv/omed/public
     db:
         # In production, you may want to use a managed database service
         container_name: omed.db

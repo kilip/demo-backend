@@ -23,6 +23,27 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity()
  * @ORM\Table(name="security_users")
+ *
+ * @ORM\AttributeOverrides({
+ *     @ORM\AttributeOverride(name="username",
+ *          column=@ORM\Column(
+ *              nullable=true,
+ *              length=180
+ *          )
+ *     ),
+ *     @ORM\AttributeOverride(name="usernameCanonical",
+ *          column=@ORM\Column(
+ *              nullable=true,
+ *              length=180
+ *          )
+ *     ),
+ *     @ORM\AttributeOverride(name="password",
+ *          column=@ORM\Column(
+ *              nullable=true
+ *          )
+ *     )
+ * })
+ *
  * @ApiResource(
  *     attributes={
  *         {"access_control"="is_granted('ROLE_USER')"}
@@ -36,6 +57,9 @@ use Doctrine\ORM\Mapping as ORM;
  *         "put"={"method"="PUT","access_control"="is_granted('ROLE_ADMIN')"}
  *     }
  * )
+ *
+ * @author Anthonius Munthi <me@itstoni.com>
+ *
  */
 class User extends BaseUser
 {

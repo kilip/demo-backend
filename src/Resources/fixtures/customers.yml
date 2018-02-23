@@ -19,19 +19,10 @@ Omed\Entity\Address:
         fax: <phoneNumber()>
         mobile: <phoneNumber()>
 
-Omed\Entity\User:
-    cust_user_{1..15}:
-        username: <userName()>
-        plainPassword: test
-        enabled: true
-        email: <email()>
-        roles: [ROLE_CUSTOMER]
-
 Omed\Entity\Customer:
     cust_{1..10}:
         name: <firstName()> <lastName()>
-        email: "@cust_user_<current()>"
-        login: '@cust_user_<current()>'
+        email: <companyEmail()>
         __calls:
             - addAddress: ['@cust_addr1_<current()>']
             - addAddress: ['@cust_addr2_<current()>']

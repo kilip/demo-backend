@@ -1,0 +1,7 @@
+doctrine_migrations:
+    dir_name: '%kernel.project_dir%/migrations/doctrine'
+    # namespace is arbitrary but should be different from App\Migrations
+    # as migrations classes should NOT be autoloaded
+    namespace: Omed\Migrations
+    table_name: migration_versions
+    name: Omed Migrations
