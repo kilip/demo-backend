@@ -13,15 +13,15 @@ services:
                             # The best practice is to be explicit about your dependencies anyway.
 
     Omed\Core\Controller\:
-        resource: "../src/Core/Controller"
+        resource: "@OmedCoreBundle/Controller"
         tags: ['controller.service_arguments']
 
     Omed\Customer\Controller\:
-        resource: "../src/Customer/Controller"
+        resource: "@OmedCustomerBundle/Controller"
         tags: ['controller.service_arguments']
 
     Omed\Employee\Controller\:
-        resource: "../src/Employee/Controller"
+        resource: "@OmedEmployeeBundle/Controller"
         tags: ['controller.service_arguments']
 
     Omed\Core\Service\AddressService:

@@ -1,4 +1,31 @@
 suites:
-    employee_suite:
-        namespace: Omed
-        psr4_prefix: Omed
+    core:
+        namespace: Omed\Core
+        psr4_prefix: Omed\Core
+        spec_path: src/backend/Core
+        src_path: src/backend/Core
+        spec_prefix: Spec
+    customer:
+        namespace: Omed\Customer
+        psr4_prefix: Omed\Customer
+        spec_path: src/backend/Customer
+        src_path: src/backend/Customer
+        spec_prefix: Spec
+    employee:
+        namespace: Omed\Employee
+        psr4_prefix: Omed\Employee
+        spec_path: src/backend/Employee
+        src_path: src/backend/Employee
+        spec_prefix: Spec
+    resource:
+        namespace: Omed\Resource
+        psr4_prefix: Omed\Resource
+        spec_path: src/backend/Resource
+        src_path: src/backend/Resource
+        spec_prefix: Spec
+    security:
+        namespace: Omed\Security
+        psr4_prefix: Omed\Security
+        spec_path: src/backend/Security
+        src_path: src/backend/Security
+        spec_prefix: Spec

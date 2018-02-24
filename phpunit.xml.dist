@@ -36,19 +36,21 @@
     </php>
 
     <testsuites>
-        <testsuite name="Omed Test Suite">
-            <directory>tests/</directory>
+        <testsuite name="main">
+            <directory>src/backend/*/Tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./src/</directory>
+            <directory>./src/backend</directory>
             <exclude>
-                <directory>src/Behat</directory>
-                <directory>src/DataFixtures</directory>
-                <directory>src/Resources</directory>
-                <directory>src/Test</directory>
+                <directory>src/backend/Behat</directory>
+                <directory>src/backend/DataFixtures</directory>
+                <directory>src/backend/*/Resources</directory>
+                <directory>src/backend/*/Test</directory>
+                <directory>src/backend/*/Tests</directory>
+                <directory>src/backend/*/Spec</directory>
             </exclude>
         </whitelist>
     </filter>

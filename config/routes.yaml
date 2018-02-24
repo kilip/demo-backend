@@ -1,6 +1,18 @@
-core:
-    resource: '../src/Core/Resources/routes.yaml'
+core_controllers:
+    resource: '@OmedCoreBundle/Resources/routes.yaml'
     prefix: "/api"
+
+customer_controllers:
+    resource: '@OmedCustomerBundle/Controller/'
+    type: annotation
+    options:
+        expose: true
+
+employee_controllers:
+    resource: '@OmedEmployeeBundle/Controller/'
+    type: annotation
+    options:
+        expose: true
 
 #login_check_json:
 #    path: /login_check_json

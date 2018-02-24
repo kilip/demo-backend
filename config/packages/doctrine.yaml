@@ -1,5 +1,6 @@
 parameters:
     '%env(resolve:DATABASE_URL)%': '%kernel.project_dir%/var/data'
+
 doctrine:
     dbal:
         # configure these for your database server
@@ -9,9 +10,9 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            Omed:
-                is_bundle: false
+            OmedResourceBundle:
+                is_bundle: true
                 type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'Omed\Entity'
+                #dir: '@OmedResourceBundle/Entity'
+                prefix: 'Omed\Resource\Entity'
                 alias: Omed

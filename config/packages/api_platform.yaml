@@ -4,8 +4,9 @@ api_platform:
         fetch_partial: true
         max_joins: 5
         force_eager: false
-    mapping:
-        paths: ['%kernel.project_dir%/src/Entity']
+    #mapping:
+    #    paths:
+    #        - '@OmedResourceBundle/Entity'
     enable_fos_user: true
     swagger:
          api_keys:
