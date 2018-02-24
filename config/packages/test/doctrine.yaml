@@ -1,5 +1,5 @@
 parameters:
-    '%env(resolve:DATABASE_URL)%': "test"
+    '%env(resolve:DATABASE_URL)%': "%kernel.project_dir%/var/data.db"
 doctrine:
     dbal:
         # configure these for your database server
