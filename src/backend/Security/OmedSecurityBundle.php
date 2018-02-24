@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Omed\Security;
 
-
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class OmedSecurityBundle extends Bundle
 {
-
 }

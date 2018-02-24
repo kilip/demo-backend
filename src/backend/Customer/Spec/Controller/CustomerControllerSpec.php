@@ -5,31 +5,28 @@ namespace Spec\Omed\Customer\Controller;
 use Omed\Customer\Controller\CustomerController;
 use Omed\Resource\Entity\User;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class CustomerControllerSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(CustomerController::class);
     }
 
-    function it_should_get_profile_properly(
+    public function it_should_get_profile_properly(
         $id,
         User $user
-    )
-    {
-        $this->getProfile($id,$user)
+    ) {
+        $this->getProfile($id, $user)
             ->shouldHaveType(User::class)
         ;
     }
 
-    function it_should_update_profile_properly(
+    public function it_should_update_profile_properly(
         $id,
         User $user
-    )
-    {
-        $this->updateProfile($id,$user)
+    ) {
+        $this->updateProfile($id, $user)
             ->shouldHaveType(User::class)
         ;
     }

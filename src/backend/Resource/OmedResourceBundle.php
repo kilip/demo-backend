@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Omed\Resource;
 
-
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class OmedResourceBundle extends Bundle
 {
-
 }

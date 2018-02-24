@@ -10,34 +10,31 @@ use Omed\Resource\Entity\User;
 use Omed\Security\Model\SecurityUserInterface;
 use Omed\Security\Services\UserCreator;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class UserCreatorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CanonicalFieldsUpdater $canonicalFieldsUpdater,
         LifecycleEventArgs $args,
         SecurityUserInterface $entity,
         UserInterface $user,
         ObjectManager $manager
-    )
-    {
+    ) {
         $args->getObjectManager()->willReturn($manager);
         $args->getEntity()->willReturn($entity);
         $this->beConstructedWith($canonicalFieldsUpdater);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(UserCreator::class);
     }
 
-    function it_should_create_new_login_for_security_user(
+    public function it_should_create_new_login_for_security_user(
         SecurityUserInterface $entity,
         LifecycleEventArgs $args,
         UserInterface $user
-    )
-    {
+    ) {
         $entity
             ->getLogin()
             ->willReturn($user)

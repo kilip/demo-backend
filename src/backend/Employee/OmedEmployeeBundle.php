@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Omed\Employee;
 
-
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class OmedEmployeeBundle extends Bundle
 {
-
 }

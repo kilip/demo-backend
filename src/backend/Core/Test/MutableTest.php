@@ -143,7 +143,7 @@ trait MutableTest
             '\Tests' => '',
             'Tests' => '',
         ));
-        $classToTest = str_replace('Test','',$classToTest);
+        $classToTest = str_replace('Test', '', $classToTest);
         //$classToTest = rtrim($classToTest,'Test');
 
         if (!class_exists($classToTest)) {

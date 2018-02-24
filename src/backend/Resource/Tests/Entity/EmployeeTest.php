@@ -35,7 +35,7 @@ class EmployeeTest extends TestCase
             ),
             'active' => [
                 'value' => false,
-            ]
+            ],
         );
     }
 

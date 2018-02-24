@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Spec\Omed\Employee\EventListener;
 
@@ -12,33 +12,30 @@ use Omed\Employee\EventListener\EmployeeListener;
 use Omed\Resource\Entity\Address;
 use Omed\Security\Model\SecurityUserInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class EmployeeListenerSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         CanonicalFieldsUpdater $canonicalFieldsUpdater,
         LifecycleEventArgs $args,
         SecurityUserInterface $entity,
         UserInterface $user,
         ObjectManager $manager
-    )
-    {
+    ) {
         $args->getEntityManager()->willReturn($manager);
         $args->getEntity()->willReturn($entity);
         $entity->getLogin()->willReturn($user);
         $this->beConstructedWith($canonicalFieldsUpdater);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(EmployeeListener::class);
     }
 
-    function it_should_process_only_security_user_interface_entity(
+    public function it_should_process_only_security_user_interface_entity(
         LifecycleEventArgs $args
-    )
-    {
+    ) {
         $entity = new Address();
         $args
             ->getEntity()
@@ -49,13 +46,12 @@ class EmployeeListenerSpec extends ObjectBehavior
         $this->postUpdate($args);
     }
 
-    function it_should_email_with_security_user(
+    public function it_should_email_with_security_user(
         LifecycleEventArgs $args,
         ObjectManager $manager,
         SecurityUserInterface $entity,
         UserInterface $user
-    )
-    {
+    ) {
         $entity->getEmail()
             ->shouldBeCalled()
             ->willReturn('some@example.com')
@@ -80,5 +76,4 @@ class EmployeeListenerSpec extends ObjectBehavior
         ;
         $this->postUpdate($args);
     }
-
 }
