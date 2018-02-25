@@ -21,6 +21,7 @@
         "symfony/framework-bundle": "^4.0",
         "symfony/lts": "^4@dev",
         "symfony/swiftmailer-bundle": "^3.1",
+        "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
@@ -47,13 +48,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Omed\\": "src/backend",
-            "Spec\\": "spec/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Omed\\Test\\": "tests/"
+            "Omed\\": "src/backend"
         }
     },
     "replace": {

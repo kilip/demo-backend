@@ -1,9 +1,9 @@
 <?php
 
-namespace Spec\Omed\Core\Controller;
+namespace Spec\Omed\Resource\Controller;
 
-use Omed\Core\Controller\AddressController;
-use Omed\Core\Service\AddressService;
+use Omed\Resource\Controller\AddressController;
+use Omed\Resource\Service\AddressService;
 use Omed\Resource\Entity\Customer;
 use Omed\Resource\Entity\Employee;
 use PhpSpec\ObjectBehavior;

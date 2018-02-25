@@ -1,0 +1,11 @@
+core_employee_routes:
+    resource: "@OmedCoreBundle/Resources/config/routes/employee.yaml"
+    prefix: '/api'
+    options:
+        expose: true
+
+homepage:
+    resource: "@OmedCoreBundle/Controller/HomepageController.php"
+    type: annotation
+    options:
+        expose: true

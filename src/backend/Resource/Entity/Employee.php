@@ -129,7 +129,7 @@ class Employee implements AddressableInterface, SecurityUserInterface
      * @ORM\ManyToMany(targetEntity="Address",cascade={"persist","remove"},fetch="LAZY")
      * @ORM\JoinTable(
      *     name="employee_address",
-     *     joinColumns={@ORM\JoinColumn(name="customer_id",referencedColumnName="id",onDelete="CASCADE")},
+     *     joinColumns={@ORM\JoinColumn(name="employee_id",referencedColumnName="id",onDelete="CASCADE")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="address_id",referencedColumnName="id",onDelete="CASCADE")}
      * )
      * @ApiSubresource()

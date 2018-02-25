@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:framework="http://symfony.com/schema/dic/framework"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd
+           http://symfony.com/schema/dic/framework http://symfony.com/schema/dic/framework/framework-1.0.xsd"
+>
+    <services>
+        <defaults autowire="true" autoconfigure="true" public="false"/>
+        <service id="Omed\Resource\Service\AddressService">
+            <tag name="controller.service_arguments"/>
+            <argument type="service" key="$errorNormalizer" id="api_platform.hydra.normalizer.constraint_violation_list"/>
+            <argument type="service" key="$itemNormalizer" id="api_platform.jsonld.normalizer.item"/>
+        </service>
+    </services>
+</container>

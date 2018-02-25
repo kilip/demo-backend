@@ -1,8 +1,8 @@
 <?php
 
-namespace Spec\Omed\Customer\Controller;
+namespace Spec\Omed\Resource\Controller;
 
-use Omed\Customer\Controller\CustomerController;
+use Omed\Resource\Controller\CustomerController;
 use Omed\Resource\Entity\User;
 use PhpSpec\ObjectBehavior;
 

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Omed\Core\Service;
+namespace Omed\Resource\Service;
 
 use Omed\Resource\Entity\Address;
 use Omed\Resource\Entity\AddressableInterface;

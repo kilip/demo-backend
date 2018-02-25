@@ -126,6 +126,8 @@ class EmployeeContext implements Context
         $em = $this->getEntityManager();
         foreach ($results as $employee) {
             $em->remove($employee);
+        }
+        if(count($results) > 0){
             $em->flush();
         }
     }
@@ -251,7 +253,7 @@ class EmployeeContext implements Context
         $faker = Factory::create();
         $defaults = array(
             'name' => $faker->name('male'),
-            'email' => $faker->companyEmail,
+            'email' => $faker->companyEmail(),
             'birthDate' => $faker->dateTimeBetween('-50 years', '-20 years'),
             'gender' => 'M',
         );
@@ -263,7 +265,6 @@ class EmployeeContext implements Context
             unset($data['address']);
         }
         $data = array_merge($defaults, $data);
-
         $employee = new Employee();
         $employee
             ->setName($data['name'])
@@ -288,11 +289,14 @@ class EmployeeContext implements Context
     {
         $userContext = $this->userContext;
         $employee = $this->getEmployeeWithName('Omed Employee', true);
+
         $user = $employee->getLogin();
         $user
             ->setUsername('employee')
             ->setPlainPassword('test')
             ->setRoles([User::ROLE_EMPLOYEE])
+            ->setEmail($employee->getEmail())
+            ->setEnabled(true)
         ;
         $this->getEntityManager()->persist($employee);
         $this->getEntityManager()->flush();

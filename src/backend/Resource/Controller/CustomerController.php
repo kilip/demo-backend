@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Omed\Customer\Controller;
+namespace Omed\Resource\Controller;
 
 use Omed\Resource\Entity\Customer;
 use Symfony\Component\Routing\Annotation\Route;

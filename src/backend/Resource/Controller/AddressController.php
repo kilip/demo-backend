@@ -11,23 +11,31 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Omed\Core\Controller;
+namespace Omed\Resource\Controller;
 
-use Omed\Core\Service\AddressService;
+use Omed\Resource\Service\AddressService;
 use Omed\Resource\Entity\Customer;
 use Omed\Resource\Entity\Employee;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class EmployeeService.
+ * Handle address creation for Customer and Employee
  */
 class AddressController
 {
     /**
-     * @param AddressService $service
+     * @Route(
+     *     name="add_employee_address",
+     *     path="/addresses/employee/{id}",
+     *     methods={"POST"},
+     *     defaults={
+     *          "_api_resource_class"="Omed\Resource\Entity\Address"
+     *     }
+     * )
+     * @param \Omed\Resource\Service\AddressService $service
      * @param Request        $request
-     *
      * @return JsonResponse
      */
     public function addForEmployeeAction($id, AddressService $service, Request $request)
@@ -36,6 +44,14 @@ class AddressController
     }
 
     /**
+     * @Route(
+     *     name="add_customer_address",
+     *     path="/addresses/customer/{id}",
+     *     methods={"POST"},
+     *     defaults={
+     *          "_api_resource_class"="Omed\Resource\Entity\Address"
+     *     }
+     * )
      * @param AddressService $service
      * @param Request        $request
      *

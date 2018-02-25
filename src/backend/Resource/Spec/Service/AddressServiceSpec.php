@@ -1,8 +1,8 @@
 <?php
 
-namespace Spec\Omed\Core\Service;
+namespace Spec\Omed\Resource\Service;
 
-use Omed\Core\Service\AddressService;
+use Omed\Resource\Service\AddressService;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use ApiPlatform\Core\Serializer\AbstractItemNormalizer;

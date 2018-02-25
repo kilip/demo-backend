@@ -1,0 +1,19 @@
+api_platform:
+    resource: .
+    type: api_platform
+    prefix: '/'
+    options:
+        expose: true
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+
+resource_controllers:
+    resource: '@OmedResourceBundle/Controller/'
+    type: annotation
+    options:
+        expose: true

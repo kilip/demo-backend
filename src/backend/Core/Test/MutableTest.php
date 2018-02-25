@@ -141,10 +141,9 @@ trait MutableTest
     {
         $classToTest = strtr(__CLASS__, array(
             '\Tests' => '',
-            'Tests' => '',
+            'Test' => ''
         ));
         $classToTest = str_replace('Test', '', $classToTest);
-        //$classToTest = rtrim($classToTest,'Test');
 
         if (!class_exists($classToTest)) {
             throw new ExpectationFailedException(
