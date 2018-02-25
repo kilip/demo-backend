@@ -1,6 +1,13 @@
 var Encore = require('@symfony/webpack-encore');
+var LiveReloadPlugin = require('webpack-livereload-plugin');
+var Dotenv = require('dotenv-webpack');
 
 Encore
+    .addPlugin(new LiveReloadPlugin())
+    .addPlugin(new Dotenv({
+        path: './.env'
+    }))
+
     // the project directory where compiled assets will be stored
     .setOutputPath('public/build/')
 
@@ -13,10 +20,14 @@ Encore
 
     // uncomment to define the assets of the project
     // .addEntry('js/app', './assets/js/app.js')
-    // .addStyleEntry('css/app', './assets/css/app.scss')
+
+    // React Frontend
+    .addStyleEntry('react/css/omed-react', './public/bundles/omedreact/css/style.scss')
+    .addEntry('react/js/omed-react','./public/bundles/omedreact/js/index.js')
+    .enableReactPreset()
 
     // uncomment if you use Sass/SCSS files
-    // .enableSassLoader()
+    .enableSassLoader()
 
     // uncomment for legacy applications that require $/jQuery as a global variable
     // .autoProvidejQuery()

@@ -10,4 +10,6 @@ api_platform:
     enable_fos_user: true
     swagger:
          api_keys:
-             - { name: 'Authorization', type: 'header' }
+            apiKey:
+                name: 'Authorization'
+                type: 'header'

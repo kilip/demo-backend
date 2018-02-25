@@ -37,20 +37,20 @@
 
     <testsuites>
         <testsuite name="main">
-            <directory>src/backend/*/Tests</directory>
+            <directory>src/*/Tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./src/backend</directory>
+            <directory>./src</directory>
             <exclude>
-                <directory>src/backend/Behat</directory>
-                <directory>src/backend/DataFixtures</directory>
-                <directory>src/backend/*/Resources</directory>
-                <directory>src/backend/*/Test</directory>
-                <directory>src/backend/*/Tests</directory>
-                <directory>src/backend/*/Spec</directory>
+                <directory>src/Behat</directory>
+                <directory>src/DataFixtures</directory>
+                <directory>src/*/Resources</directory>
+                <directory>src/*/Test</directory>
+                <directory>src/*/Tests</directory>
+                <directory>src/*/Spec</directory>
             </exclude>
         </whitelist>
     </filter>

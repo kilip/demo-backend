@@ -26,4 +26,6 @@ return [
     Omed\Employee\OmedEmployeeBundle::class => ['all' => true],
     Omed\Resource\OmedResourceBundle::class => ['all' => true],
     Omed\Security\OmedSecurityBundle::class => ['all' => true],
+    Omed\React\OmedReactBundle::class => ['all' => true],
+    Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
 ];
