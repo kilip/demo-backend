@@ -127,7 +127,7 @@ class EmployeeContext implements Context
         foreach ($results as $employee) {
             $em->remove($employee);
         }
-        if(count($results) > 0){
+        if (count($results) > 0) {
             $em->flush();
         }
     }
@@ -294,7 +294,7 @@ class EmployeeContext implements Context
         $user
             ->setUsername('employee')
             ->setPlainPassword('test')
-            ->setRoles([User::ROLE_EMPLOYEE])
+            ->setRoles(array(User::ROLE_EMPLOYEE))
             ->setEmail($employee->getEmail())
             ->setEnabled(true)
         ;

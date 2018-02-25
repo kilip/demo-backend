@@ -104,7 +104,6 @@ trait MutableTest
             }
             $testValue = 'some value';
             $readOnly = false;
-            $default = null;
 
             if ('created' == $name || 'updated' == $name) {
                 $testValue = new \DateTime();
@@ -141,7 +140,7 @@ trait MutableTest
     {
         $classToTest = strtr(__CLASS__, array(
             '\Tests' => '',
-            'Test' => ''
+            'Test' => '',
         ));
         $classToTest = str_replace('Test', '', $classToTest);
 

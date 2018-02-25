@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Omed\React;
 
-
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class OmedReactBundle extends Bundle

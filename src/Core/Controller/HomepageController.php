@@ -13,19 +13,17 @@ declare(strict_types=1);
 
 namespace Omed\Core\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class HomepageController
- *
- * @package Omed\Core\Controller
+ * Class HomepageController.
  */
 class HomepageController extends Controller
 {
     /**
      * @Route(path="/")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()

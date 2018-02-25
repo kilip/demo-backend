@@ -170,9 +170,6 @@
     "fzaninotto/faker": {
         "version": "v1.7.1"
     },
-    "gecko-packages/gecko-php-unit": {
-        "version": "v3.0"
-    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.33"
     },

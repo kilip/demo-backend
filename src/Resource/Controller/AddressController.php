@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Handle address creation for Customer and Employee
+ * Handle address creation for Customer and Employee.
  */
 class AddressController
 {
@@ -34,8 +34,10 @@ class AddressController
      *          "_api_resource_class"="Omed\Resource\Entity\Address"
      *     }
      * )
+     *
      * @param \Omed\Resource\Service\AddressService $service
-     * @param Request        $request
+     * @param Request                               $request
+     *
      * @return JsonResponse
      */
     public function addForEmployeeAction($id, AddressService $service, Request $request)
@@ -52,6 +54,7 @@ class AddressController
      *          "_api_resource_class"="Omed\Resource\Entity\Address"
      *     }
      * )
+     *
      * @param AddressService $service
      * @param Request        $request
      *

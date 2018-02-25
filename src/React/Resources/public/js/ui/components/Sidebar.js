@@ -23,7 +23,7 @@ class Sidebar extends Component {
 
     }
 
-    // todo Sidebar nav secondLevel
+    // @todo Sidebar nav secondLevel
     // secondLevelActive(routeName) {
     //   return this.props.location.pathname.indexOf(routeName) > -1 ? "nav nav-second-level collapse in" : "nav nav-second-level collapse";
     // }

@@ -183,7 +183,7 @@ class Customer implements AddressableInterface, SecurityUserInterface
      */
     public function getLogin()
     {
-        if (is_null($this->login)) {
+        if (null === $this->login) {
             $this->login = new User();
         }
 
