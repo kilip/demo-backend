@@ -1,0 +1,42 @@
+coverage:
+  precision: 0
+  round: down
+  status:
+    project:
+      default: off
+      frontend:
+        flags: frontend
+        target: 50%
+      backend:
+        target: 50%
+        flags: backend
+
+flags:
+  backend:
+    paths:
+      - src/Core
+      - src/Customer
+      - src/Employee
+      - src/Resource
+      - src/React
+      - src/Security
+    ignore:
+      - src/Behat
+      - src/DataFixtures
+      - src/**/Test
+      - src/**/Tests
+      - src/**/Spec
+      - src/**/Resources
+  frontend:
+    paths:
+      - src/**/Resources/public/js
+    ignore:
+      - src/**/Resources/public/js/tests
+
+comment:
+  layout: "diff,flags"
+  behavior: default
+  require_changes: false  # if true: only post the comment if coverage changes
+  require_base: no        # [yes :: must have a base report to post]
+  require_head: yes       # [yes :: must have a head report to post]
+  branches: null
