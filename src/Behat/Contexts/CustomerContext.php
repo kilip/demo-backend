@@ -19,8 +19,8 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Faker\Factory;
-use Omed\Entity\Address;
-use Omed\Entity\Customer;
+use Omed\Resource\Entity\Address;
+use Omed\Resource\Entity\Customer;
 
 class CustomerContext implements Context
 {
@@ -100,7 +100,7 @@ class CustomerContext implements Context
             if (is_callable($callable)) {
                 call_user_func($callable, $value);
             } elseif ('address' == $key) {
-                $this->createCustomerAddress($customer, ['address' => $value]);
+                $this->createCustomerAddress($customer, array('address' => $value));
             }
         }
         $this->getEntityManager()->persist($customer);
@@ -120,10 +120,10 @@ class CustomerContext implements Context
         $routeName = 'api_customers_'.strtolower($method).'_item';
         $url = $this->restContext->generateUrl(
             $routeName,
-            ['id' => $customer->getId()]
+            array('id' => $customer->getId())
         );
         $this->restContext->iSetHeaderTypeToHydra();
-        if (!is_null($body)) {
+        if (null !== $body) {
             $this->restContext->iSendARequestToWithBody($method, $url, $body);
         } else {
             $this->restContext->iSendARequestTo($method, $url);
@@ -147,7 +147,7 @@ class CustomerContext implements Context
         }
 
         $routeName = 'add_customer_address';
-        $url = $this->restContext->generateUrl($routeName, ['id' => $customer->getId()]);
+        $url = $this->restContext->generateUrl($routeName, array('id' => $customer->getId()));
 
         $this->restContext->iSetHeaderTypeToHydra();
         $this->restContext->iSendARequestToWithBody($method, $url, $body);
@@ -206,11 +206,11 @@ class CustomerContext implements Context
     public function createCustomerAddress(Customer $customer, array $info)
     {
         $faker = Factory::create();
-        $defaults = [
+        $defaults = array(
             'address' => $faker->address,
             'city' => $faker->city,
             'country' => $faker->country,
-        ];
+        );
         $info = array_merge($defaults, $info);
         if (!$customer->hasAddress($info['address'])) {
             $address = new Address();
@@ -233,10 +233,10 @@ class CustomerContext implements Context
     public function findByName($name, $create = false)
     {
         $repo = $this->getRepository(Customer::class);
-        $customer = $repo->findOneBy(['name' => $name]);
+        $customer = $repo->findOneBy(array('name' => $name));
 
         if ((!$customer instanceof Customer) && $create) {
-            $customer = $this->createCustomer(['name' => $name]);
+            $customer = $this->createCustomer(array('name' => $name));
         }
 
         return $customer;
@@ -250,11 +250,11 @@ class CustomerContext implements Context
     public function createCustomer(array $data)
     {
         $faker = Factory::create();
-        $defaults = [
+        $defaults = array(
             'name' => $faker->name,
             'company' => $faker->company,
             'email' => $faker->companyEmail,
-        ];
+        );
 
         $data = array_merge($defaults, $data);
 
@@ -280,7 +280,7 @@ class CustomerContext implements Context
     public function iSendPostRequestToCustomers($method, PyStringNode $body = null)
     {
         $routeName = 'api_customers_'.strtolower($method).'_collection';
-        $url = $this->restContext->generateUrl($routeName, []);
+        $url = $this->restContext->generateUrl($routeName, array());
 
         $this->restContext->iSetHeaderTypeToHydra();
         $this->restContext->iSendARequestToWithBody($method, $url, $body);

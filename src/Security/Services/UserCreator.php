@@ -43,7 +43,7 @@ class UserCreator
                 $this->canonicalFieldsUpdater->updateCanonicalFields($login);
             }
             if (!is_array($login->getRoles())) {
-                $login->setRoles([$securityUser->getDefaultRole()]);
+                $login->setRoles(array($securityUser->getDefaultRole()));
             }
 
             $login->setEnabled(true);

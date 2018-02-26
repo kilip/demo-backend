@@ -1,0 +1,6 @@
+react_controllers:
+    resource: '@OmedReactBundle/Controller/'
+    prefix: /react
+    type: annotation
+    options:
+        expose: true

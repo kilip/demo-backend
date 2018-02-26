@@ -1,0 +1,12 @@
+api_platform:
+    resource: .
+    type: api_platform
+    prefix: '/'
+    options:
+        expose: true
+
+resource_controllers:
+    resource: '@OmedResourceBundle/Controller/'
+    type: annotation
+    options:
+        expose: true

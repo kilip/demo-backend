@@ -9,6 +9,7 @@ services:
             - db
         volumes:
             - ./:/srv/omed:rw
+            - /srv/omed/var
         environment:
             - APP_DEBUG = ${APP_DEBUG}
     api:
@@ -21,6 +22,7 @@ services:
             - "80:80"
         volumes:
             - ./public:/srv/omed/public
+
     db:
         # In production, you may want to use a managed database service
         container_name: omed.db
@@ -31,7 +33,7 @@ services:
             # You should definitely change the password in production
             - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
         volumes:
-            - ./docker/postgres/data:/var/lib/postgresql/data:rw
+            - ./var/postgres/data:/var/lib/postgresql/data:rw
             # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
             # - ./docker/db/data:/var/lib/postgresql/data:rw
         ports:

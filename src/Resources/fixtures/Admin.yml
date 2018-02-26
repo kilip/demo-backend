@@ -1,7 +1,0 @@
-Omed\Entity\User:
-    admin:
-        username: admin
-        plainPassword: admin
-        email: admin@example.com
-        enabled: true
-        roles: [ ROLE_SUPER_ADMIN ]

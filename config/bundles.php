@@ -21,4 +21,11 @@ return [
     Hautelook\AliceBundle\HautelookAliceBundle::class => ['dev' => true, 'test' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
+    Omed\Core\OmedCoreBundle::class => ['all' => true],
+    Omed\Customer\OmedCustomerBundle::class => ['all' => true],
+    Omed\Employee\OmedEmployeeBundle::class => ['all' => true],
+    Omed\Resource\OmedResourceBundle::class => ['all' => true],
+    Omed\Security\OmedSecurityBundle::class => ['all' => true],
+    Omed\React\OmedReactBundle::class => ['all' => true],
+    Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
 ];

@@ -12,23 +12,23 @@ services:
                             # fetching services directly from the container via $container->get() won't work.
                             # The best practice is to be explicit about your dependencies anyway.
 
-    Omed\Core\Controller\:
-        resource: "../src/Core/Controller"
+    #Omed\Core\Controller\:
+    #    resource: "@OmedCoreBundle/Controller"
+    #    tags: ['controller.service_arguments']
+
+    #Omed\Customer\Controller\:
+    #    resource: "@OmedCustomerBundle/Controller"
+    #    tags: ['controller.service_arguments']
+
+    Omed\Resource\Controller\:
+        resource: "@OmedResourceBundle/Controller"
         tags: ['controller.service_arguments']
 
-    Omed\Customer\Controller\:
-        resource: "../src/Customer/Controller"
-        tags: ['controller.service_arguments']
-
-    Omed\Employee\Controller\:
-        resource: "../src/Employee/Controller"
-        tags: ['controller.service_arguments']
-
-    Omed\Core\Service\AddressService:
-        tags: ['controller.service_arguments']
-        arguments:
-            $errorNormalizer: "@api_platform.hydra.normalizer.constraint_violation_list"
-            $itemNormalizer: "@api_platform.jsonld.normalizer.item"
+    #Omed\Resource\Service\AddressService:
+    #    tags: ['controller.service_arguments']
+    #    arguments:
+    #        $errorNormalizer: "@api_platform.hydra.normalizer.constraint_violation_list"
+    #        $itemNormalizer: "@api_platform.jsonld.normalizer.item"
 
 
     lexik_jwt_authentication.jwt_manager:

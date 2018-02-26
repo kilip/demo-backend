@@ -27,7 +27,7 @@ $cmd = __DIR__.'/../vendor/bin/behat -fprogress -p coverage';
 passthru($cmd,$behat);
 
 $dir = realpath(__DIR__.'/../build');
-$cmd = __DIR__."/../vendor/bin/phpcov merge $dir/coverage --html=$dir/html/coverage --clover $dir/logs/clover.xml";
+$cmd = __DIR__."/../vendor/bin/phpcov merge $dir/coverage --html=$dir/html/coverage --clover $dir/logs/backend/clover.xml";
 passthru($cmd);
 
 if($behat || $phpunit || $phpspec){

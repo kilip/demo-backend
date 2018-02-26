@@ -1,7 +1,7 @@
 doctrine:
     dbal:
         driver: 'pdo_pgsql'
-        url: "%env(resolve:SYMFONY_DATABASE_URL)%"
+        url: "%env(resolve:DATABASE_URL)%"
     orm:
         auto_generate_proxy_classes: false
         metadata_cache_driver: apcu

@@ -16,7 +16,7 @@ namespace Omed\Behat\Contexts;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
-use Omed\Entity\User;
+use Omed\Resource\Entity\User;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory;
