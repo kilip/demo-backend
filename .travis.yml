@@ -98,5 +98,5 @@ after_script:
         bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
         bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
         wget https://scrutinizer-ci.com/ocular.phar;
-        php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
+        php ocular.phar code-coverage:upload --format=php-clover build/logs/backend/*.xml;
     fi
