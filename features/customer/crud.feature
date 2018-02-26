@@ -15,7 +15,8 @@ Feature: Adding a new customer
         """
         {
             "name": "Some Customer",
-            "company": "Some Company"
+            "company": "Some Company",
+            "email": "customer@example.com"
         }
         """
         Then the response status code should be 201

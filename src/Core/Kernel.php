@@ -10,6 +10,8 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
  * Class Kernel.
+ *
+ * @codeCoverageIgnore
  */
 class Kernel extends BaseKernel
 {

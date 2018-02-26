@@ -4,8 +4,7 @@ Feature: Securing Employee Resource
     I should be able manage authentication
 
     Background:
-        Given I don't have any employee data
-        And I have employee with data:
+        Given I have employee with data:
             | name      | Lorem Ipsum             |
             | gender    | M                       |
             | address   | Some Street             |

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -16,7 +16,7 @@ namespace Omed\Behat\Contexts;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
-use Omed\Entity\User;
+use Omed\Resource\Entity\User;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Faker\Factory;
@@ -55,7 +55,7 @@ class UserContext implements Context
     /**
      * @BeforeSuite
      */
-    static public function beforeSuite(BeforeSuiteScope $scope)
+    public static function beforeSuite(BeforeSuiteScope $scope)
     {
         (new Dotenv())->load(getcwd().'/.env');
     }
@@ -111,6 +111,7 @@ class UserContext implements Context
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+
         return $user;
     }
 
@@ -130,9 +131,10 @@ class UserContext implements Context
     public function findByUsername($username, $create = false)
     {
         $user = $this->userRepository->findOneBy(array('username' => $username));
-        if(!$user instanceof User && $create){
-            $user = $this->createUser($username,'test');
+        if (!$user instanceof User && $create) {
+            $user = $this->createUser($username, 'test');
         }
+
         return $user;
     }
 }

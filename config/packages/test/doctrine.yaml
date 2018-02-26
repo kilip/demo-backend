@@ -1,5 +1,5 @@
 parameters:
-    '%env(resolve:DATABASE_URL)%': "test"
+    env(DATABASE_URL): ''
 doctrine:
     dbal:
         # configure these for your database server
@@ -8,10 +8,3 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
-        mappings:
-            Omed:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'Omed\Entity'
-                alias: Omed

@@ -8,8 +8,6 @@ Feature: Manage Employee Address
             | name                   | Some Customer |
         And I am logged in employee
 
-    Scenario: Get Customer Addresses
-
     Scenario: Add address to customer
         Given I send POST request to customer address for "Some Customer" with body:
         """

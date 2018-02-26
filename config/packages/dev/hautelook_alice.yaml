@@ -1,0 +1,6 @@
+# Read the documentation: https://github.com/hautelook/AliceBundle/blob/v1.4.1/README.md
+hautelook_alice:
+    fixtures_path: 'Resources/fixtures'
+    root_dirs:
+        - '%kernel.root_dir%'
+        - '%kernel.project_dir%/src/DataFixtures'

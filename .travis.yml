@@ -10,31 +10,30 @@ cache:
   - "$HOME/.composer/cache"
   - "$HOME/.npm"
 
-php:
-  - 7.1
-  - 7.2
+notifications:
+  slack:
+    secure: QmqwC9/Ky597ejaltBsnmtY8MKbeWT3p/bopOXgwwTozws6/6pZNdrXN0cjMI/E3TlkgQb27ky0fYb2sBmE9IyzOBPJNBi+7T7YLJgvzWVcMlaB27BiY7LWSKj7/nuUoHf5g+suB1QxxN9D/FXCq59bAg5gZIobI1nZXP9DoJeI+0kzTrDViaqgQvGHeoWx6tRhoxI6lrA3ccWjpHpI74I8T2EFX9f1XR+cc1if4ycBIgYfjp7lC16QLNLFuZs3AStJqr/tAfWyelWlTc5dw6tM6UF8/BN53gzAgIRBYS/ZJ2nMsGJjg85lrx7i9ddegSurprKrYzOuOiVr4hPtQi4Hw1O8M1WQvWe3XRKYPV/Z9McsiZZ0tY0Z1d9JF1H3rs28ibJ5uW44UG4oaMkrXscn3JehGc8Q7tGGS0Hkl4T6XMQs+aqq2pnUgBIW4+o0rkof2emeTpxWnfIeB9cD6EyeuCbHLiW7p1MXEWuGRMz7DLIjOMwl1On9ClJlTcklB5R47YpYGHY+Ur0Ax5HNj8gW1N6JIBKb2yoSwtWQ7H4runlIwdyoz0+oGvYJSkfoAZZCP1gAphS3kx2a+ZWa7pA/E/2FTViOCgVNuOraKxj93pey3fuAH+ya/f7ebhZQzeJA8b34Hfn4xl4+vnuZf5KVfwP9zSZX/rFvlxUpqzKU=
 
 env:
   global:
     - COVERAGE=no
     - APP_ENV=test
-  matrix:
-    - DATABASE_URL=pgsql://postgres@localhost:5432/omed
     - DATABASE_URL=mysql://root@localhost:3306/omed
 
-notifications:
-  slack:
-    secure: QmqwC9/Ky597ejaltBsnmtY8MKbeWT3p/bopOXgwwTozws6/6pZNdrXN0cjMI/E3TlkgQb27ky0fYb2sBmE9IyzOBPJNBi+7T7YLJgvzWVcMlaB27BiY7LWSKj7/nuUoHf5g+suB1QxxN9D/FXCq59bAg5gZIobI1nZXP9DoJeI+0kzTrDViaqgQvGHeoWx6tRhoxI6lrA3ccWjpHpI74I8T2EFX9f1XR+cc1if4ycBIgYfjp7lC16QLNLFuZs3AStJqr/tAfWyelWlTc5dw6tM6UF8/BN53gzAgIRBYS/ZJ2nMsGJjg85lrx7i9ddegSurprKrYzOuOiVr4hPtQi4Hw1O8M1WQvWe3XRKYPV/Z9McsiZZ0tY0Z1d9JF1H3rs28ibJ5uW44UG4oaMkrXscn3JehGc8Q7tGGS0Hkl4T6XMQs+aqq2pnUgBIW4+o0rkof2emeTpxWnfIeB9cD6EyeuCbHLiW7p1MXEWuGRMz7DLIjOMwl1On9ClJlTcklB5R47YpYGHY+Ur0Ax5HNj8gW1N6JIBKb2yoSwtWQ7H4runlIwdyoz0+oGvYJSkfoAZZCP1gAphS3kx2a+ZWa7pA/E/2FTViOCgVNuOraKxj93pey3fuAH+ya/f7ebhZQzeJA8b34Hfn4xl4+vnuZf5KVfwP9zSZX/rFvlxUpqzKU=
-
 matrix:
+  fast_finish: true
+  allow_failures:
+    env: COVERAGE=yes
   include:
+    - php: '7.1'
     - php: '7.2'
-      env: COVERAGE=yes DATABASE_URL=pgsql://postgres@localhost:5432/omed
-
-jobs:
-  include:
-    - stage: deploy
-      php: 7.2
+    - php: '7.2'
+      env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
+      services:
+        - postgresql
+    - php: '7.2'
+      env: COVERAGE=yes
+    - php: '7.2.2'
       env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
       deploy:
         provider: heroku
@@ -43,7 +42,7 @@ jobs:
         app: omed
         strategy: git
         on:
-          repo: kilip/omed-backend
+          tags: true
 
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini

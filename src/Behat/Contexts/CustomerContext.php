@@ -13,16 +13,14 @@ declare(strict_types=1);
 
 namespace Omed\Behat\Contexts;
 
-
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Faker\Factory;
-use Omed\Entity\Address;
-use Omed\Entity\Customer;
+use Omed\Resource\Entity\Address;
+use Omed\Resource\Entity\Customer;
 
 class CustomerContext implements Context
 {
@@ -79,7 +77,7 @@ class CustomerContext implements Context
     public function iDonTHaveCustomerNamed($name)
     {
         $customer = $this->findByName($name);
-        if($customer instanceof Customer){
+        if ($customer instanceof Customer) {
             $this->getEntityManager()->remove($customer);
             $this->getEntityManager()->flush();
         }
@@ -96,13 +94,13 @@ class CustomerContext implements Context
         $rows = $table->getRowsHash();
         $name = $rows['name'];
 
-        $customer = $this->findByName($name,true);
-        foreach($rows as $key=>$value){
-            $callable = array($customer,'set'.$key);
-            if(is_callable($callable)){
-                call_user_func($callable,$value);
-            }elseif($key=='address'){
-                $this->createCustomerAddress($customer,['address' => $value]);
+        $customer = $this->findByName($name, true);
+        foreach ($rows as $key => $value) {
+            $callable = array($customer, 'set'.$key);
+            if (is_callable($callable)) {
+                call_user_func($callable, $value);
+            } elseif ('address' == $key) {
+                $this->createCustomerAddress($customer, array('address' => $value));
             }
         }
         $this->getEntityManager()->persist($customer);
@@ -113,45 +111,46 @@ class CustomerContext implements Context
      * @Given I send :method request to customer :name
      * @Given I send :method request to customer :name with body:
      */
-    public function iSendRequestToCustomer($method,$name, PyStringNode $body=null)
+    public function iSendRequestToCustomer($method, $name, PyStringNode $body = null)
     {
         $customer = $this->findByName($name);
-        if(!$customer instanceof Customer){
+        if (!$customer instanceof Customer) {
             throw new \Exception('Customer '.$name.'  Not Exists');
         }
         $routeName = 'api_customers_'.strtolower($method).'_item';
         $url = $this->restContext->generateUrl(
             $routeName,
-            ['id' => $customer->getId()]
+            array('id' => $customer->getId())
         );
         $this->restContext->iSetHeaderTypeToHydra();
-        if(!is_null($body)){
-            $this->restContext->iSendARequestToWithBody($method,$url,$body);
-        }else{
-            $this->restContext->iSendARequestTo($method,$url);
+        if (null !== $body) {
+            $this->restContext->iSendARequestToWithBody($method, $url, $body);
+        } else {
+            $this->restContext->iSendARequestTo($method, $url);
         }
     }
 
     /**
      * @Given I send :method request to customer address for :name with body:
      *
-     * @param string $method
-     * @param string $name
+     * @param string            $method
+     * @param string            $name
      * @param PyStringNode|null $body
+     *
      * @throws \Exception
      */
-    public function iSendCustomerAddressRequest($method,$name,PyStringNode $body = null)
+    public function iSendCustomerAddressRequest($method, $name, PyStringNode $body = null)
     {
         $customer = $this->findByName($name);
-        if(!$customer instanceof Customer){
+        if (!$customer instanceof Customer) {
             throw new \Exception('Customer named: '.$name.' not exists');
         }
 
         $routeName = 'add_customer_address';
-        $url = $this->restContext->generateUrl($routeName,['id' => $customer->getId()]);
+        $url = $this->restContext->generateUrl($routeName, array('id' => $customer->getId()));
 
         $this->restContext->iSetHeaderTypeToHydra();
-        $this->restContext->iSendARequestToWithBody($method,$url,$body);
+        $this->restContext->iSendARequestToWithBody($method, $url, $body);
     }
 
     /**
@@ -159,7 +158,7 @@ class CustomerContext implements Context
      */
     public function iHaveAddressForCustomerNamed($name)
     {
-        $customer = $this->findByName($name,true);
+        $customer = $this->findByName($name, true);
         if (0 === $customer->getAddresses()->count()) {
             $faker = Factory::create();
             $address = new Address();
@@ -179,7 +178,7 @@ class CustomerContext implements Context
      */
     public function iHaveCustomerNamed($name)
     {
-        $this->findByName($name,true);
+        $this->findByName($name, true);
     }
 
     /**
@@ -199,43 +198,45 @@ class CustomerContext implements Context
     }
 
     /**
-     * Create address will be skipped if customer already have same address
+     * Create address will be skipped if customer already have same address.
      *
      * @param Customer $customer
-     * @param array $info
+     * @param array    $info
      */
-    public function createCustomerAddress(Customer $customer,array $info)
+    public function createCustomerAddress(Customer $customer, array $info)
     {
         $faker = Factory::create();
-        $defaults = [
-            'address'=> $faker->address,
+        $defaults = array(
+            'address' => $faker->address,
             'city' => $faker->city,
             'country' => $faker->country,
-        ];
-        $info = array_merge($defaults,$info);
-        if(!$customer->hasAddress($info['address'])){
+        );
+        $info = array_merge($defaults, $info);
+        if (!$customer->hasAddress($info['address'])) {
             $address = new Address();
-            foreach($info as $key=>$value){
-                $callable = array($address,'set'.$key);
-                if(is_callable($callable)){
-                    call_user_func($callable,$value);
+            foreach ($info as $key => $value) {
+                $callable = array($address, 'set'.$key);
+                if (is_callable($callable)) {
+                    call_user_func($callable, $value);
                 }
             }
         }
     }
 
     /**
-     * Find customer by name
+     * Find customer by name.
+     *
      * @param $name
+     *
      * @return null|object
      */
-    public function findByName($name,$create=false)
+    public function findByName($name, $create = false)
     {
         $repo = $this->getRepository(Customer::class);
-        $customer = $repo->findOneBy(['name' => $name]);
+        $customer = $repo->findOneBy(array('name' => $name));
 
-        if((!$customer instanceof Customer) && $create){
-            $customer = $this->createCustomer(['name' => $name]);
+        if ((!$customer instanceof Customer) && $create) {
+            $customer = $this->createCustomer(array('name' => $name));
         }
 
         return $customer;
@@ -243,18 +244,19 @@ class CustomerContext implements Context
 
     /**
      * @param array $data
+     *
      * @return Customer
      */
     public function createCustomer(array $data)
     {
         $faker = Factory::create();
-        $defaults = [
+        $defaults = array(
             'name' => $faker->name,
             'company' => $faker->company,
-            'email' => $faker->companyEmail
-        ];
+            'email' => $faker->companyEmail,
+        );
 
-        $data = array_merge($defaults,$data);
+        $data = array_merge($defaults, $data);
 
         $customer = new Customer();
         $customer
@@ -264,21 +266,23 @@ class CustomerContext implements Context
         ;
         $this->getEntityManager()->persist($customer);
         $this->getEntityManager()->flush();
+
         return $customer;
     }
 
     /**
      * @Given I send :method request to customers with body:
      * @Given I send :method to customers
-     * @param string $method
+     *
+     * @param string            $method
      * @param PyStringNode|null $body
      */
-    public function iSendPostRequestToCustomers($method,PyStringNode $body=null)
+    public function iSendPostRequestToCustomers($method, PyStringNode $body = null)
     {
         $routeName = 'api_customers_'.strtolower($method).'_collection';
-        $url = $this->restContext->generateUrl($routeName,[]);
+        $url = $this->restContext->generateUrl($routeName, array());
 
         $this->restContext->iSetHeaderTypeToHydra();
-        $this->restContext->iSendARequestToWithBody($method,$url,$body);
+        $this->restContext->iSendARequestToWithBody($method, $url, $body);
     }
 }

@@ -1,4 +1,0 @@
-core_employee_routes:
-    resource: 'routes/employee.yaml'
-    options:
-        expose: true

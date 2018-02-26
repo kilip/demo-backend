@@ -1,0 +1,79 @@
+{
+    "name": "omed-project",
+    "node": "8.9",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production",
+        "test": "node public/bundles/omedcore/js/runtest.js --env=jsdom"
+    },
+    "jest": {
+        "collectCoverageFrom": [
+            "src/React/Resources/public/js/**/*.{js,jsx,mjs}"
+        ],
+        "modulePathIgnorePatterns": [
+            "<rootDir>/var/",
+            "<rootDir>/public/"
+        ],
+        "setupTestFrameworkScriptFile": "<rootDir>/src/React/Resources/public/js/tests/setupTests.js",
+        "testEnvironment": "node",
+        "testPathIgnorePatterns": [
+            "<rootDir>/node_modules/",
+            "<rootDir>/docker/",
+            "<rootDir>/vendor/",
+            "<rootDir>/config/",
+            "<rootDir>/var"
+        ],
+        "transform": {
+            "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
+            "^.+\\.css$": "<rootDir>/src/Core/Resources/public/js/config/jest/cssTransform.js",
+            "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/src/Core/Resources/public/js/config/jest/fileTransform.js"
+        },
+        "transformIgnorePatterns": [
+            "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$",
+            "<rootDir>/docker",
+            "<rootDir>/var"
+        ]
+    },
+    "dependencies": {
+        "@coreui/react": "1.0.10",
+        "axios": "^0.18.0",
+        "bootstrap": "^4.0.0",
+        "dotenv": "^5.0.0",
+        "dotenv-expand": "^4.2.0",
+        "dotenv-webpack": "^1.5.4",
+        "font-awesome": "^4.7.0",
+        "jsonld": "^0.5.21",
+        "jwt-decode": "^2.2.0",
+        "prop-types": "^15.6.0",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "react-redux": "^5.0.7",
+        "react-router-dom": "^4.2.2",
+        "react-router-redux": "^4.0.8",
+        "react-transition-group": "^2.2.1",
+        "reactstrap": "5.0.0-beta",
+        "redux": "^3.7.2",
+        "redux-auth-wrapper": "^2.0.2",
+        "redux-form": "^7.2.3",
+        "redux-thunk": "^2.2.0"
+    },
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.17.0",
+        "babel-jest": "^22.4.1",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "babel-preset-react": "^6.24.1",
+        "enzyme": "^3.3.0",
+        "enzyme-adapter-react-16": "^1.1.1",
+        "jest": "^22.4.2",
+        "node-sass": "^4.7.2",
+        "react-test-renderer": "^16.2.0",
+        "redux-mock-store": "^1.5.1",
+        "sass-loader": "^6.0.6",
+        "webpack-livereload-plugin": "^1.0.0"
+    }
+}

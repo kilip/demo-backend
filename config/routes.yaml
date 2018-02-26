@@ -1,6 +1,27 @@
 core:
-    resource: '../src/Core/Resources/routes.yaml'
+    resource: "@OmedCoreBundle/Resources/config/routes.yaml"
+
+resource:
+    resource: "@OmedResourceBundle/Resources/config/routes.yaml"
     prefix: "/api"
+
+customer:
+    resource: "@OmedCustomerBundle/Resources/config/routes.yaml"
+    prefix: "/api"
+
+employee:
+    resource: "@OmedEmployeeBundle/Resources/config/routes.yaml"
+    prefix: "/api"
+
+react:
+    resource: "@OmedReactBundle/Resources/config/routes.yaml"
+    prefix: "/"
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 #login_check_json:
 #    path: /login_check_json

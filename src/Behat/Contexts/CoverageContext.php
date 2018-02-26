@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the Omed project.
@@ -12,7 +12,6 @@ declare(strict_types = 1);
  */
 
 namespace Omed\Behat\Contexts;
-
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
@@ -33,9 +32,11 @@ class CoverageContext implements Context
     public static function setup()
     {
         $filter = new Filter();
-        $filter->addDirectoryToWhitelist(getcwd().'/src');
+        $filter->addDirectoryToWhitelist(getcwd().'/src/');
         $filter->removeDirectoryFromWhitelist(getcwd().'/src/Behat');
-        $filter->removeDirectoryFromWhitelist(getcwd().'/src/Test');
+        $filter->removeDirectoryFromWhitelist(getcwd().'/src/*/Test');
+        $filter->removeDirectoryFromWhitelist(getcwd().'/src/*/Tests');
+        $filter->removeDirectoryFromWhitelist(getcwd().'/src/*/Spec');
         $filter->removeDirectoryFromWhitelist(getcwd().'/src/*/Resources');
         self::$coverage = new CodeCoverage(null, $filter);
     }

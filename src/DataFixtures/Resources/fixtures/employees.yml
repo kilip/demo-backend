@@ -1,0 +1,38 @@
+Omed\Resource\Entity\Address:
+    emp_addr1_{1..15}:
+        address: <address()>
+        city: <city()>
+        state: <state()>
+        country: <country()>
+        zip: <postcode()>
+        phone: <phoneNumber()>
+        fax: <phoneNumber()>
+        mobile: <phoneNumber()>
+    emp_addr2_{1..15}:
+        address: <address()>
+        city: <city()>
+        state: <state()>
+        country: <country()>
+        zip: <postcode()>
+        phone: <phoneNumber()>
+        fax: <phoneNumber()>
+        mobile: <phoneNumber()>
+
+Omed\Resource\Entity\Employee:
+    emp_female_{1..10}:
+        name: <firstName('female')> <lastName('female')>
+        birthDate: <dateTimeBetween('-40 years','-20 years')>
+        email: <companyEmail()>
+        gender: 'F'
+        __calls:
+            - addAddress: ['@emp_addr1_<current()>']
+            - addAddress: ['@emp_addr2_<current()>']
+
+    emp_male_{11..15}:
+        name: <firstName('male')> <lastName('male')>
+        email: <companyEmail()>
+        gender: 'M'
+        birthDate: <dateTimeBetween('-40 years','-20 years')>
+        __calls:
+            - addAddress: ['@emp_addr1_<current()>']
+            - addAddress: ['@emp_addr2_<current()>']

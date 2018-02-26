@@ -1,8 +1,0 @@
-api_platform:
-    resource: .
-    type: api_platform
-    prefix: '/'
-
-core:
-    resource: '../../../src/Core/Resources/routes.yaml'
-    prefix: "/"

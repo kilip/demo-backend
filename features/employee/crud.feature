@@ -81,25 +81,8 @@ Feature: Manage Employees
         }
         """
         Then the response status code should be 400
-        And the JSON should be equal to:
-        """
-        {
-            "@context": "/contexts/ConstraintViolationList",
-            "@type": "ConstraintViolationList",
-            "hydra:title": "An error occurred",
-            "hydra:description": "gender: Choose a valid gender type 'M' or 'F'\nemail: This value is not a valid email address.",
-            "violations": [
-                {
-                    "propertyPath": "gender",
-                    "message": "Choose a valid gender type 'M' or 'F'"
-                },
-                {
-                    "propertyPath": "email",
-                    "message": "This value is not a valid email address."
-                }
-            ]
-        }
-        """
+        And the JSON node "hydra:description" should contain "gender: Choose a valid gender type 'M' or 'F'"
+        And the JSON node "hydra:description" should contain "email: This value is not a valid email address."
 
     Scenario: Delete employee
         When I send DELETE request to employee "Lorem Ipsum"
