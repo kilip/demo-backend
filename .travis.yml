@@ -65,12 +65,23 @@ install:
   - bin/console doctrine:schema:create -n
   - composer run-script compile
 
+  # install javascript dependencies
+  - >
+  if [[ $COVERAGE = yes ]]; then
+    yarn install
+  fi;
+
 script:
   - mkdir -p build/logs
   - if [[ $COVERAGE = yes  ]]; then bin/coverage; fi
   - if [[ $COVERAGE != yes ]]; then bin/phpunit; fi
   - if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
   - if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
+  # run jest test
+  - >
+  if [[ $COVERAGE = yes ]]; then
+    yarn test --coverage
+  fi;
 
 after_script:
   - >
