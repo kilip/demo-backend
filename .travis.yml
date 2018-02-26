@@ -16,6 +16,7 @@ notifications:
 
 env:
   global:
+    - TRAVIS_NODE_VERSION=8.9.4
     - COVERAGE=no
     - APP_ENV=test
     - DATABASE_URL=mysql://root@localhost:3306/omed
