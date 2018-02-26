@@ -18,11 +18,10 @@ Encore
     // uncomment to create hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
 
-    // uncomment to define the assets of the project
-    // .addEntry('js/app', './assets/js/app.js')
+    // core styling
+    .addStyleEntry('core/css/omed', './public/bundles/omedcore/css/style.scss')
 
     // React Frontend
-    .addStyleEntry('react/css/omed-react', './public/bundles/omedreact/css/style.scss')
     .addEntry('react/js/omed-react','./public/bundles/omedreact/js/index.js')
     .enableReactPreset()
 

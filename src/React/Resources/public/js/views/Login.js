@@ -58,11 +58,11 @@ class Login extends Component {
                                             Use username: <b>admin</b>, and password: <b>admin</b>
                                         </p>
                                         <InputGroup className="mb-3">
-                                            <InputGroupAddon><i className="icon-user"></i></InputGroupAddon>
+                                            <InputGroupAddon addonType="prepend"><i className="icon-user"></i></InputGroupAddon>
                                             <Input type="text" name="username" placeholder="Username" value={this.state.username} onChange={(e) => this.handleChange(e)}/>
                                         </InputGroup>
                                         <InputGroup className="mb-4">
-                                            <InputGroupAddon><i className="icon-lock"></i></InputGroupAddon>
+                                            <InputGroupAddon addonType="prepend"><i className="icon-lock"></i></InputGroupAddon>
                                             <Input type="password" name="password" placeholder="Password" value={this.state.password} onChange={(e) => this.handleChange(e)}/>
                                         </InputGroup>
                                         <Row>

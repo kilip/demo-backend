@@ -1,12 +1,42 @@
 {
     "name": "omed-project",
+    "node": "8.9",
     "license": "MIT",
     "private": true,
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production"
+        "build": "encore production",
+        "test": "node public/bundles/omedcore/js/runtest.js --env=jsdom"
+    },
+    "jest": {
+        "collectCoverageFrom": [
+            "src/React/Resources/public/js/**/*.{js,jsx,mjs}"
+        ],
+        "modulePathIgnorePatterns": [
+            "<rootDir>/var/",
+            "<rootDir>/public/"
+        ],
+        "setupTestFrameworkScriptFile": "<rootDir>/src/React/Resources/public/js/tests/setupTests.js",
+        "testEnvironment": "node",
+        "testPathIgnorePatterns": [
+            "<rootDir>/node_modules/",
+            "<rootDir>/docker/",
+            "<rootDir>/vendor/",
+            "<rootDir>/config/",
+            "<rootDir>/var"
+        ],
+        "transform": {
+            "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
+            "^.+\\.css$": "<rootDir>/src/Core/Resources/public/js/config/jest/cssTransform.js",
+            "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/src/Core/Resources/public/js/config/jest/fileTransform.js"
+        },
+        "transformIgnorePatterns": [
+            "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$",
+            "<rootDir>/docker",
+            "<rootDir>/var"
+        ]
     },
     "dependencies": {
         "@coreui/react": "1.0.10",
@@ -33,9 +63,16 @@
     },
     "devDependencies": {
         "@symfony/webpack-encore": "^0.17.0",
+        "babel-jest": "^22.4.1",
         "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
         "babel-preset-react": "^6.24.1",
+        "enzyme": "^3.3.0",
+        "enzyme-adapter-react-16": "^1.1.1",
+        "jest": "^22.4.2",
         "node-sass": "^4.7.2",
+        "react-test-renderer": "^16.2.0",
+        "redux-mock-store": "^1.5.1",
         "sass-loader": "^6.0.6",
         "webpack-livereload-plugin": "^1.0.0"
     }
