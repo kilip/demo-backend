@@ -6,6 +6,7 @@ services:
   - postgresql
 
 cache:
+  yarn: true
   directories:
   - "$HOME/.composer/cache"
   - "$HOME/.npm"
@@ -49,7 +50,7 @@ matrix:
           tags: true
   allow_failures:
     - php: '7.2'
-      env: COVERAGE=yes
+      env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
   fast_finish: true
 
 before_install:
