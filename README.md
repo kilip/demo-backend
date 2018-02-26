@@ -9,10 +9,61 @@
 OMED project is my project that contains a latest technology available
 in web development.
 
-### Used Technology
+### Technology Stack
+#### Backend
 - Symfony 4 Framework
 - api-platform
-- React
 - phpspec
 - Behat
 - Docker
+#### Frontend
+- React
+- Vue (Not implemented yet)
+- AngularJS (Not implemented yet)
+
+
+Installation
+====
+```bash
+
+$ cd path/to/omed
+$ composer install
+$ yarn install
+
+```
+
+Docker and Debugging
+====
+Copy `docker/php/99-custom.ini.dist` to `99-custom.ini`, and edit to match your local environment.
+By default `xdebug` is disabled, in order to enable `xdebug` you need to define in `99-custom.ini`:
+
+```ini
+
+; path/to/omed/docker/php/99-custom.ini
+; xdebug configuration
+zend_extension=xdebug.so
+xdebug.remote_host=172.20.0.1
+xdebug.remote_autostart=1
+
+```
+
+Start development server by starting a docker: 
+
+```bash
+
+# or if you have docker
+$ cd path/to/omed
+$ docker-compose up
+
+```
+
+Frontend Development
+====
+If you working on a frontend, you can watch file changes by using this command: 
+
+```bash
+
+$ cd path/to/omed
+$ yarn watch
+
+```
