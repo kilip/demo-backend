@@ -21,9 +21,6 @@ env:
     - DATABASE_URL=mysql://root@localhost:3306/omed
 
 matrix:
-  fast_finish: true
-  allow_failures:
-    env: COVERAGE=yes
   include:
     - php: '7.1'
     - php: '7.2'
@@ -43,6 +40,10 @@ matrix:
         strategy: git
         on:
           tags: true
+  allow_failures:
+    - php: '7.2'
+      env: COVERAGE=yes
+  fast_finish: true
 
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
@@ -50,14 +51,14 @@ before_install:
   - >
     if [[ $COVERAGE != yes ]]; then
       phpenv config-rm xdebug.ini || echo "xdebug not available";
-    fi
+    fi;
   - cp .env.dist .env
   - >
     if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
       echo yes | pecl install apcu;
     else
       echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
-    fi
+    fi;
 
 install:
   - composer update --prefer-dist --no-progress --no-suggest --ansi
@@ -67,9 +68,9 @@ install:
 
   # install javascript dependencies
   - >
-  if [[ $COVERAGE = yes ]]; then
-    yarn install
-  fi;
+    if [[ $COVERAGE = yes ]]; then
+      yarn install;
+    fi
 
 script:
   - mkdir -p build/logs
@@ -79,9 +80,9 @@ script:
   - if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
   # run jest test
   - >
-  if [[ $COVERAGE = yes ]]; then
-    yarn test --coverage
-  fi;
+    if [[ $COVERAGE = yes ]]; then
+      yarn test --coverage;
+    fi;
 
 after_script:
   - >
