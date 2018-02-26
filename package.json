@@ -8,7 +8,8 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production",
-        "test": "node public/bundles/omedcore/js/runtest.js --env=jsdom"
+        "test": "node public/bundles/omedcore/js/runtest.js --env=jsdom",
+        "postinstall": "yarn build"
     },
     "jest": {
         "collectCoverageFrom": [

@@ -14,7 +14,12 @@ coverage:
 flags:
   backend:
     paths:
-      - src
+      - src/Core
+      - src/Customer
+      - src/Employee
+      - src/Resource
+      - src/React
+      - src/Security
     ignore:
       - src/Behat
       - src/DataFixtures
