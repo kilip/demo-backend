@@ -6,6 +6,7 @@ services:
   - postgresql
 
 cache:
+  yarn: true
   directories:
   - "$HOME/.composer/cache"
   - "$HOME/.npm"
@@ -16,14 +17,12 @@ notifications:
 
 env:
   global:
+    - TRAVIS_NODE_VERSION=8.9.4
     - COVERAGE=no
     - APP_ENV=test
     - DATABASE_URL=mysql://root@localhost:3306/omed
 
 matrix:
-  fast_finish: true
-  allow_failures:
-    env: COVERAGE=yes
   include:
     - php: '7.1'
     - php: '7.2'
@@ -32,7 +31,13 @@ matrix:
       services:
         - postgresql
     - php: '7.2'
-      env: COVERAGE=yes
+      env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.9
     - php: '7.2.2'
       env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
       deploy:
@@ -43,6 +48,10 @@ matrix:
         strategy: git
         on:
           tags: true
+  allow_failures:
+    - php: '7.2'
+      env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
+  fast_finish: true
 
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
@@ -50,14 +59,14 @@ before_install:
   - >
     if [[ $COVERAGE != yes ]]; then
       phpenv config-rm xdebug.ini || echo "xdebug not available";
-    fi
+    fi;
   - cp .env.dist .env
   - >
     if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
       echo yes | pecl install apcu;
     else
       echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
-    fi
+    fi;
 
 install:
   - composer update --prefer-dist --no-progress --no-suggest --ansi
@@ -65,12 +74,23 @@ install:
   - bin/console doctrine:schema:create -n
   - composer run-script compile
 
+  # install javascript dependencies
+  - >
+    if [[ $COVERAGE = yes ]]; then
+      yarn install;
+    fi
+
 script:
   - mkdir -p build/logs
   - if [[ $COVERAGE = yes  ]]; then bin/coverage; fi
   - if [[ $COVERAGE != yes ]]; then bin/phpunit; fi
   - if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
   - if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
+  # run jest test
+  - >
+    if [[ $COVERAGE = yes ]]; then
+      yarn test --coverage;
+    fi;
 
 after_script:
   - >
