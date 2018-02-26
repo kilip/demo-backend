@@ -1,104 +1,99 @@
 language: php
-
 sudo: false
-
 services:
-  - postgresql
-
+- postgresql
 cache:
   yarn: true
   directories:
   - "$HOME/.composer/cache"
   - "$HOME/.npm"
-
 notifications:
   slack:
     secure: QmqwC9/Ky597ejaltBsnmtY8MKbeWT3p/bopOXgwwTozws6/6pZNdrXN0cjMI/E3TlkgQb27ky0fYb2sBmE9IyzOBPJNBi+7T7YLJgvzWVcMlaB27BiY7LWSKj7/nuUoHf5g+suB1QxxN9D/FXCq59bAg5gZIobI1nZXP9DoJeI+0kzTrDViaqgQvGHeoWx6tRhoxI6lrA3ccWjpHpI74I8T2EFX9f1XR+cc1if4ycBIgYfjp7lC16QLNLFuZs3AStJqr/tAfWyelWlTc5dw6tM6UF8/BN53gzAgIRBYS/ZJ2nMsGJjg85lrx7i9ddegSurprKrYzOuOiVr4hPtQi4Hw1O8M1WQvWe3XRKYPV/Z9McsiZZ0tY0Z1d9JF1H3rs28ibJ5uW44UG4oaMkrXscn3JehGc8Q7tGGS0Hkl4T6XMQs+aqq2pnUgBIW4+o0rkof2emeTpxWnfIeB9cD6EyeuCbHLiW7p1MXEWuGRMz7DLIjOMwl1On9ClJlTcklB5R47YpYGHY+Ur0Ax5HNj8gW1N6JIBKb2yoSwtWQ7H4runlIwdyoz0+oGvYJSkfoAZZCP1gAphS3kx2a+ZWa7pA/E/2FTViOCgVNuOraKxj93pey3fuAH+ya/f7ebhZQzeJA8b34Hfn4xl4+vnuZf5KVfwP9zSZX/rFvlxUpqzKU=
-
 env:
   global:
-    - TRAVIS_NODE_VERSION=8.9.4
-    - COVERAGE=no
-    - APP_ENV=test
-    - DATABASE_URL=mysql://root@localhost:3306/omed
-
+  - TRAVIS_NODE_VERSION=8.9.4
+  - COVERAGE=no
+  - APP_ENV=test
+  - DATABASE_URL=mysql://root@localhost:3306/omed
 matrix:
   include:
-    - php: '7.1'
-    - php: '7.2'
-    - php: '7.2'
-      env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
-      services:
-        - postgresql
-    - php: '7.2'
-      env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-4.9
-    - php: '7.2.2'
-      env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
-      deploy:
-        provider: heroku
-        api_key:
-          secure: Qc9rQBoTpmY+3OEyK0qUydtlMNbFz9PDzOmNW7OBVDOENpCilzC/D49NRRh9tgY2rmD0AmkwTRfeej/oW0mq1fokluzhU7PfdazA4CYq7sQKDenJIQll+xu/E6ZcH5BPZGH5FW6ulRJ/p217W+fRESYNDea2raP7r4P+KWA7k2JT0+X0pvVwxLbjnewn/ON73ttKejuXlWC95SH0Iv62xDgbg7gCiVUeqer96iPM+R9ottA5IvEqRjbNAWg/HHEj67lHlHBvDSiN4TzQUcDSOZetnu2QFBJwIsVPFQN+ADq3uN2gL7owaPp8R+0vCni33h3Axat5j+mut33FcNc5t+hHKT4bYoeSPLq/j70YFGQv57B9tlqzvFd2dyQHp0sVUwCqURN99RJt5VnbsUh8WMEAOpabJx0jpdsNYRqKb4PvUu7cSlzFG+2w7pOOHugRTpRmYaUK9M6WwpX3Hz78mcMFAMZisUfK1iLnH66v8FfGm/sGx6oH9AosXnoL3WeHb2yq/s5/sZhafTVSsXqgPI0mYWeSblFaRkCi8cMrb/WJYg+qflbk2SVuodLeo2gcZDJCcHUMVCD3fUXDBZ1hvuD5jTuQME5bdthJ8Vv1EOs+pSqqfrC6P6pxV30leG9dxb7dU4PWcxy+zqWFr5WIM/wgfL/XonNCUq/oQDwLQ3g=
-        app: omed
-        strategy: git
-        on:
-          all_branches: true
-        #on:
-        #  tags: true
+  - php: '7.1'
+  - php: '7.2'
+  - php: '7.2'
+    env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
+    services:
+    - postgresql
+    deploy:
+      provider: heroku
+      api_key:
+        secure: P2zJm68JQLdqCrongL5YfbtOoXyCQMbx2fwe7f+WweJ29sgrTiXsowcAlqg8xPckDFlkkaQPZhsagpEvo1ufcddUFj+NhRBxhCa+ci4LLzVvm11q0FMPNtHxedpXkvHzk71szs5oYkWPvnoEMUOL6cdoxdbVIjTPChVt1SaSmxQUFb2aqXOiow1e/TmS34clMAVnApvkCpagcPG9MkJQcbyp8GoqHFE097w4FARIuU+z5tWnWJQR81SPRd+lpO2UpdHrQ7tOwMCibvBAHByWWUlqG2/Cq23GaOw6tXPUXE4ExO+pSCgNl1J5Uzo+iuJBFPDTtp1yfcapEbtuUoVWOmQLgM+VupewdsqzHKaEkDnKNqwr51ofr8y7oKmJZS7ETUkf2Dm/4oPmYyMErHxQ33gT22qtCtZpmLoxcSoLnX0OyHG32NKRBcEJ0nOmUekTmqXnZXKYKRSQwlIwByWYKPSnoSXF5+4GRNaYkZbUXCq6Hr7ZkSNMCFBI6yUNczjRPDQgIKthr9AImkQ3AChftXksuzC9RU+oaITqkTT6vY3hnQk2uYcoUxlnCviiE25uNYLNeN0WkzhSjqSSLllnc8iOmMUTSi4zFuf0ycpFoPRtCcAjptHkiWxY6KTmYk9UWRZIb44bt+8nLk8f7Wv1SgagtoR1lZRfgP+YuqMF1TU=
+      app: omed-dev
+      strategy: git
+      on:
+        all_branches: true
+  - php: '7.2'
+    env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-4.9
+  - php: 7.2.2
+    env: DATABASE_URL=pgsql://postgres@localhost:5432/omed
+    deploy:
+      provider: heroku
+      api_key:
+        secure: P2zJm68JQLdqCrongL5YfbtOoXyCQMbx2fwe7f+WweJ29sgrTiXsowcAlqg8xPckDFlkkaQPZhsagpEvo1ufcddUFj+NhRBxhCa+ci4LLzVvm11q0FMPNtHxedpXkvHzk71szs5oYkWPvnoEMUOL6cdoxdbVIjTPChVt1SaSmxQUFb2aqXOiow1e/TmS34clMAVnApvkCpagcPG9MkJQcbyp8GoqHFE097w4FARIuU+z5tWnWJQR81SPRd+lpO2UpdHrQ7tOwMCibvBAHByWWUlqG2/Cq23GaOw6tXPUXE4ExO+pSCgNl1J5Uzo+iuJBFPDTtp1yfcapEbtuUoVWOmQLgM+VupewdsqzHKaEkDnKNqwr51ofr8y7oKmJZS7ETUkf2Dm/4oPmYyMErHxQ33gT22qtCtZpmLoxcSoLnX0OyHG32NKRBcEJ0nOmUekTmqXnZXKYKRSQwlIwByWYKPSnoSXF5+4GRNaYkZbUXCq6Hr7ZkSNMCFBI6yUNczjRPDQgIKthr9AImkQ3AChftXksuzC9RU+oaITqkTT6vY3hnQk2uYcoUxlnCviiE25uNYLNeN0WkzhSjqSSLllnc8iOmMUTSi4zFuf0ycpFoPRtCcAjptHkiWxY6KTmYk9UWRZIb44bt+8nLk8f7Wv1SgagtoR1lZRfgP+YuqMF1TU=
+      app: omed
+      strategy: git
+      on:
+        tags: true
+
   allow_failures:
-    - php: '7.2'
-      env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
+  - php: '7.2'
+    env: COVERAGE=yes CC=gcc-4.9 CXX=g++-4.9
   fast_finish: true
 
 before_install:
-  - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-  - export PATH="$PATH:$HOME/.composer/vendor/bin"
-  - >
-    if [[ $COVERAGE != yes ]]; then
-      phpenv config-rm xdebug.ini || echo "xdebug not available";
-    fi;
-  - cp .env.dist .env
-  - >
-    if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
-      echo yes | pecl install apcu;
-    else
-      echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
-    fi;
-
+- echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+- export PATH="$PATH:$HOME/.composer/vendor/bin"
+- |
+  if [[ $COVERAGE != yes ]]; then
+    phpenv config-rm xdebug.ini || echo "xdebug not available";
+  fi;
+- cp .env.dist .env
+- |
+  if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then
+    echo yes | pecl install apcu;
+  else
+    echo "extension = apcu.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini;
+  fi;
 install:
-  - composer update --prefer-dist --no-progress --no-suggest --ansi
-  - bin/console doctrine:database:create -n --if-not-exists
-  - bin/console doctrine:schema:create -n
-  - composer run-script compile
-
-  # install javascript dependencies
-  - >
-    if [[ $COVERAGE = yes ]]; then
-      yarn install;
-    fi
-
+- composer update --prefer-dist --no-progress --no-suggest --ansi
+- bin/console doctrine:database:create -n --if-not-exists
+- bin/console doctrine:schema:create -n
+- composer run-script compile
+- |
+  if [[ $COVERAGE = yes ]]; then
+    yarn install;
+  fi
 script:
-  - mkdir -p build/logs
-  - if [[ $COVERAGE = yes  ]]; then bin/coverage; fi
-  - if [[ $COVERAGE != yes ]]; then bin/phpunit; fi
-  - if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
-  - if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
-  # run jest test
-  - >
-    if [[ $COVERAGE = yes ]]; then
-      yarn test --coverage;
-    fi;
-
+- mkdir -p build/logs
+- if [[ $COVERAGE = yes  ]]; then bin/coverage; fi
+- if [[ $COVERAGE != yes ]]; then bin/phpunit; fi
+- if [[ $COVERAGE != yes ]]; then ./vendor/bin/phpspec run -fdot; fi
+- if [[ $COVERAGE != yes ]]; then ./vendor/bin/behat -fprogress; fi
+- |
+  if [[ $COVERAGE = yes ]]; then
+    yarn test --coverage;
+  fi;
 after_script:
-  - >
-    if [[ $COVERAGE = yes ]]; then
-        bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
-        bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
-        wget https://scrutinizer-ci.com/ocular.phar;
-        php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
-    fi
+- |
+  if [[ $COVERAGE = yes ]]; then
+      bash <(curl -s https://codecov.io/bash) -F backend -s build/logs/backend -f "*.xml";
+      bash <(curl -s https://codecov.io/bash) -F frontend -s build/logs/frontend -f "*.xml";
+      wget https://scrutinizer-ci.com/ocular.phar;
+      php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
+  fi;

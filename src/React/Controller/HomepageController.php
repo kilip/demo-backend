@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomepageController extends Controller
 {
     /**
-     * @Route(path="/")
+     * @Route(name="react_homepage",path="/")
      */
     public function indexAction()
     {

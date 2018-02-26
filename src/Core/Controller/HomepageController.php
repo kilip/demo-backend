@@ -28,6 +28,6 @@ class HomepageController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@OmedCoreBundle/Resources/views/index.html.twig');
+        return $this->redirectToRoute('react_homepage');
     }
 }
