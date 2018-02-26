@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 
 import Omed from './omed';
-import registerServiceWorker from './registerServiceWorker';
 
 import security from './components/security/reducers';
 import employee from './components/employees/reducers';
@@ -27,4 +26,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
-registerServiceWorker();
